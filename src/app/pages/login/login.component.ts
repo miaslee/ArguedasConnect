@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import {FirebaseTSAuth} from 'firebasets/firebasetsAuth/firebaseTSAuth';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,77 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
   state = LoginCompState.LOGIN;
+  firebasetsAuth: FirebaseTSAuth;
+  constructor (){
+
+    this.firebasetsAuth = new FirebaseTSAuth();
+  }
+
+
+
+
+  Registro(
+    
+     registroEmail: HTMLInputElement,
+     registroPass: HTMLInputElement,
+      registroConfirmPass: HTMLInputElement
+  ){
+    
+    let email = registroEmail.value;
+    let pass = registroPass.value;
+    let confirmPass =  registroConfirmPass.value;
+
+    if(
+      
+      this.isNotEmpty(email) &&
+      this.isNotEmpty(pass) && 
+      this.isUnajmaMail(email) &&
+      this.isNotEmpty(confirmPass) &&
+      this.isAMatch(pass, confirmPass)
+    ){
+      this.firebasetsAuth.createAccountWith({
+        email: email,
+        password: pass,
+        onComplete: (uc) => {
+            alert("Cuenta creada con éxito:");
+            
+            registroEmail.value ="";
+            registroPass.value ="";
+            registroConfirmPass.value ="";
+        },
+        onFail: (err) => {
+            alert("Error al crear la cuenta: " + err);
+        }
+    });
+
+    }else if (!this.isUnajmaMail(email)){
+      alert("Solo estudiantes de UNAJMA se pueden registrar")
+
+    }else if(this.isUnajmaMail(email) && !this.isAMatch(pass, confirmPass)) {
+      alert("Contraseña no coincide")
+
+    }
+
+    else{
+      
+      alert("No te puedes registrar")
+    }
+
+   
+    
+  }
+  isUnajmaMail (text : string) {
+    return text.endsWith("@unajma.edu.pe");
+  }
+
+  isNotEmpty(text: string){
+    return text != null && text.length > 0;
+  }
+
+  isAMatch(text : string, text2 : string){
+    return text == text2;
+
+  }
 
   ForgotPassClick(){
 this.state = LoginCompState.FORGOT_PASSWORD;
