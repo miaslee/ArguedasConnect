@@ -2,10 +2,12 @@
     
         <div   >
             <h1 class="logo">ArguedasConnect</h1>
-            <input type="text" placeholder="Correo electrónico">
-            <input type="password" placeholder="Contraseña">
-            <button class="login-button">Iniciar sesión</button>
-            <a (click)="ForgotPassClick()" class="forgot-password">¿Olvidaste tu contraseña?</a>
+            <input #loginEmail type="text" placeholder="Correo electrónico">
+            <input #loginPass type="password" placeholder="Contraseña">
+            <button  (click) ="Login(loginEmail, loginPass)"
+            
+            class="login-button">Iniciar sesión</button>
+            <a href="#" (click)="ForgotPassClick()" class="forgot-password">¿Olvidaste tu contraseña?</a>
             <hr>
             <button  (click)="CreateAccountClick()" class="create-account-button">Crear cuenta nueva</button>
         </div>
@@ -17,12 +19,12 @@
 <div class="container" *ngIf="isForgotPasswordState()" >
     <div >
         <h1 class="logo">ArguedasConnect</h1>
-        <h2>Recupera tu cuenta</h2>
-        <p>Ingresa tu correo electrónico para buscar tu cuenta.</p>
-        <input type="text" placeholder="Correo electrónico">
+        <h2>¿Olvidaste tu contraseña?</h2>
+        <p>Ingresa tu correo electrónico para recibir un enlace de restablecimiento de contraseña.</p>
+        <input  #resetEmail type="text" placeholder="Correo electrónico">
         <div class="buttons">
             <button (click)="LoginClick()"  class="cancel-button">Cancelar</button>
-            <button class="search-button">Buscar</button>
+            <button (click)="ResetPass(resetEmail)" class="search-button">Enviar enlace</button>
         </div>
     </div>
 </div>
@@ -42,10 +44,8 @@
             <input #registroPass type="password" placeholder="Contraseña nueva" required>
             <input #registroConfirmPass type="password" placeholder="Contraseña nueva" required>
 
-           
-
             <button   (click)="Registro(
-                
+    
             registroEmail,
             registroPass,
             registroConfirmPass

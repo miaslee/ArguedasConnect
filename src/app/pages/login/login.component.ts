@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, resolveForwardRef } from '@angular/core';
 import {FirebaseTSAuth} from 'firebasets/firebasetsAuth/firebaseTSAuth';
 
 @Component({
@@ -17,7 +17,47 @@ export class LoginComponent {
     this.firebasetsAuth = new FirebaseTSAuth();
   }
 
+  ResetPass(resetEmail: HTMLInputElement){
+    let email = resetEmail.value;
+    if(this.isNotEmpty(email)){
+      this.firebasetsAuth.sendPasswordResetEmail({
+        email:email,
+        onComplete: (err) => {
+          alert("Hemos enviado un enlace de restablecimiento de contraseña a tu correo electrónico. Revisa tu bandeja de entrada y sigue las instrucciones.");
+        
+        }
+      }
 
+
+      );
+    }
+
+  }
+
+Login(loginEmail: HTMLInputElement,
+  loginPass: HTMLInputElement
+){
+  let email = loginEmail.value;
+  let pass = loginPass.value;
+
+   if(this.isNotEmpty(email) && this.isNotEmpty(pass))
+{
+  this.firebasetsAuth.signInWith(
+    {
+      email:email,
+      password : pass,
+      onComplete: (uc) => {
+    alert("Logged");
+      },
+      onFail : (err) => {
+        alert("No se puede iniciar"+ err);
+      }
+    }
+  )
+}
+
+   
+}
 
 
   Registro(
