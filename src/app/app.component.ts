@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import {FirebaseTSApp} from 'firebasets/firebasetsApp/firebaseTSApp'
+import { environment } from '../environments/environment';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -10,4 +13,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'ArguedasConnect';
+
+  constructor (){
+    FirebaseTSApp.init(environment.firebaseConfig);
+  }
 }
