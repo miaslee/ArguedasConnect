@@ -1,0 +1,65 @@
+<div class="container" *ngIf = "isLoginState()">
+    
+        <div   >
+            <h1 class="logo">ArguedasConnect</h1>
+            <input type="text" placeholder="Correo electrónico">
+            <input type="password" placeholder="Contraseña">
+            <button class="login-button">Iniciar sesión</button>
+            <a (click)="ForgotPassClick()" class="forgot-password">¿Olvidaste tu contraseña?</a>
+            <hr>
+            <button  (click)="CreateAccountClick()" class="create-account-button">Crear cuenta nueva</button>
+        </div>
+       
+   
+</div>
+
+
+<div class="container" *ngIf="isForgotPasswordState()" >
+    <div >
+        <h1 class="logo">ArguedasConnect</h1>
+        <h2>Recupera tu cuenta</h2>
+        <p>Ingresa tu correo electrónico para buscar tu cuenta.</p>
+        <input type="text" placeholder="Correo electrónico">
+        <div class="buttons">
+            <button (click)="LoginClick()"  class="cancel-button">Cancelar</button>
+            <button class="search-button">Buscar</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container" *ngIf="isRegisterState()">
+   
+    <div  >
+        <h1 class="logo">ArguedasConnect</h1>
+        <h2>Crea una cuenta</h2>
+        <p>Es rápido y fácil.</p>
+        <form>
+            <input type="text" placeholder="Nombre" required>
+            <input type="text" placeholder="Apellido" required>
+
+            <label>Fecha de nacimiento</label>
+            <div class="birthdate">
+              <input  type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+            </div>
+
+            <label>Género</label>
+            <div class="gender">
+                <label><input type="radio" name="gender" value="female" required> Mujer</label>
+                <label><input type="radio" name="gender" value="male" required> Hombre</label>
+                <label><input type="radio" name="gender" value="custom" required> Personalizado</label>
+            </div>
+
+            <input type="email" placeholder="correo electrónico" required>
+            <input type="password" placeholder="Contraseña nueva" required>
+
+           
+
+            <button type="submit" class="signup-button">Registrarte</button>
+            <p (click)="LoginClick()" class="login-link"><a href="#">¿Ya tienes una cuenta?</a></p>
+        </form>
+    </div>
+</div>
+
+

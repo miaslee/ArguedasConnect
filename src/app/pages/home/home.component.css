@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #e9ebee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Cambiado para apilar en columna */
+    max-width: 1000px;
+    width: 100%;
+    padding: 20px;
+    align-items: center;
+}
+
+.left-section {
+    text-align: center;
+    margin-bottom: 20px; /* Espacio entre las secciones */
+    padding: 20px;
+}
+
+.left-section h1 {
+    color: #d2691e; 
+    font-size: 50px;
+    font-weight: bold;
+    
+}
+/* Logo */
+
+
+
+
+
+
+/* Para pantallas grandes, restaura el diseño en fila */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: column; /* En pantallas grandes vuelve a lado a lado */
+        justify-content: space-between;
+    }
+
+    .left-section {
+        text-align: left;
+        margin-bottom: 0;
+    }
+}

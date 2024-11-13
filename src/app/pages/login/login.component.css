@@ -1,0 +1,281 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.logo {
+    color: #d2691e;
+    font-size: 60px; /* Tamaño ligeramente más grande */
+    font-weight: bold;
+    margin-bottom: 30px;
+    
+    letter-spacing: 2px; /* Espaciado entre letras para mejor legibilidad */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15); /* Sombra suave para profundidad */
+    border-bottom: 3px solid #b35917; /* Línea decorativa debajo del texto */
+    padding-bottom: 5px;
+}
+
+
+
+/* Body */
+body {
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #333;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Estilos generales para los cuadros de login, recuperación y registro */
+
+
+/* Estilos para todos los inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+.birthdate select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9fafb;
+}
+
+
+
+
+
+/* Link para recuperar contraseña */
+.forgot-password {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #d2691e;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Línea divisoria */
+hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* Enlace para crear página */
+.create-page {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+.create-page a {
+    color: #d2691e;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.create-page a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos específicos para los cuadros de login y registro */
+.right-section .login-box,
+.signup-box {
+    text-align: center;
+}
+
+.signup-box h2,
+.right-section h2 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.signup-box p,
+.right-section p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.birthdate,
+.gender {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.gender label {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Política de privacidad y términos */
+.policy,
+.terms {
+    font-size: 12px;
+    color: #777;
+    margin: 10px 0;
+}
+
+.policy a,
+.terms a {
+    color: #d2691e;
+    text-decoration: none;
+}
+
+/* Link de inicio de sesión */
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #d2691e;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Caja de Recuperación de Cuenta */
+.recovery-box h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.recovery-box p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.recovery-box input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    background-color: #f9fafb;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.cancel-button {
+    padding: 10px 20px;
+    background-color: #f0f2f5;
+    color: #606770;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancel-button:hover {
+    background-color: #e0e2e5;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #d2691e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+.login-button {
+    padding: 10px 20px;
+    background-color: #d2691e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+.signup-button {
+    padding: 10px 20px;
+    background-color: #d2691e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+.create-account-button {
+    padding: 10px 20px;
+    background-color: #19ce46;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.search-button:hover {
+    background-color: #b35917;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+.login-button:hover {
+    background-color: #b35917; /* Naranja más oscuro */
+}
+
+
+
+.create-account-button:hover
+{
+    background-color: #055318; /* Naranja más oscuro */
+}
+.signup-button:hover {
+    background-color: #b35917; /* Naranja más oscuro */
+}
