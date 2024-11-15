@@ -1,0 +1,44 @@
+<div class="container"  [ngClass]="{'active': show, 'idle': !show}">
+   
+    <div  >
+        <h1 class="logo">ArguedasConnect</h1>
+        <h2>Completa tu perfil</h2>
+        
+        <form>
+            <input #InputNombre type="text" placeholder="Nombre" required>
+            <input #InputApellido type="text" placeholder="Apellido" required>
+
+           
+
+            <label>Género</label>
+            <div #InputGender class="gender">
+                <label><input type="radio" name="gender" value="Mujer" required> Mujer</label>
+                <label><input type="radio" name="gender" value="Hombre" required> Hombre</label>
+                <label><input type="radio" name="gender" value="custom" required> Personalizado</label>
+            </div>
+
+            <label>Carrera Universitaria</label>
+            <div   class="gender">
+                <select #InputCarrera required>
+                    <option value="">Selecciona tu carrera</option>
+                    <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
+                    <option value="Ingeniería Ambiental">Ingeniería Ambiental</option>
+                    <option value="Derecho">Derecho</option>
+                    <option value="Administración de Empresas">Administración de Empresas</option>
+                    <option value="Psicología">Psicología</option>
+                    <option value="Contabilidad">Contabilidad</option>
+                  
+                    <option value="Educación">Educación</option>
+                    
+                </select>
+            </div>
+            <label>Fecha de nacimiento</label>
+            <div class="birthdate">
+              <input #InputFN type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+            </div>
+            
+            <button  type="button"  (click)="CompleteProClick(InputNombre, InputApellido, InputCarrera,InputFN, InputGender)" class="signup-button">Enviar</button>
+            
+        </form>
+    </div>
+</div>

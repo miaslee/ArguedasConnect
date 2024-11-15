@@ -17,6 +17,7 @@ export class LoginComponent {
     this.firebasetsAuth = new FirebaseTSAuth();
   }
 
+
   ResetPass(resetEmail: HTMLInputElement){
     let email = resetEmail.value;
     if(this.isNotEmpty(email)){

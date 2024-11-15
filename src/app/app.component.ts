@@ -6,19 +6,23 @@ import { environment } from '../environments/environment';
 import {FirebaseTSAuth} from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { Route } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { CompleteProfileComponent } from './pages/complete-profile/complete-profile.component';
+import{FirebaseTSFirestore} from "firebasets/firebasetsFirestore/firebaseTSFirestore";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NgIf],
+  imports: [RouterOutlet,NgIf, CompleteProfileComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  
 })
 export class AppComponent {
   title = 'ArguedasConnect';
 
   auth: FirebaseTSAuth;
   isLoggedIn = false;
+  firestore:  FirebaseTSFirestore;
 
 
 constructor (
@@ -28,6 +32,7 @@ constructor (
 ) {
   FirebaseTSApp.init(environment.firebaseConfig);
   this.auth = new FirebaseTSAuth();
+  this.firestore = new FirebaseTSFirestore();
   
 
   //

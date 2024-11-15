@@ -15,6 +15,14 @@
 
         <div *ngIf="!isLog()" class="right-section">
             <app-login></app-login>
+            <app-complete-profile  *ngIf="isLog()"></app-complete-profile>
+
+            
+        </div>
+        <div *ngIf="isLog()" class="right-section">
+           
+            <app-complete-profile  ></app-complete-profile>
+
             
         </div>
     </div>
