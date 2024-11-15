@@ -105,7 +105,8 @@ export interface UserProfile {
 export interface PostData {
   comment: string,
   creatorId: string,
-  imageUrl?: string
+  imageUrl?: string,
+  timestamp : any
 }
 
 
