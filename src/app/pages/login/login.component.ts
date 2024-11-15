@@ -24,7 +24,7 @@ export class LoginComponent {
 init() {
     setTimeout(() => {
         this.state = LoginCompState.LOGIN;
-    }, 1000); // Espera de 2 segundos
+    }, 500); // Espera de 2 segundos
     
 }
   
@@ -155,6 +155,9 @@ isRegisterState(){
 }
 isForgotPasswordState(){
   return this.state == LoginCompState.FORGOT_PASSWORD;
+}
+isLoggin (){
+  return this.firebasetsAuth.isSignedIn();
 }
 
 

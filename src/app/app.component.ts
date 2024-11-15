@@ -62,6 +62,7 @@ constructor (
           
         console.log("login")
         this.isLoggedIn = true;
+        
           },
           whenSignedOut: user => {
             console.log("logout") 
@@ -71,13 +72,12 @@ constructor (
           whenSignedInAndEmailNotVerified : user => {
             this.router.navigate(["emailVerification"])
             this.mailv = false;
-
             
-
           },
           whenSignedInAndEmailVerified : user =>{
+           
             this.getUsersProfile();
-            this.mailv = true;
+           
 
           },
           whenChanged :user => {
@@ -107,12 +107,14 @@ getUsersProfile() {
         // Aquí puedes manejar la actualización del documento del usuario
         console.log("Documento del perfil de usuario actualizado:", result);
         this.userHasProfile =result.exists; 
+        this.mailv = true;
       }
     });
   } else {
     console.warn("No hay un usuario autenticado.");
     
   }
+  
   
 }
 
