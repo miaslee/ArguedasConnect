@@ -42,7 +42,8 @@ if (user) {
       publicLastname: lastname,
       publicCareer: carrera,
       publicFN: fechaNaci,
-      publicSex: sexo
+      publicSex: sexo,
+      userId: this.auth.getAuth().currentUser?.uid
     },
     onComplete: (docId: string) => {
       alert("Perfil creado");
