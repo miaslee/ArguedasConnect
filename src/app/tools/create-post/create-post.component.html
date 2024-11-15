@@ -2,7 +2,7 @@
     <h2>Create Post</h2>
     
     <div class="input-area">
-      <textarea placeholder="Type your message..." id="messageInput"></textarea>
+      <textarea #commentInput placeholder="Type your message..." id="messageInput"></textarea>
     </div>
     
     <div   id="post-preview" class="post-preview">
@@ -17,6 +17,6 @@
         <input   #photoSelector (change)="onPhotoSelected(photoSelector)"
          id="photo-upload" type="file" accept="image/*">
       </label>
-      <button  >Post</button>
+      <button  (click)="PostClick(commentInput)" >Post</button>
     </div>
   </div>
