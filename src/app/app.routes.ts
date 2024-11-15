@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { EmailverificationComponent } from './pages/emailverification/emailverification.component';
 import { CompleteProfileComponent } from './pages/complete-profile/complete-profile.component';
 import { FeedComponent } from './pages/feed/feed.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 export const routes: Routes = [
 
@@ -10,6 +11,7 @@ export const routes: Routes = [
     {path:"emailVerification", component: EmailverificationComponent},
     {path: "completeProfile", component: CompleteProfileComponent},
     {path:"feed", component: FeedComponent   },
+    {path: "perfil", component:PerfilComponent},
     {path: "**", component: HomeComponent}
     
 ];

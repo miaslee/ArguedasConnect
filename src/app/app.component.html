@@ -1,7 +1,7 @@
 
 <router-outlet *ngIf="!loggedIn()"></router-outlet>
 
-<header *ngIf="userHasProfile && loggedIn()  " class="header">
+<header *ngIf="MailV()  && userHasProfile && loggedIn()  " class="header">
     <div class="header-left">
       <h1 class="logo">ArguedasConnect</h1>
     </div>
@@ -12,9 +12,9 @@
     
     <div class="header-right">
       <span class="user-name">Hola, {{userDocument.publicName}}</span>
-      <a href="#" class="header-link">Inicio</a>
-      <a href="#" class="header-link">Perfil</a>
-      <a href="#" class="header-link">Amigos</a>
+      <a (click)="HomeClick()" class="header-link">Inicio</a>
+      <a (click)="PerfilClick()"class="header-link">Perfil</a>
+      <a (click)="AmigoClick()" class="header-link">Amigos</a>
       <button  (click)="LogoutClick()" class="logout-button">Cerrar sesión</button>
     </div>
   </header>
@@ -31,7 +31,8 @@
     </div>
   </header>
   
-  <app-feed   *ngIf="loggedIn() && userHasProfile "></app-feed>
+  <app-feed   *ngIf="MailV() && loggedIn() && userHasProfile && isHomeState() "></app-feed>
+  <app-perfil *ngIf="loggedIn() && userHasProfile && isPerfilState() "></app-perfil>
 
 <app-complete-profile *ngIf="loggedIn() &&!userHasProfile "> </app-complete-profile>
 

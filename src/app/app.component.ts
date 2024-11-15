@@ -11,11 +11,12 @@ import{FirebaseTSFirestore} from "firebasets/firebasetsFirestore/firebaseTSFires
 import { FeedComponent } from './pages/feed/feed.component';
 import { PostComponent } from './tools/post/post.component';
 import { HeaderComponent } from './tools/header/header.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NgIf, CompleteProfileComponent, FeedComponent, PostComponent, HeaderComponent],
+  imports: [RouterOutlet,NgIf, CompleteProfileComponent, FeedComponent, PostComponent, HeaderComponent, PerfilComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   
@@ -29,6 +30,7 @@ export class AppComponent {
  userHasProfile : boolean;
  userDocument: userDocument;
  log :boolean;
+ mailv : boolean;
 
 constructor (
   private router: Router
@@ -47,6 +49,7 @@ constructor (
     publicSex: ''
   };
   this.log = false;
+  this.mailv = false;
   
 
   //
@@ -67,11 +70,14 @@ constructor (
           },
           whenSignedInAndEmailNotVerified : user => {
             this.router.navigate(["emailVerification"])
+            this.mailv = false;
+
             
 
           },
           whenSignedInAndEmailVerified : user =>{
             this.getUsersProfile();
+            this.mailv = true;
 
           },
           whenChanged :user => {
@@ -123,7 +129,52 @@ loggedIn(){
 return this.log;
 }
 
+
+MailV(){
+
+return this.mailv;
+}
+
+state = HomeCompState.HOME;
+
+
+isHomeState(){
+  return this.state == HomeCompState.HOME;
+}
+isPerfilState(){
+  return this.state == HomeCompState.PERFIL;
+}
+isAmigoState(){
+  return this.state == HomeCompState.AMIGOS;
+}
+     HomeClick(){
+    this.state = HomeCompState.HOME;
+    }
+    PerfilClick(){
+      this.state = HomeCompState.PERFIL;
+    }
+    AmigoClick(){
+      this.state = HomeCompState.AMIGOS;
+    }
+    getStateText (){
+
+      switch (this.state) {
+        case HomeCompState.HOME :
+    return "Home";
+  case HomeCompState.PERFIL :
+    return "Perfil";
+    case HomeCompState.AMIGOS:
+      return "Amigos";
+      
+    }
+  }
   
+}
+export enum HomeCompState {
+  HOME,
+PERFIL,
+AMIGOS,
+
 }
 export interface userDocument {
   publicName: string;

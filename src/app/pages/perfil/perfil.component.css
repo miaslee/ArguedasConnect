@@ -1,0 +1,110 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+  }
+  
+  /* Profile Container */
+  .profile-container {
+    width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-top: 100px;
+  }
+  
+  /* Cover Photo */
+  .cover-photo {
+    position: relative;
+  }
+  
+  .cover-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  /* Profile Header */
+  .profile-header {
+    text-align: center;
+    margin-top: -75px;
+  }
+  
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    object-fit: cover; /* Ajusta la imagen para que no se recorte */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .profile-name {
+    font-size: 1.8em;
+    margin: 10px 0 5px;
+    color: #333;
+  }
+  
+  .profile-career {
+    font-size: 1em;
+    color: #666;
+  }
+  
+  /* Profile Info */
+  .profile-info {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .profile-info h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .profile-info ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .profile-info li {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  /* Profile Posts */
+  .profile-posts {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .profile-posts h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .post {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post p {
+    margin: 0 0 5px;
+    font-size: 0.9em;
+    color: #333;
+  }
+  
+  .post-timestamp {
+    font-size: 0.8em;
+    color: #888;
+  }
+  
