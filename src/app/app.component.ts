@@ -24,6 +24,7 @@ export class AppComponent {
   isLoggedIn = false;
   firestore:  FirebaseTSFirestore;
  userHasProfile : boolean;
+ userDocument: any;
 
 constructor (
   private router: Router
@@ -82,6 +83,9 @@ getUsersProfile() {
       name: "Getting Document",
       path: ["Users", user.uid], // Asegúrate de incluir la colección y el UID del usuario
       onUpdate: (result) => {
+       
+      this.userDocument =  result.data();
+      this.userDocument.publicName;
         // Aquí puedes manejar la actualización del documento del usuario
         console.log("Documento del perfil de usuario actualizado:", result);
         this.userHasProfile =result.exists; 
@@ -103,4 +107,11 @@ return this.isLoggedIn;
 }
 
   
+}
+export interface userDocument {
+  publicName: string;
+      publicLastname: string;
+      publicCareer: string;
+      publicFN: string;
+      publicSex: string;
 }
