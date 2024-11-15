@@ -1,4 +1,24 @@
-<div  *ngIf="loggedIn()" (click)="LogoutClick()" > Cerrar Sesión </div>
+
 <router-outlet *ngIf="!loggedIn()"></router-outlet>
+
+<header *ngIf="loggedIn() && userHasProfile" class="header">
+    <div class="header-left">
+      <h1 class="logo">ArguedasConnect</h1>
+    </div>
+    
+    <div class="header-center">
+      <input type="text" class="search-bar" placeholder="Buscar...">
+    </div>
+    
+    <div class="header-right">
+      <span class="user-name">Hola, {{userDocument.publicName}}</span>
+      <a href="#" class="header-link">Inicio</a>
+      <a href="#" class="header-link">Perfil</a>
+      <a href="#" class="header-link">Amigos</a>
+      <button  (click)="LogoutClick()" class="logout-button">Cerrar sesión</button>
+    </div>
+  </header>
+  
+
 
 <app-complete-profile *ngIf="!userHasProfile"> </app-complete-profile>

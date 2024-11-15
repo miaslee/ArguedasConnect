@@ -48,7 +48,7 @@ Login(loginEmail: HTMLInputElement,
       email:email,
       password : pass,
       onComplete: (uc) => {
-    alert("Logged");
+    console.log("Logged")
       },
       onFail : (err) => {
         alert("No se puede iniciar"+ err);
