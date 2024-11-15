@@ -2,12 +2,14 @@ import { Component, Input } from '@angular/core';
 import { FirebaseTSFirestore, Where } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { PostData } from '../../pages/feed/feed.component';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
+import { NgIf } from '@angular/common';
+import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [],
+  imports: [NgIf],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'
 })
@@ -17,6 +19,8 @@ export class PostComponent {
  firestore = new FirebaseTSFirestore(); 
  public userProfileData: UserProfile | null = null;
   username: string = "";
+  time: string = "Hace ";
+  u : boolean = false;
 
   constructor(){
     
@@ -44,18 +48,51 @@ export class PostComponent {
        
        this.userProfileData = doc.data() as UserProfile;
        if(this.postData?.creatorId == this.userProfileData.userId){
-        this.username = this.userProfileData.publicName;
+        this.u  = true;
+        this.username = this.userProfileData.publicName + " " + this.userProfileData.publicLastname;
+        //time
+        const timePost = this.postData?.timestamp ? this.postData.timestamp.toMillis() : null;
+        const timeNow = Date.now();
+
+
+        if (timePost) {
+          const difference = timeNow - timePost;
+      
+          // Conversión a unidades de tiempo
+          const seconds = Math.floor(difference / 1000);
+          const minutes = Math.floor(seconds / 60);
+          const hours = Math.floor(minutes / 60);
+          const days = Math.floor(hours / 24);
+      
+          // Muestra en consola el tiempo transcurrido
+          if (days > 0) {
+            this.time = (`Hace ${days} días`);
+             
+          } else if (hours > 0) {
+              
+              this.time = (`Hace ${hours} horas`);
+          } else if (minutes > 0) {
+             
+              this.time = (`Hace ${minutes} minutos`);
+          } else {
+              
+              this.time = (`Hace ${seconds} segundos`);
+          }
+      } else {
+          console.log("El timestamp del post no está disponible.");
+      }
+        
+        
+
+        
+
        
        }
 
-
-       
-       
        //console.log(post);
       }
     )
     
-        
       },
       onFail: err => {
         
@@ -68,6 +105,6 @@ export class PostComponent {
 }
 export interface UserProfile {
   publicName: string;
-  
+  publicLastname: string;
   userId : string;
 }

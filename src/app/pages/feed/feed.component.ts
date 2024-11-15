@@ -5,6 +5,7 @@ import { FirebaseTSFirestore, Limit, OrderBy, Where } from 'firebasets/firebaset
 import { PostComponent } from '../../tools/post/post.component';
 import { NgFor } from '@angular/common';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
+import { Timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-feed',
@@ -66,6 +67,7 @@ export interface PostData {
   comment: string,
   creatorId: string,
   imageUrl?: string,
+  timestamp: any;
  
 }
 
