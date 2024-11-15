@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { PostData } from '../../pages/perfil/perfil.component';
+
+
 
 @Component({
   selector: 'app-perfil-posts',
@@ -9,4 +12,18 @@ import { Component } from '@angular/core';
 })
 export class PerfilPostsComponent {
 
+  @Input() postData?: PostData;
+
+  constructor(){
+    console.log(this.postData)
+  }
+  
+
+
+
+
+
+    
+  
 }
+

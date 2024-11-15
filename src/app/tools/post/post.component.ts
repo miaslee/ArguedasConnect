@@ -13,7 +13,7 @@ export class PostComponent {
   @Input() postData?: PostData;
 
   constructor(){
-     
+    
   }
 
 

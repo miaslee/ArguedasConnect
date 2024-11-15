@@ -20,11 +20,16 @@
       
     </div>
 
+    
     <div class="profile-posts">
       <h2>Publicaciones</h2>
       
+<!-- Descripción antes de la imagen -->
+    
+ <app-perfil-posts *ngFor="let post of posts"  [postData]="post"  ></app-perfil-posts>
 
-      <app-post></app-post>
+
+
 
       <!-- Agregar más publicaciones aquí -->
     </div>

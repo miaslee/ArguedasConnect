@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog"
 import { CreatePostComponent } from '../../tools/create-post/create-post.component';
-import { FirebaseTSFirestore, Limit, OrderBy } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
+import { FirebaseTSFirestore, Limit, OrderBy, Where } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { PostComponent } from '../../tools/post/post.component';
 import { NgFor } from '@angular/common';
+import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 
 @Component({
   selector: 'app-feed',
@@ -14,7 +15,10 @@ import { NgFor } from '@angular/common';
 })
 export class FeedComponent {
   firestore = new FirebaseTSFirestore();
+  auth = new FirebaseTSAuth();
+
 posts : PostData []=[];
+
 
 
 constructor (private dialog : MatDialog){
@@ -22,6 +26,7 @@ constructor (private dialog : MatDialog){
 }
 ngOnInit(): void {
   this.getPosts();
+ 
 }
 
 
@@ -57,9 +62,12 @@ result.docs.forEach(
 );
 }
 
+
+
 }
 export interface PostData {
   comment: string,
   creatorId: string,
   imageUrl?: string
 }
+

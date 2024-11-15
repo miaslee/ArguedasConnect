@@ -1,0 +1,87 @@
+/* Main container */
+.main-container {
+    display: flex;
+    justify-content: center;
+}
+
+/* Post container */
+.post {
+    width: 630px;
+    max-width: 100%;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    background-color: #fff;
+    margin: 20px auto; /* Centrado horizontal */
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Post header */
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #dbdbdb;
+    justify-content: space-between; /* Alinea los elementos hacia los extremos */
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 14px;
+    color: #262626;
+}
+
+/* Post image */
+.post-image {
+    width: 100%;
+    height: auto;
+}
+
+/* Post actions */
+.post-actions {
+    display: flex;
+    padding: 10px;
+}
+
+.icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 15px;
+    color: #262626;
+}
+
+.like-icon:hover {
+    color: #ed4956; /* Instagram-like red color */
+}
+
+.comment-icon:hover {
+    color: #007aff; /* Comment icon color on hover */
+}
+
+.save-icon:hover {
+    color: #000; /* Save icon color on hover */
+}
+
+/* Post description */
+.post-description {
+    padding: 10px;
+    font-size: 14px;
+    color: #262626;
+}
+
+.post-description p {
+    display: inline;
+    margin-left: 5px;
+}
+.post-time {
+    font-size: 12px;
+    color: #8e8e8e; /* Color gris para menor importancia */
+    margin-left: auto;
+}
