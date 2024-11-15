@@ -48,11 +48,8 @@ result.docs.forEach(
     let post = <PostData>doc.data();
     this.posts.push(post);
    
-   //console.log(post);
   }
-)
-
-    
+)   
   },
   onFail: err => {
     
@@ -68,6 +65,7 @@ result.docs.forEach(
 export interface PostData {
   comment: string,
   creatorId: string,
-  imageUrl?: string
+  imageUrl?: string,
+ 
 }
 

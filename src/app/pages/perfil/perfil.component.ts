@@ -36,7 +36,8 @@ export class PerfilComponent {
     {
       path:["Posts"],
       where: [
-          new Where("creatorId", "==",userId)
+          new Where("creatorId", "==",userId),
+          new OrderBy("timestamp", "desc")
       ],
       onComplete: (result) => {
     result.docs.forEach(
@@ -74,6 +75,7 @@ export class PerfilComponent {
     result.docs.forEach(
       doc => {
        
+        
        
         this.userProfileData = doc.data() as UserProfile; 
        
