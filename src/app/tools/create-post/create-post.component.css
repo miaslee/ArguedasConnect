@@ -1,0 +1,108 @@
+
+  
+  #post-preview {
+    text-align: right;
+    margin-top: 1em;
+  }
+  
+
+  
+  #post-preview-image {
+    object-fit: cover;
+    object-position: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 1em;
+    border: 1px dashed gray;
+  }
+  
+
+  .post-container {
+    width: 100%;
+    max-width: 350px;
+    
+    padding: 10px;
+    
+    
+   
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+  
+  .post-container h2 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .input-area {
+    margin-bottom: 15px;
+  }
+  
+  textarea {
+    width: 100%;
+    min-height: 40px; /* Altura inicial más pequeña */
+    max-height: 200px; /* Altura máxima para evitar un crecimiento excesivo */
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none; /* Desactiva el redimensionamiento manual en la esquina */
+    overflow-y: auto;
+    transition: border-color 0.3s;
+  }
+  
+  
+ 
+  
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    flex-wrap: wrap; 
+  }
+  
+  .upload-button {
+    cursor: pointer;
+    padding: 8px 12px;
+    
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #333;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .upload-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  button {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 12px;
+    background-color: #d2691e; /* Color similar al de Facebook */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px; /* Tamaño de fuente más grande */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+  }
+  
+  button:hover {
+    background-color: #b35917; /* Color más oscuro al pasar el mouse */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Sombra aumentada al hacer hover */
+  }
+  
+  button:active {
+    background-color: #582b0b; /* Color más oscuro al hacer clic */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra reducida al hacer clic */
+  }
+  
+
+  

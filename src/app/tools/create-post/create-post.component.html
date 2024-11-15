@@ -1,0 +1,22 @@
+<div class="post-container">
+    <h2>Create Post</h2>
+    
+    <div class="input-area">
+      <textarea placeholder="Type your message..." id="messageInput"></textarea>
+    </div>
+    
+    <div   id="post-preview" class="post-preview">
+      <img   id="post-preview-image"  alt="Image Preview"/>
+    </div>
+    
+    <div class="actions">
+      <label for="photo-upload" class="upload-button">
+       
+        
+
+        <input   #photoSelector (change)="onPhotoSelected(photoSelector)"
+         id="photo-upload" type="file" accept="image/*">
+      </label>
+      <button  >Post</button>
+    </div>
+  </div>
