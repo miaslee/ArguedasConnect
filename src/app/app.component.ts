@@ -23,7 +23,7 @@ export class AppComponent {
   auth: FirebaseTSAuth;
   isLoggedIn = false;
   firestore:  FirebaseTSFirestore;
-
+ userHasProfile : boolean;
 
 constructor (
   private router: Router
@@ -33,6 +33,7 @@ constructor (
   FirebaseTSApp.init(environment.firebaseConfig);
   this.auth = new FirebaseTSAuth();
   this.firestore = new FirebaseTSFirestore();
+  this.userHasProfile = true;
   
 
   //
@@ -57,6 +58,7 @@ constructor (
 
           },
           whenSignedInAndEmailVerified : user =>{
+            this.getUsersProfile();
 
           },
           whenChanged :user => {
@@ -72,6 +74,26 @@ constructor (
   );
   
 }
+getUsersProfile() {
+  const user = this.auth.getAuth().currentUser;
+
+  if (user) {
+    this.firestore.listenToDocument({
+      name: "Getting Document",
+      path: ["Users", user.uid], // Asegúrate de incluir la colección y el UID del usuario
+      onUpdate: (result) => {
+        // Aquí puedes manejar la actualización del documento del usuario
+        console.log("Documento del perfil de usuario actualizado:", result);
+        this.userHasProfile =result.exists; 
+      }
+    });
+  } else {
+    console.warn("No hay un usuario autenticado.");
+    
+  }
+}
+
+
 LogoutClick() {
   this.auth.signOut();
 }
