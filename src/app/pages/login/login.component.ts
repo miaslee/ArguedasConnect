@@ -10,13 +10,24 @@ import {FirebaseTSAuth} from 'firebasets/firebasetsAuth/firebaseTSAuth';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  state = LoginCompState.LOGIN;
+  state = LoginCompState.BLANK;
+
+ 
   firebasetsAuth: FirebaseTSAuth;
   constructor (){
 
     this.firebasetsAuth = new FirebaseTSAuth();
-  }
+    this.init();
 
+    
+  }
+init() {
+    setTimeout(() => {
+        this.state = LoginCompState.LOGIN;
+    }, 1000); // Espera de 2 segundos
+    
+}
+  
 
   ResetPass(resetEmail: HTMLInputElement){
     let email = resetEmail.value;
@@ -49,12 +60,14 @@ Login(loginEmail: HTMLInputElement,
       password : pass,
       onComplete: (uc) => {
     console.log("Logged")
+   
       },
       onFail : (err) => {
         alert("No se puede iniciar"+ err);
       }
     }
   )
+ 
 }
 
    
@@ -149,6 +162,8 @@ isForgotPasswordState(){
   getStateText (){
 
     switch (this.state) {
+      case LoginCompState.BLANK :
+  return "Blank";
 case LoginCompState.LOGIN :
   return "Login";
   case LoginCompState.REGISTER:
@@ -161,6 +176,7 @@ case LoginCompState.LOGIN :
 }
 
 export enum LoginCompState {
+  BLANK,
 LOGIN,
 REGISTER,
 FORGOT_PASSWORD

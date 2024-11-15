@@ -107,15 +107,18 @@ getUsersProfile() {
     console.warn("No hay un usuario autenticado.");
     
   }
+  
 }
 
 
 LogoutClick() {
   this.auth.signOut();
+  window.location.reload();
 }
 
 loggedIn(){
   this.log = this.isLoggedIn
+ 
   
 return this.log;
 }
