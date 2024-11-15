@@ -9,11 +9,12 @@ import { NgIf } from '@angular/common';
 import { CompleteProfileComponent } from './pages/complete-profile/complete-profile.component';
 import{FirebaseTSFirestore} from "firebasets/firebasetsFirestore/firebaseTSFirestore";
 import { FeedComponent } from './pages/feed/feed.component';
+import { PostComponent } from './tools/post/post.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NgIf, CompleteProfileComponent, FeedComponent],
+  imports: [RouterOutlet,NgIf, CompleteProfileComponent, FeedComponent, PostComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   

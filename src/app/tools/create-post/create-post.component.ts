@@ -4,11 +4,12 @@ import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFi
 import { timestamp } from 'rxjs';
 import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 import { MatDialogRef } from '@angular/material/dialog';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-create-post',
   standalone: true,
-  imports: [],
+  imports: [PostComponent],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.css'
 })
