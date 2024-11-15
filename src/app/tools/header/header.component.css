@@ -1,0 +1,92 @@
+/* Estilo general del header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #1B263B;
+    color: white;
+    font-family: Arial, sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea si es necesario */
+  }
+  
+  /* Espaciado para el contenido debajo del header */
+  .main-container {
+    margin-top: 60px;
+  }
+  
+  /* Logo de la izquierda */
+  .header-left .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    letter-spacing: 2px; 
+  }
+  
+  /* Centro: barra de búsqueda */
+  .header-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-bar {
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: none;
+    width: 300px;
+  }
+  
+  /* Enlaces y botón de la derecha */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .header-right .user-name {
+    font-weight: bold;
+  }
+  
+  /* Estilos de los enlaces */
+  .header-link {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+  }
+  
+  .header-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Botón de cerrar sesión */
+  .logout-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 50px;
+    font-weight: bold;
+    flex-shrink: 0; /* Evita que el botón se encoja en pantallas pequeñas */
+  }
+  
+  .logout-button:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* Ajustes en pantallas pequeñas */
+  @media (max-width: 768px) {
+    .search-bar {
+        width: 200px; /* Reduce el tamaño de la barra de búsqueda */
+    }
+  }
+  

@@ -10,11 +10,12 @@ import { CompleteProfileComponent } from './pages/complete-profile/complete-prof
 import{FirebaseTSFirestore} from "firebasets/firebasetsFirestore/firebaseTSFirestore";
 import { FeedComponent } from './pages/feed/feed.component';
 import { PostComponent } from './tools/post/post.component';
+import { HeaderComponent } from './tools/header/header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NgIf, CompleteProfileComponent, FeedComponent, PostComponent],
+  imports: [RouterOutlet,NgIf, CompleteProfileComponent, FeedComponent, PostComponent, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   

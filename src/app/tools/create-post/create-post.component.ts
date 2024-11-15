@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
-import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
+import { FirebaseTSFirestore, Limit, OrderBy, Where } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { timestamp } from 'rxjs';
 import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -22,6 +22,9 @@ export class CreatePostComponent {
   constructor (private dialog :MatDialogRef<CreatePostComponent>){
 
   }
+ 
+
+  
 
 
   PostClick(commentInput : HTMLTextAreaElement){ 
@@ -152,3 +155,5 @@ export class CreatePostComponent {
   
 
 }
+
+
