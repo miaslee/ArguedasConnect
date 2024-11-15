@@ -248,7 +248,7 @@ hr {
 }
 .create-account-button {
     padding: 10px 20px;
-    background-color: #19ce46;
+    background-color: #1B263B;
     color: white;
     border: none;
     border-radius: 8px;
@@ -274,7 +274,7 @@ hr {
 
 .create-account-button:hover
 {
-    background-color: #055318; /* Naranja más oscuro */
+    background-color: #29406b; /* Naranja más oscuro */
 }
 .signup-button:hover {
     background-color: #b35917; /* Naranja más oscuro */

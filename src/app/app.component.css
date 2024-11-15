@@ -4,16 +4,20 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: #4267B2; /* Color similar al de Facebook */
+    background-color: #1B263B; /* Color similar al de Facebook */
     color: white;
     font-family: Arial, sans-serif;
   }
+ 
+
   
   /* Logo de la izquierda */
   .header-left .logo {
     font-size: 24px;
     font-weight: bold;
     color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    letter-spacing: 2px; 
   }
   
   /* Centro: barra de búsqueda */

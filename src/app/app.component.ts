@@ -25,6 +25,7 @@ export class AppComponent {
   firestore:  FirebaseTSFirestore;
  userHasProfile : boolean;
  userDocument: userDocument;
+ log :boolean;
 
 constructor (
   private router: Router
@@ -42,6 +43,7 @@ constructor (
     publicFN: '',
     publicSex: ''
   };
+  this.log = false;
   
 
   //
@@ -110,7 +112,9 @@ LogoutClick() {
 }
 
 loggedIn(){
-return this.isLoggedIn;
+  this.log = this.isLoggedIn
+  
+return this.log;
 }
 
   
