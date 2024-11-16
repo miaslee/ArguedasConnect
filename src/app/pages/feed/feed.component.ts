@@ -22,12 +22,15 @@ posts : PostData []=[];
 photo : string = "";
 name: string ="";
 b : boolean = false;
+p :boolean = false;
+
+
 
 public userProfileData: UserProfile | null = null;
 
 
 constructor (private dialog : MatDialog){
-
+  
 }
 ngOnInit(): void {
   this.getPosts();
@@ -52,6 +55,8 @@ getPosts() {
         let post = <PostData>doc.data();
         post.id = doc.id; // Agrega el ID del documento al objeto `post`
         this.posts.push(post); // Agrega el post con su ID al arreglo
+        //verificar post
+        
       });
     },
     onFail: (err) => {

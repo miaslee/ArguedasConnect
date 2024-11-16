@@ -12,9 +12,9 @@
     
     <div class="header-right">
       <span class="user-name">Hola, {{getUsername()}}</span>
-      <a (click)="HomeClick()" class="header-link">Inicio</a>
-      <a (click)="userPerfilClick()"class="header-link">Perfil</a>
-      <a (click)="AmigoClick()" class="header-link">Amigos</a>
+      <a  (click)="HomeClick()" class=" menut">Inicio</a>
+      <a (click)="userPerfilClick()"class="menut">Perfil</a>
+      <a  class="menut">Amigos</a>
       <button  (click)="LogoutClick()" class="logout-button">Cerrar sesión</button>
     </div>
   </header>
@@ -34,6 +34,11 @@
   <app-feed   *ngIf="MailV() && loggedIn() && userHasProfile && isHomeState() "></app-feed>
   <app-perfil *ngIf="loggedIn() && userHasProfile && isPerfilState() "></app-perfil>
   <app-user-perfil    *ngIf="loggedIn() && userHasProfile && isUserPerfilState() ">   </app-user-perfil>
+
+  <div  *ngIf="loggedIn() && userHasProfile && isAmigoState()"  class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+  
 
 <app-complete-profile *ngIf="loggedIn() &&!userHasProfile "> </app-complete-profile>
 

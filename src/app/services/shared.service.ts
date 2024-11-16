@@ -24,6 +24,16 @@ export class SharedService {
     
   }
 
+  //Miperfilclick en appcomponetn
+  private perfilClickSource2= new Subject<void>();
+  perfilClick2$ = this.perfilClickSource2.asObservable();
+
+  triggerPerfilClick2() {
+    this.perfilClickSource2.next();
+    
+  }
+  
+
   //senID
   private idSource = new BehaviorSubject<string | null>(null); // Usa BehaviorSubject para emitir y almacenar el último valor
   currentId$: Observable<string | null> = this.idSource.asObservable();
