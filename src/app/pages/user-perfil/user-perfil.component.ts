@@ -4,6 +4,9 @@ import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { FirebaseTSFirestore, Limit, OrderBy, Where } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { PerfilComponent } from '../perfil/perfil.component';
 import { PerfilPostsComponent } from '../../tools/perfil-posts/perfil-posts.component';
+import { MatDialog } from '@angular/material/dialog';
+import { CompleteProfileComponent } from '../complete-profile/complete-profile.component';
+import { EdiPerfilComponent } from '../../tools/edi-perfil/edi-perfil.component';
 
 @Component({
   selector: 'app-user-perfil',
@@ -21,12 +24,17 @@ export class UserPerfilComponent {
   selectedImageFile: File | null = null;
   bb: boolean = false;
 
+constructor(private dialog: MatDialog){
 
+}
 
   ngOnInit(): void {
     const i = this.auth.getAuth().currentUser?.uid + "";
     this.getPosts(i);
     this.getInfoProfile1(i);
+  }
+  onEditInfo(){
+this.dialog.open(EdiPerfilComponent);
   }
 
   onPhotoSelected(photoSelector: HTMLInputElement) {

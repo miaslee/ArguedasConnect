@@ -33,7 +33,7 @@
   
   <div class="profile-content">
     <div class="profile-info">
-      <h2   >Información Personal  <button  class="edit-button"> Editar</button> </h2>
+      <h2   >Información Personal  <button (click)="onEditInfo()" class="edit-button"> Editar</button> </h2>
       <p><strong>Fecha de Nacimiento:</strong> {{ userProfileData?.publicFN }}</p>
       <p><strong>Sexo:</strong> {{ userProfileData?.publicSex }}</p>
       
