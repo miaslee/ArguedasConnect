@@ -148,6 +148,7 @@ export class CreatePostComponent {
       this.selectedImageFile = null; // O undefined, según tu preferencia
     }
   }
+  
   isImage(r :boolean){
     return r;
   }

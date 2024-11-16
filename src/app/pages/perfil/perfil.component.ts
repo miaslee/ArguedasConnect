@@ -109,12 +109,14 @@ export interface UserProfile {
   publicFN: string;
   publicLastname: string;
   publicSex: string;
+  photoUrl :string
 }
 export interface PostData {
   comment: string,
   creatorId: string,
   imageUrl?: string,
-  timestamp : any
+  timestamp : any,
+  
 }
 
 

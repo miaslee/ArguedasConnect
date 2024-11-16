@@ -14,18 +14,21 @@
           accept="image/*"
         />
       </label>
+      
 
 
       <div class="profile-photo ">
         
-        <img src="user.png" id="post-preview-image" alt="Profile Photo">
+        <img src="{{ userProfileData?.photoUrl }}" id="post-preview-image" alt="Profile Photo">
         
       </div>
       <div class="profile-details">
         <h1>{{ userProfileData?.publicName }} {{ userProfileData?.publicLastname }} </h1>
         <p class="career">{{ userProfileData?.publicCareer }}</p>
       </div>
+      <button (click)="uploadPhoto()" > Guardar</button>
     </div>
+    
   </div>
 
   <div class="profile-content">

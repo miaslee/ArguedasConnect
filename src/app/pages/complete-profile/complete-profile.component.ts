@@ -43,7 +43,9 @@ if (user) {
       publicCareer: carrera,
       publicFN: fechaNaci,
       publicSex: sexo,
-      userId: this.auth.getAuth().currentUser?.uid
+      userId: this.auth.getAuth().currentUser?.uid,
+      photoUrl: "https://devmiasx.com/uploads/67380645a9ac3_user.png"
+
     },
     onComplete: (docId: string) => {
       alert("Perfil creado");

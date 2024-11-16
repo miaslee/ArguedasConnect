@@ -22,6 +22,7 @@ export class PerfilPostsComponent {
   firestore = new FirebaseTSFirestore(); 
   username: string = "";
   time: string = "";
+  photo : string = "";
   u : boolean = false;
   public userProfileData: UserProfile | null = null;
 
@@ -50,6 +51,8 @@ export class PerfilPostsComponent {
        if(this.postData?.creatorId == this.userProfileData.userId){
         this.u  = true;
         this.username = this.userProfileData.publicName + " " + this.userProfileData.publicLastname;
+        this.photo = this.userProfileData.photoUrl;
+        console.log("photo" + this.photo)
         //time
         const timePost = this.postData?.timestamp ? this.postData.timestamp.toMillis() : null;
         const timeNow = Date.now();
@@ -102,5 +105,6 @@ export interface UserProfile {
   publicName: string;
   publicLastname: string;
   userId : string;
+  photoUrl: string
 }
 

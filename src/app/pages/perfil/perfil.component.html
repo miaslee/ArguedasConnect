@@ -3,7 +3,7 @@
     <img src="https://via.placeholder.com/800x200" alt="Cover Image" class="cover-image">
     <div class="profile-overlay">
       <div class="profile-photo">
-        <img src="user.png" alt="Profile Photo">
+        <img src="{{ userProfileData?.photoUrl}}" alt="Profile Photo">
       </div>
       <div class="profile-details">
         <h1>{{ userProfileData?.publicName }} {{ userProfileData?.publicLastname }} </h1>

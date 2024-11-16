@@ -52,6 +52,68 @@ export class UserPerfilComponent {
     }
   }
 
+  async uploadPhoto() {
+    if (this.selectedImageFile) {
+      let id  =  this.auth.getAuth().currentUser?.uid+"";
+      const uploadedUrl = await this.uploadToDevmias(this.selectedImageFile);
+      console.log(uploadedUrl)
+   
+       this.firestore.update({
+         path: ["Users", id], // Ruta al documento que deseas actualizar
+         data: {
+           photoUrl: uploadedUrl
+         }, // Campos adicionales o modificados
+         onComplete: () => {
+           console.log("Documento actualizado exitosamente.");
+         },
+         onFail: (error) => {
+           console.error("Error al actualizar el documento:", error);
+         },
+       });
+    }
+   
+
+  }
+ 
+
+  async uploadToDevmias(selectedImageFile: File): Promise<string | undefined> {
+    let url: string | undefined;
+
+    try {
+      // Crear un FormData para enviar el archivo
+      const formData = new FormData();
+      formData.append('file', selectedImageFile);
+
+      // URL del archivo PHP
+      const serverUrl = 'https://devmiasx.com/upload.php'; // Cambia esto por la URL donde está tu archivo PHP
+
+      // Realizar la solicitud POST
+      const response = await fetch(serverUrl, {
+        method: 'POST',
+        body: formData,
+      });
+
+      // Verificar si la respuesta fue exitosa
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.statusText}`);
+      }
+
+      // Parsear la respuesta
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        url = "https://devmiasx.com/" + responseData.url;
+      } else {
+        throw new Error(responseData.message || 'Error desconocido al subir la imagen.');
+      }
+    } catch (error) {
+      console.error('Error al subir la imagen:', error);
+    }
+
+    return url;
+  }
+
+
   getPosts (userId: string){
     //let userId = this.auth.getAuth().currentUser?.uid;
     this.firestore.getCollection(
@@ -114,10 +176,12 @@ export interface UserProfile {
   publicFN: string;
   publicLastname: string;
   publicSex: string;
+  photoUrl : string;
 }
 export interface PostData {
   comment: string,
   creatorId: string,
   imageUrl?: string,
-  timestamp : any
+  timestamp : any,
+  photoUrl :string
 }

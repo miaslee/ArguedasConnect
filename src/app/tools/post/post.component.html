@@ -1,7 +1,7 @@
 <div *ngIf="u" class="main-container">
     <div class="post">
         <div class="post-header">
-            <img (click)="sendId()"  src="user.png" alt="User Avatar" class="user-avatar">
+            <img (click)="sendId()"  src="{{photo}}" alt="User Avatar" class="user-avatar">
             <span (click)="sendId()" class="username">{{username}}</span>
             <!-- Tiempo de publicación -->
             <span class="post-time">{{time}}</span>

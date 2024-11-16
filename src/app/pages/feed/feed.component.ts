@@ -3,14 +3,14 @@ import {MatDialog} from "@angular/material/dialog"
 import { CreatePostComponent } from '../../tools/create-post/create-post.component';
 import { FirebaseTSFirestore, Limit, OrderBy, Where } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { PostComponent } from '../../tools/post/post.component';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { Timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [PostComponent, NgFor],
+  imports: [PostComponent, NgFor, NgIf],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.css'
 })
@@ -19,7 +19,11 @@ export class FeedComponent {
   auth = new FirebaseTSAuth();
 
 posts : PostData []=[];
+photo : string = "";
+name: string ="";
+b : boolean = false;
 
+public userProfileData: UserProfile | null = null;
 
 
 constructor (private dialog : MatDialog){
@@ -27,6 +31,7 @@ constructor (private dialog : MatDialog){
 }
 ngOnInit(): void {
   this.getPosts();
+  this.getInfo ();
  
 }
 
@@ -60,6 +65,36 @@ result.docs.forEach(
 );
 }
 
+getInfo (){
+  let i = this.auth.getAuth().currentUser?.uid;
+  this.firestore.getCollection(
+  {
+    path:["Users"],
+    where: [
+        new Where ("userId","==",i)
+    ],
+    onComplete: (result) => {
+  result.docs.forEach(
+    doc => {
+      this.b = true;
+      this.userProfileData = doc.data() as UserProfile;
+      console.log(doc.data())
+     // doc.data();
+      this.photo = this.userProfileData.photoUrl;
+      this.name = this.userProfileData.publicName;
+      
+     
+    }
+  )   
+    },
+    onFail: err => {
+      
+    }
+  }
+  
+  );
+  }
+
 
 
 }
@@ -68,6 +103,12 @@ export interface PostData {
   creatorId: string,
   imageUrl?: string,
   timestamp: any;
- 
+  
+}
+export interface UserProfile {
+  publicName: string;
+  publicLastname: string;
+  userId : string;
+  photoUrl: string
 }
 
