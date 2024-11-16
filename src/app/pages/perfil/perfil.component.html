@@ -1,4 +1,22 @@
-<div *ngIf="b"  class="profile-container">
+
+
+<div *ngIf="!p"  class="profile-container">
+  <div class="profile-header">
+    <img src="baner.jpg" alt="Cover Image" class="cover-image">
+    <div class="profile-overlay">
+      <div class="profile-photo">
+        <img src="https://devmiasx.com/uploads/67380645a9ac3_user.png" alt="Profile Photo">
+      </div>
+      <div class="profile-details">
+        <h1>Anónimo</h1>
+        <p class="career">Perfil privado</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="b && p"  class="profile-container">
   <div class="profile-header">
     <img src="baner.jpg" alt="Cover Image" class="cover-image">
     <div class="profile-overlay">

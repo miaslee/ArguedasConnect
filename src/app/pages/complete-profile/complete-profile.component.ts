@@ -54,7 +54,7 @@ if(this.isNotEmpty(name)&& this.isNotEmpty(lastname) &&this.isNotEmpty(sexo) && 
   
       },
       onComplete: (docId: string) => {
-        alert("Perfil creado");
+       console.log("Perfil creado");
   
   
         InputNombre.value = "";
@@ -68,7 +68,7 @@ if(this.isNotEmpty(name)&& this.isNotEmpty(lastname) &&this.isNotEmpty(sexo) && 
       }
     });
   } else {
-    alert("No hay un usuario autenticado.");
+    console.log("No hay un usuario autenticado.");
   }
 }else{
   console.log("Completa todos los campos")

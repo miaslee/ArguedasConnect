@@ -22,6 +22,7 @@ export class PerfilComponent {
  posts : PostData []=[];
  receivedId: string | null = null; // Variable para almacenar el ID recibido
   b : boolean = false;
+  p : boolean = true;
  
 
 
@@ -66,12 +67,8 @@ export class PerfilComponent {
         
       }
     }
-    
     );
     }
-
-
-
   getInfoProfile1 (userId: string){
     
     
@@ -86,9 +83,15 @@ export class PerfilComponent {
       doc => {
        
         this.userProfileData = doc.data() as UserProfile; 
-        this.b = true;
-       
-       //console.log(post);
+        
+        if(this.userProfileData.privacidad == "privado"){
+          this.p = false;
+        }
+        if(this.userProfileData.privacidad == "publico"){
+          this.p = true;
+          this.b = true;
+        }
+     
       }
     )
       },
@@ -110,7 +113,8 @@ export interface UserProfile {
   publicFN: string;
   publicLastname: string;
   publicSex: string;
-  photoUrl :string
+  photoUrl :string;
+  privacidad: string
 }
 export interface PostData {
   comment: string,
