@@ -19,6 +19,7 @@ export class UserPerfilComponent {
   posts : PostData []=[];
   b :boolean =  false;
   selectedImageFile: File | null = null;
+  bb : boolean = false;
 
 
 
@@ -44,6 +45,7 @@ export class UserPerfilComponent {
         if (postPreviewImage && fileReader.result) {
           
           postPreviewImage.src = fileReader.result.toString();
+          this.bb = true;
           
         }
       };

@@ -2,10 +2,16 @@
     <div class="post">
         <div class="post-header">
             <img (click)="sendId()"  src="{{photo}}" alt="User Avatar" class="user-avatar">
-            <span (click)="sendId()" class="username">{{username}}</span>
+            
+            <div class="user-info">
+                <span (click)="sendId()" class="username">{{username}}</span>
+                <!-- Información de la carrera -->
+                <p class="career">{{carrera}}</p>
+              </div>
             <!-- Tiempo de publicación -->
             <span class="post-time">{{time}}</span>
         </div>
+        
         <!-- Descripción antes de la imagen -->
         <div class="post-description">
             <p>{{postData?.comment}}</p>

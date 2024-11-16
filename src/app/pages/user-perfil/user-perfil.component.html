@@ -26,7 +26,7 @@
         <h1>{{ userProfileData?.publicName }} {{ userProfileData?.publicLastname }} </h1>
         <p class="career">{{ userProfileData?.publicCareer }}</p>
       </div>
-      <button (click)="uploadPhoto()" > Guardar</button>
+      <button *ngIf="bb" (click)="uploadPhoto()" > Guardar</button>
     </div>
     
   </div>

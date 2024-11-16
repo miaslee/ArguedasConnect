@@ -98,3 +98,21 @@
     color: #8e8e8e; /* Color gris para menor importancia */
     margin-left: auto;
 }
+.user-info {
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+  }
+  
+  .username {
+    font-weight: bold;
+    font-size: 14px;
+    color: #262626;
+    margin-bottom: 2px; /* Espaciado entre el nombre y la carrera */
+  }
+  
+  .career {
+    font-size: 12px; /* Tamaño de fuente más pequeño */
+    color: #555; /* Color gris para menor énfasis */
+    margin: 0; /* Elimina márgenes adicionales */
+  }
+  

@@ -24,6 +24,7 @@ export class PostComponent {
   time: string = "Hace ";
   photo: string = "";
   u : boolean = false;
+  carrera: string = "";
 
   constructor(private sharedService: SharedService){
     
@@ -75,6 +76,7 @@ export class PostComponent {
         this.u  = true;
         this.username = this.userProfileData.publicName + " " + this.userProfileData.publicLastname;
         this.photo = this.userProfileData.photoUrl;
+        this.carrera = this.userProfileData.publicCareer;
         //time
         const timePost = this.postData?.timestamp ? this.postData.timestamp.toMillis() : null;
         const timeNow = Date.now();
@@ -136,4 +138,5 @@ export interface UserProfile {
   publicLastname: string;
   userId : string;
   photoUrl: string
+  publicCareer: string
 }
