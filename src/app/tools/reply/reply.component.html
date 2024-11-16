@@ -1,19 +1,24 @@
-<p>Comentarios</p>
+<div *ngIf="c" >
+  <p>Comentarios</p>
 
-<div class="reply-box">
-  <!-- Comentario 1 -->
-  <div *ngFor="let comment of comments" class="comment-item">
-    <img src="{{comment.photoUrl}}" alt="Foto de perfil" class="comment-avatar">
-    <div class="comment-content">
-      <p class="comment-name">{{comment.creatorName}}</p>
-      <p class="comment-text">{{comment.comment}}</p>
+  <div class="reply-box">
+    <!-- Comentario 1 -->
+    <div *ngFor="let comment of comments" class="comment-item">
+      <img src="{{comment.photoUrl}}" alt="Foto de perfil" class="comment-avatar">
+      <div class="comment-content">
+        <p class="comment-name">{{comment.creatorName}}</p>
+        <p class="comment-text">{{comment.comment}}</p>
+      </div>
     </div>
+  
+   
   </div>
-
- 
+  
+  <div id="reply-action-bar">
+    <button (click)="onSendClick(commentInput)">Enviar</button>
+    <input type="text" placeholder="Escribe un comentario"  #commentInput>
+  </div>
 </div>
 
-<div id="reply-action-bar">
-  <button (click)="onSendClick(commentInput)">Enviar</button>
-  <input type="text" placeholder="Escribe un comentario"  #commentInput>
-</div>
+
+

@@ -4,13 +4,13 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 import { AppComponent } from '../../app.component';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 
 @Component({
   selector: 'app-reply',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, NgIf],
   templateUrl: './reply.component.html',
   styleUrl: './reply.component.css'
 })
@@ -19,6 +19,7 @@ export class ReplyComponent {
   auth = new FirebaseTSAuth();
   public userProfileData: UserProfile | null = null;
   comments :Comment [] = [];
+  c : boolean = false;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) private id: string){
@@ -44,6 +45,7 @@ getComment() {
             }
           }
         )
+        this.c = true;
       }
     }
   );
