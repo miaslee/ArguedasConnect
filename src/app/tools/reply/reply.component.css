@@ -1,0 +1,114 @@
+/* Título de la sección */
+p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    padding-left: 10px; /* Espaciado del título */
+  }
+  
+  /* Caja de comentarios */
+  .reply-box {
+    width: 100%;
+    max-width: 500px;
+    height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    padding: 15px; /* Margen interno general */
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  /* Comentario individual */
+  .comment-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .comment-item:last-child {
+    border-bottom: none;
+  }
+  
+  /* Avatar del usuario */
+  .comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+  }
+  
+  /* Contenedor de contenido */
+  .comment-content {
+    flex-grow: 1;
+    word-wrap: break-word; /* Permite saltos de línea en palabras largas */
+    word-break: break-word; /* Asegura el ajuste de texto */
+    white-space: normal; /* Permite texto multilínea */
+  }
+  
+  /* Estilo del nombre */
+  .comment-name {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0;
+    color: #1877f2; /* Color similar al de Facebook */
+    margin-bottom: 3px;
+  }
+  
+  /* Estilo del texto del comentario */
+  .comment-text {
+    font-size: 14px;
+    margin: 0;
+    color: #555;
+  }
+  
+  /* Barra de acción */
+  #reply-action-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 0 15px; /* Margen interno en los lados */
+  }
+  
+  /* Botón de enviar */
+  button {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 15px;
+  }
+  
+  button:hover {
+    background-color: #145db2;
+  }
+  
+  /* Input de comentario */
+  input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+  }
+  
+  input:focus {
+    border-color: #1877f2;
+    box-shadow: 0 0 5px rgba(24, 119, 242, 0.5);
+  }
+  

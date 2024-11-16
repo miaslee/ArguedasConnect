@@ -6,6 +6,8 @@ import { NgIf } from '@angular/common';
 import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 import { SharedService } from '../../services/shared.service';
 import firebase from "firebase/app";
+import { MatDialog } from '@angular/material/dialog';
+import { ReplyComponent } from '../reply/reply.component';
 
 
 @Component({
@@ -30,7 +32,7 @@ export class PostComponent {
   l: string = "♡"
   n : any;
 
-  constructor(private sharedService: SharedService){
+  constructor(private sharedService: SharedService, private dialog:MatDialog){
     
 
     
@@ -43,6 +45,9 @@ export class PostComponent {
    
   }
   
+  onReplyClick() {
+ this.dialog.open(ReplyComponent); 
+  }
 
 update (){
 
