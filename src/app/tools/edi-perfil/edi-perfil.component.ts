@@ -1,9 +1,10 @@
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-edi-perfil',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './edi-perfil.component.html',
   styleUrl: './edi-perfil.component.css'
 })
