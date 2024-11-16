@@ -30,7 +30,7 @@ export class AppComponent {
   isLoggedIn = false;
   firestore:  FirebaseTSFirestore;
  userHasProfile : boolean;
- userDocument: userDocument;
+ private static userDocument: userDocument| null = null ;
  log :boolean;
  mailv : boolean;
 
@@ -44,12 +44,13 @@ constructor (
   this.auth = new FirebaseTSAuth();
   this.firestore = new FirebaseTSFirestore();
   this.userHasProfile = true;
-  this.userDocument = {
+  AppComponent.userDocument = {
     publicName: '',
     publicLastname: '',
     publicCareer: '',
     publicFN: '',
-    publicSex: ''
+    publicSex: '',
+    userId: ''
   };
   this.log = false;
   this.mailv = false;
@@ -70,6 +71,8 @@ constructor (
           whenSignedOut: user => {
             console.log("logout") 
             this.isLoggedIn = false;
+            AppComponent.userDocument = null;
+
 
           },
           whenSignedInAndEmailNotVerified : user => {
@@ -101,6 +104,21 @@ ngOnInit() {
     this.PerfilClick(); // Llama a perfilClick cuando el evento se activa
   });
 }
+
+public static getUserDocument(){
+return AppComponent.userDocument;
+
+}
+getUsername(): string {
+  try {
+      // Devuelve el nombre del usuario si está disponible
+      return AppComponent.userDocument?.publicName || "Invitado";
+  } catch (err) {
+      // Devuelve un valor predeterminado en caso de error
+      console.error("Error al obtener el nombre de usuario:", err);
+      return "Invitado";
+  }
+}
 getUsersProfile() {
   const user = this.auth.getAuth().currentUser;
 
@@ -110,11 +128,12 @@ getUsersProfile() {
       path: ["Users", user.uid], // Asegúrate de incluir la colección y el UID del usuario
       onUpdate: (result) => {
        
-      this.userDocument =<userDocument> result.data();
+      AppComponent.userDocument =<userDocument> result.data();
      
         // Aquí puedes manejar la actualización del documento del usuario
         console.log("Documento del perfil de usuario actualizado:", result);
         this.userHasProfile =result.exists; 
+        AppComponent.userDocument.userId = this.auth.getAuth().currentUser?.uid+"";
         this.mailv = true;
       }
     });
@@ -202,4 +221,6 @@ export interface userDocument {
       publicCareer: string;
       publicFN: string;
       publicSex: string;
+      userId: string
+
 }

@@ -9,8 +9,8 @@ p {
   
   /* Caja de comentarios */
   .reply-box {
-    width: 100%;
-    max-width: 500px;
+    width:94%;
+    max-width: 600px;
     height: 500px;
     overflow-y: auto;
     border: 1px solid #ccc;
@@ -20,7 +20,8 @@ p {
     box-sizing: border-box;
     margin-bottom: 10px;
     margin-left: 10px;
-    margin-right: 10px;
+    
+    
   }
   
   /* Comentario individual */
@@ -58,7 +59,7 @@ p {
     font-weight: bold;
     font-size: 14px;
     margin: 0;
-    color: #1877f2; /* Color similar al de Facebook */
+    color: #1B263B; /* Color similar al de Facebook */
     margin-bottom: 3px;
   }
   
@@ -80,7 +81,7 @@ p {
   
   /* Botón de enviar */
   button {
-    background-color: #1877f2;
+    background-color: #ce6921;
     color: white;
     border: none;
     border-radius: 20px;
@@ -92,7 +93,7 @@ p {
   }
   
   button:hover {
-    background-color: #145db2;
+    background-color: #b35917;
   }
   
   /* Input de comentario */
@@ -108,7 +109,7 @@ p {
   }
   
   input:focus {
-    border-color: #1877f2;
-    box-shadow: 0 0 5px rgba(24, 119, 242, 0.5);
+    border-color: #b35917;
+    box-shadow: 0 0 5px rgba(139, 87, 8, 0.5);
   }
   

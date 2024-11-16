@@ -2,34 +2,18 @@
 
 <div class="reply-box">
   <!-- Comentario 1 -->
-  <div class="comment-item">
-    <img src="https://via.placeholder.com/40" alt="Foto de perfil" class="comment-avatar">
+  <div *ngFor="let comment of comments" class="comment-item">
+    <img src="{{comment.photoUrl}}" alt="Foto de perfil" class="comment-avatar">
     <div class="comment-content">
-      <p class="comment-name">Usuario 1</p>
-      <p class="comment-text">Este es un comentario de ejemplo. fdshjdfshfdshj fds fd 3erer rew rew r</p>
+      <p class="comment-name">{{comment.creatorName}}</p>
+      <p class="comment-text">{{comment.comment}}</p>
     </div>
   </div>
 
-  <!-- Comentario 2 -->
-  <div class="comment-item">
-    <img src="https://via.placeholder.com/40" alt="Foto de perfil" class="comment-avatar">
-    <div class="comment-content">
-      <p class="comment-name">Usuario 2</p>
-      <p class="comment-text">Otro comentario interesante.</p>
-    </div>
-  </div>
-
-  <!-- Comentario 3 -->
-  <div class="comment-item">
-    <img src="https://via.placeholder.com/40" alt="Foto de perfil" class="comment-avatar">
-    <div class="comment-content">
-      <p class="comment-name">Usuario 3</p>
-      <p class="comment-text">¡Este diseño es genial!</p>
-    </div>
-  </div>
+ 
 </div>
 
 <div id="reply-action-bar">
-  <button>Enviar</button>
-  <input type="text" placeholder="Escribe un comentario">
+  <button (click)="onSendClick(commentInput)">Enviar</button>
+  <input type="text" placeholder="Escribe un comentario"  #commentInput>
 </div>

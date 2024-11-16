@@ -11,7 +11,7 @@
     </div>
     
     <div class="header-right">
-      <span class="user-name">Hola, {{userDocument.publicName}}</span>
+      <span class="user-name">Hola, {{getUsername()}}</span>
       <a (click)="HomeClick()" class="header-link">Inicio</a>
       <a (click)="userPerfilClick()"class="header-link">Perfil</a>
       <a (click)="AmigoClick()" class="header-link">Amigos</a>
