@@ -20,87 +20,87 @@ export class PerfilPostsComponent {
 
   @Input() postData?: PostData;
   auth = new FirebaseTSAuth();
-  firestore = new FirebaseTSFirestore(); 
+  firestore = new FirebaseTSFirestore();
   username: string = "";
   time: string = "";
-  photo : string = "";
-  u : boolean = false;
+  photo: string = "";
+  u: boolean = false;
   public userProfileData: UserProfile | null = null;
   l: string = "♡"
-  n : any;
+  n: any;
   public likeData: likes | null = null;
 
-  constructor(){
-    
+  constructor() {
+
   }
   ngOnInit() {
     this.getInfoProfile();
     this.update();
     this.n = this.postData?.likes;
-  
+
   }
-  update (){
+  update() {
 
     const postId = this.postData?.id ?? ""; // ID del post actual
-  const userId = this.auth.getAuth().currentUser?.uid ?? ""; // ID del usuario actual
-  
-  
-  
-  const likeId = `${postId}_${userId}`; // ID único para el like
-  const likePath = ["Likes", likeId]; // Ruta del documento en Firestore
-  
-  this.firestore.getDocument({
-    path: likePath,
-    onComplete: (result) => {
-      if (result.exists) {
-       
-        this.l = "♥"; // Actualizar visualmente el estado
-       
-      } else {
-        
-        this.l = "♡"; // Actualizar visualmente el estado
-        
-      }
-    },
-    onFail: (error) => {
-      console.error("Error al verificar el like:", error);
-    },
-  });
+    const userId = this.auth.getAuth().currentUser?.uid ?? ""; // ID del usuario actual
+
+
+
+    const likeId = `${postId}_${userId}`; // ID único para el like
+    const likePath = ["Likes", likeId]; // Ruta del documento en Firestore
+
+    this.firestore.getDocument({
+      path: likePath,
+      onComplete: (result) => {
+        if (result.exists) {
+
+          this.l = "♥"; // Actualizar visualmente el estado
+
+        } else {
+
+          this.l = "♡"; // Actualizar visualmente el estado
+
+        }
+      },
+      onFail: (error) => {
+        console.error("Error al verificar el like:", error);
+      },
+    });
   }
   Like() {
     const postId = this.postData?.id || ""; // ID del post actual
     const user = this.auth.getAuth().currentUser; // Usuario actual
     const userId = user?.uid || ""; // ID del usuario actual
     console.log(postId)
-  
+
     if (!postId || !userId) {
       console.error("PostId o UserId no disponibles");
       return;
     }
-  
+
     const likeId = `${postId}_${userId}`; // ID único para el like
     const likePath = ["Likes", likeId]; // Ruta del documento del like
-  
+
     // Verificar si el like ya existe
     this.firestore.getDocument({
       path: likePath,
       onComplete: (result) => {
         if (result.exists) {
-          
+
           // Quitar el like
           this.firestore.delete({
             path: likePath,
             onComplete: () => {
-             
+
               this.l = "♡";
               this.disLike(postId);
             },
             onFail: (error) => {
-              
+
             },
           });
         } else {
-          
+
           // Crear el like
           this.firestore.create({
             path: likePath,
@@ -109,8 +109,8 @@ export class PerfilPostsComponent {
               userId: userId,
             },
             onComplete: () => {
-             
-              this.l ="♥"
+
+              this.l = "♥"
               this.addLike(postId);
             },
             onFail: (error) => {
@@ -131,8 +131,8 @@ export class PerfilPostsComponent {
         likes: firebase.firestore.FieldValue.increment(1), // Incrementa el campo "likes"
       },
       onComplete: () => {
-       
-        this.n = this.n +1;
+
+        this.n = this.n + 1;
       },
       onFail: (error) => {
         console.error("Error al incrementar los likes:", error);
@@ -146,8 +146,8 @@ export class PerfilPostsComponent {
         likes: firebase.firestore.FieldValue.increment(-1), // Incrementa el campo "likes"
       },
       onComplete: () => {
-        
-        this.n = this.n -1;
+
+        this.n = this.n - 1;
       },
       onFail: (error) => {
         console.error("Error al incrementar los likes:", error);
@@ -155,92 +155,80 @@ export class PerfilPostsComponent {
     });
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-  getInfoProfile (){
+  getInfoProfile() {
     let userId = this.auth.getAuth().currentUser?.uid;
-    
+
     this.firestore.getCollection(
-    {
-      path:["Users"],
-      where: [
-        
-      ],
-      
-      onComplete: (result) => {
-    result.docs.forEach(
-      doc => {
-       
-       this.userProfileData = doc.data() as UserProfile;
-       if(this.postData?.creatorId == this.userProfileData.userId){
-        this.u  = true;
-        this.username = this.userProfileData.publicName + " " + this.userProfileData.publicLastname;
-        this.photo = this.userProfileData.photoUrl;
-        console.log("photo" + this.photo)
-        //time
-        const timePost = this.postData?.timestamp ? this.postData.timestamp.toMillis() : null;
-        const timeNow = Date.now();
+      {
+        path: ["Users"],
+        where: [
+
+        ],
+
+        onComplete: (result) => {
+          result.docs.forEach(
+            doc => {
+
+              this.userProfileData = doc.data() as UserProfile;
+              if (this.postData?.creatorId == this.userProfileData.userId) {
+                this.u = true;
+                this.username = this.userProfileData.publicName + " " + this.userProfileData.publicLastname;
+                this.photo = this.userProfileData.photoUrl;
+                console.log("photo" + this.photo)
+                //time
+                const timePost = this.postData?.timestamp ? this.postData.timestamp.toMillis() : null;
+                const timeNow = Date.now();
 
 
-        if (timePost) {
-          const difference = timeNow - timePost;
-      
-          // Conversión a unidades de tiempo
-          const seconds = Math.floor(difference / 1000);
-          const minutes = Math.floor(seconds / 60);
-          const hours = Math.floor(minutes / 60);
-          const days = Math.floor(hours / 24);
-      
-          // Muestra en consola el tiempo transcurrido
-          if (days > 0) {
-            this.time = (`Hace ${days} días`);
-             
-          } else if (hours > 0) {
-              
-              this.time = (`Hace ${hours} horas`);
-          } else if (minutes > 0) {
-             
-              this.time = (`Hace ${minutes} minutos`);
-          } else {
-              
-              this.time = (`Hace ${seconds} segundos`);
-          }
-      } else {
-          console.log("El timestamp del post no está disponible.");
-      }
-       }
+                if (timePost) {
+                  const difference = timeNow - timePost;
 
-       //console.log(post);
+                  // Conversión a unidades de tiempo
+                  const seconds = Math.floor(difference / 1000);
+                  const minutes = Math.floor(seconds / 60);
+                  const hours = Math.floor(minutes / 60);
+                  const days = Math.floor(hours / 24);
+
+                  // Muestra en consola el tiempo transcurrido
+                  if (days > 0) {
+                    this.time = (`Hace ${days} días`);
+
+                  } else if (hours > 0) {
+
+                    this.time = (`Hace ${hours} horas`);
+                  } else if (minutes > 0) {
+
+                    this.time = (`Hace ${minutes} minutos`);
+                  } else {
+
+                    this.time = (`Hace ${seconds} segundos`);
+                  }
+                } else {
+                  console.log("El timestamp del post no está disponible.");
+                }
+              }
+
+              //console.log(post);
+            }
+          )
+
+        },
+        onFail: err => {
+
+        }
       }
-    )
-    
-      },
-      onFail: err => {
-        
-      }
-    }
-    
+
     );
-    }
-  
+  }
+
 
 }
 export interface UserProfile {
   publicName: string;
   publicLastname: string;
-  userId : string;
+  userId: string;
   photoUrl: string
 }
 export interface likes {
-  likeId :string
- }
+  likeId: string
+}
