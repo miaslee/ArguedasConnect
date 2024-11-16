@@ -104,7 +104,13 @@ export class AppComponent {
       this.PerfilClick(); // Llama a perfilClick cuando el evento se activa
     });
     this.sharedService.perfilClick1$.subscribe(() => {
-      this.userPerfilClick(); // Llama a perfilClick cuando el evento se activa
+      //this.userPerfilClick(); // Llama a perfilClick cuando el evento se activa
+     //esperar 1 segundo 
+     this.HomeClick();
+     setTimeout(() => {
+      this.userPerfilClick(); // Llama a userPerfilClick después de 1 segundo
+    }, 100); // 1000 milisegundos = 1 segundo
+      
     });
   }
 

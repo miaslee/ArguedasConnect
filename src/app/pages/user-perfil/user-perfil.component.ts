@@ -7,11 +7,12 @@ import { PerfilPostsComponent } from '../../tools/perfil-posts/perfil-posts.comp
 import { MatDialog } from '@angular/material/dialog';
 import { CompleteProfileComponent } from '../complete-profile/complete-profile.component';
 import { EdiPerfilComponent } from '../../tools/edi-perfil/edi-perfil.component';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-user-perfil',
   standalone: true,
-  imports: [NgFor, PerfilComponent, PerfilPostsComponent, NgIf],
+  imports: [NgFor, PerfilComponent, PerfilPostsComponent, NgIf, EdiPerfilComponent],
   templateUrl: './user-perfil.component.html',
   styleUrl: './user-perfil.component.css'
 })
@@ -19,22 +20,36 @@ export class UserPerfilComponent {
   auth = new FirebaseTSAuth();
   firestore = new FirebaseTSFirestore();
   public userProfileData: UserProfile | null = null;
+ 
   posts: PostData[] = [];
+  
   b: boolean = false;
   selectedImageFile: File | null = null;
   bb: boolean = false;
 
-constructor(private dialog: MatDialog){
+constructor(private dialog: MatDialog, private sharedService: SharedService){
 
 }
-
+callPerfilClick1() {
+  this.sharedService.triggerPerfilClick1();
+  
+}
   ngOnInit(): void {
     const i = this.auth.getAuth().currentUser?.uid + "";
     this.getPosts(i);
     this.getInfoProfile1(i);
   }
   onEditInfo(){
-this.dialog.open(EdiPerfilComponent);
+    this.dialog.open(EdiPerfilComponent, {
+      data: { 
+        nombre: this.userProfileData?.publicName, 
+        apellido: this.userProfileData?.publicLastname,
+        sexo: this.userProfileData?.publicSex,
+        privacidad : this.userProfileData?.privacidad,
+        fn : this.userProfileData?.publicFN
+
+      }
+    });
   }
 
   onPhotoSelected(photoSelector: HTMLInputElement) {
@@ -74,6 +89,7 @@ this.dialog.open(EdiPerfilComponent);
           photoUrl: uploadedUrl
         }, // Campos adicionales o modificados
         onComplete: () => {
+          this.callPerfilClick1();
 
         },
         onFail: (error) => {
@@ -167,6 +183,7 @@ this.dialog.open(EdiPerfilComponent);
               this.userProfileData = doc.data() as UserProfile;
               this.b = true;
 
+
             }
           )
         },
@@ -185,7 +202,9 @@ export interface UserProfile {
   publicLastname: string;
   publicSex: string;
   photoUrl: string;
+  privacidad: string;
 }
+
 export interface PostData {
   comment: string,
   creatorId: string,

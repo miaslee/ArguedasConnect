@@ -21,6 +21,7 @@ export class SharedService {
 
   triggerPerfilClick1() {
     this.perfilClickSource1.next();
+    
   }
 
   //senID
