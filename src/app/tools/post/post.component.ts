@@ -35,7 +35,6 @@ export class PostComponent {
   constructor(private sharedService: SharedService, private dialog: MatDialog) {
 
 
-
   }
   ngOnInit(): void {
     this.update()
@@ -166,7 +165,7 @@ export class PostComponent {
       },
     });
   }
-  
+
   //llamar para mostrar perfil
   callPerfilClick() {
     this.sharedService.triggerPerfilClick();

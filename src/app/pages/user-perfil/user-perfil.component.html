@@ -30,12 +30,13 @@
     </div>
     
   </div>
-
+  
   <div class="profile-content">
     <div class="profile-info">
-      <h2>Información Personal</h2>
+      <h2   >Información Personal  <button  class="edit-button"> Editar</button> </h2>
       <p><strong>Fecha de Nacimiento:</strong> {{ userProfileData?.publicFN }}</p>
       <p><strong>Sexo:</strong> {{ userProfileData?.publicSex }}</p>
+      
       
     </div>
 
@@ -47,9 +48,6 @@
     
  <app-perfil-posts *ngFor="let post of posts"  [postData]="post"  ></app-perfil-posts>
  
-
-
-
 
       <!-- Agregar más publicaciones aquí -->
     </div>

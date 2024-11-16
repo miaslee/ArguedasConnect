@@ -236,3 +236,17 @@ input[type="file"] {
 .edit-profile-photo:hover {
   background-color: #717375;
 }
+
+.edit-button {
+ 
+  background-color: #636668;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-button:hover {
+  background-color: #111213;
+}

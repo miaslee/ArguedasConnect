@@ -174,7 +174,7 @@ export class PerfilPostsComponent {
                 this.u = true;
                 this.username = this.userProfileData.publicName + " " + this.userProfileData.publicLastname;
                 this.photo = this.userProfileData.photoUrl;
-                console.log("photo" + this.photo)
+              
                 //time
                 const timePost = this.postData?.timestamp ? this.postData.timestamp.toMillis() : null;
                 const timeNow = Date.now();
