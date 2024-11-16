@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { FirebaseTSFirestore, Limit, OrderBy, Where } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
@@ -8,7 +8,7 @@ import { PerfilPostsComponent } from '../../tools/perfil-posts/perfil-posts.comp
 @Component({
   selector: 'app-user-perfil',
   standalone: true,
-  imports: [NgFor,PerfilComponent, PerfilPostsComponent],
+  imports: [NgFor,PerfilComponent, PerfilPostsComponent, NgIf],
   templateUrl: './user-perfil.component.html',
   styleUrl: './user-perfil.component.css'
 })
@@ -17,6 +17,8 @@ export class UserPerfilComponent {
   firestore = new FirebaseTSFirestore(); 
   public userProfileData: UserProfile | null = null;
   posts : PostData []=[];
+  b :boolean =  false;
+  selectedImageFile: File | null = null;
 
 
 
@@ -26,6 +28,29 @@ export class UserPerfilComponent {
     this.getInfoProfile1(i);
   }
 
+  onPhotoSelected(photoSelector: HTMLInputElement) {
+  
+    // Verificar si hay un archivo seleccionado
+    if (photoSelector.files?.length) {
+      this.selectedImageFile = photoSelector.files[0];
+      
+  
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(this.selectedImageFile);
+      fileReader.onload = () => {
+        const postPreviewImage = document.getElementById("post-preview-image") as HTMLImageElement;
+        
+        
+        if (postPreviewImage && fileReader.result) {
+          
+          postPreviewImage.src = fileReader.result.toString();
+          
+        }
+      };
+    } else {
+      this.selectedImageFile = null; // O undefined, según tu preferencia
+    }
+  }
 
   getPosts (userId: string){
     //let userId = this.auth.getAuth().currentUser?.uid;
@@ -69,6 +94,7 @@ export class UserPerfilComponent {
       doc => {
        
         this.userProfileData = doc.data() as UserProfile; 
+        this.b = true;
        
        //console.log(post);
       }

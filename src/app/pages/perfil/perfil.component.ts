@@ -21,7 +21,7 @@ export class PerfilComponent {
  public userProfileData: UserProfile | null = null;
  posts : PostData []=[];
  receivedId: string | null = null; // Variable para almacenar el ID recibido
-  
+  b : boolean = false;
  
 
 
@@ -57,7 +57,7 @@ export class PerfilComponent {
       doc => {
         let post = <PostData>doc.data();
         this.posts.push(post);
-       
+         
       }
     )  
       },
@@ -85,6 +85,7 @@ export class PerfilComponent {
       doc => {
        
         this.userProfileData = doc.data() as UserProfile; 
+        this.b = true;
        
        //console.log(post);
       }

@@ -81,12 +81,6 @@ export class PerfilPostsComponent {
       } else {
           console.log("El timestamp del post no está disponible.");
       }
-        
-        
-
-        
-
-       
        }
 
        //console.log(post);

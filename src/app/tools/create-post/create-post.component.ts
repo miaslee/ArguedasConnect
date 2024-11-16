@@ -75,7 +75,6 @@ export class CreatePostComponent {
         data: {
           comment: comment,
           creatorId: this.auth.getAuth().currentUser?.uid,
-         
           timestamp : FirebaseTSApp.getFirestoreTimestamp( )
         },
         onComplete: (docId) =>{

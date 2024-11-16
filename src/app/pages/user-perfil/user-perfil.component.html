@@ -1,39 +1,54 @@
-<div class="profile-container">
-    <div class="profile-header">
-      <img src="https://via.placeholder.com/800x200" alt="Cover Image" class="cover-image">
-      <div class="profile-overlay">
-        <div class="profile-photo">
-          <img src="user.png" alt="Profile Photo">
-        </div>
-        <div class="profile-details">
-          <h1>{{ userProfileData?.publicName }} {{ userProfileData?.publicLastname }} </h1>
-          <p class="career">{{ userProfileData?.publicCareer }}</p>
-        </div>
-      </div>
-    </div>
-  
-    <div class="profile-content">
-      <div class="profile-info">
-        <h2>Información Personal</h2>
-        <p><strong>Fecha de Nacimiento:</strong> {{ userProfileData?.publicFN }}</p>
-        <p><strong>Sexo:</strong> {{ userProfileData?.publicSex }}</p>
+<div *ngIf="b"  class="profile-container">
+  <div class="profile-header">
+    <img src="https://via.placeholder.com/800x200" alt="Cover Image" class="cover-image">
+    <div class="profile-overlay">
+      
+
+      <label for="photo-upload" class="edit-profile-photo">
+        📷
+        <input
+          #photoSelector
+          (change)="onPhotoSelected(photoSelector)"
+          id="photo-upload"
+          type="file"
+          accept="image/*"
+        />
+      </label>
+
+
+      <div class="profile-photo ">
+        
+        <img src="user.png" id="post-preview-image" alt="Profile Photo">
         
       </div>
-  
-      
-      <div class="profile-posts">
-        <h2>Publicaciones</h2>
-        
-  <!-- Descripción antes de la imagen -->
-      
-   <app-perfil-posts *ngFor="let post of posts"  [postData]="post"  ></app-perfil-posts>
-   
-  
-  
-  
-  
-        <!-- Agregar más publicaciones aquí -->
+      <div class="profile-details">
+        <h1>{{ userProfileData?.publicName }} {{ userProfileData?.publicLastname }} </h1>
+        <p class="career">{{ userProfileData?.publicCareer }}</p>
       </div>
     </div>
   </div>
-  
+
+  <div class="profile-content">
+    <div class="profile-info">
+      <h2>Información Personal</h2>
+      <p><strong>Fecha de Nacimiento:</strong> {{ userProfileData?.publicFN }}</p>
+      <p><strong>Sexo:</strong> {{ userProfileData?.publicSex }}</p>
+      
+    </div>
+
+    
+    <div class="profile-posts">
+      <h2>Publicaciones</h2>
+      
+<!-- Descripción antes de la imagen -->
+    
+ <app-perfil-posts *ngFor="let post of posts"  [postData]="post"  ></app-perfil-posts>
+ 
+
+
+
+
+      <!-- Agregar más publicaciones aquí -->
+    </div>
+  </div>
+</div>
