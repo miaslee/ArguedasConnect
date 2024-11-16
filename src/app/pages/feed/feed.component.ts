@@ -40,29 +40,24 @@ ngOnInit(): void {
   this.dialog.open(CreatePostComponent);
   }
 
-getPosts (){
-this.firestore.getCollection(
-{
-  path:["Posts"],
-  where: [
+getPosts() {
+  this.firestore.getCollection({
+    path: ["Posts"],
+    where: [
       new OrderBy("timestamp", "desc"),
-      new Limit(10)
-  ],
-  onComplete: (result) => {
-result.docs.forEach(
-  doc => {
-    let post = <PostData>doc.data();
-    this.posts.push(post);
-   
-  }
-)   
-  },
-  onFail: err => {
-    
-  }
-}
-
-);
+      new Limit(10),
+    ],
+    onComplete: (result) => {
+      result.docs.forEach((doc) => {
+        let post = <PostData>doc.data();
+        post.id = doc.id; // Agrega el ID del documento al objeto `post`
+        this.posts.push(post); // Agrega el post con su ID al arreglo
+      });
+    },
+    onFail: (err) => {
+      console.error("Error al obtener los posts:", err);
+    },
+  });
 }
 
 getInfo (){
@@ -78,7 +73,7 @@ getInfo (){
     doc => {
       this.b = true;
       this.userProfileData = doc.data() as UserProfile;
-      console.log(doc.data())
+      
      // doc.data();
       this.photo = this.userProfileData.photoUrl;
       this.name = this.userProfileData.publicName;
@@ -103,6 +98,8 @@ export interface PostData {
   creatorId: string,
   imageUrl?: string,
   timestamp: any;
+  id?: string; 
+  likes: number;
   
 }
 export interface UserProfile {

@@ -1,3 +1,56 @@
+.more-post {
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos */
+    align-items: center; /* Alinea verticalmente */
+    padding: 10px 15px; /* Espaciado interno */
+    
+   
+    font-size: 14px; /* Tamaño de fuente */
+   
+   
+  }
+  
+  /* Estilo para los likes */
+  .more-post .likes {
+    display: flex;
+    align-items: center;
+    font-size: 16px; /* Tamaño ligeramente más grande */
+   
+  }
+  
+  .more-post .like-count {
+    margin-left: 5px; /* Espaciado entre el icono y el número */
+  }
+  
+  /* Estilo para los comentarios */
+  .more-post .comments {
+    display: flex;
+    align-items: center;
+    font-size: 14px; /* Tamaño estándar */
+   
+  }
+  
+  .more-post .comments i {
+    margin-right: 5px; /* Espaciado entre el icono y el texto */
+  }
+  
+  /* Hover en los elementos */
+  
+  .more-post .comments:hover {
+    text-decoration: underline; /* Subraya solo los comentarios */
+    cursor: pointer; /* Cambia el cursor a puntero */
+  }
+  
+
+
+
+
+
+
+
+
+
+
 /* Main container */
 .main-container {
     display: flex;
@@ -98,6 +151,8 @@
     color: #8e8e8e; /* Color gris para menor importancia */
     margin-left: auto;
 }
+
+
 .user-info {
     display: flex;
     flex-direction: column; /* Apila los elementos verticalmente */
@@ -115,4 +170,3 @@
     color: #555; /* Color gris para menor énfasis */
     margin: 0; /* Elimina márgenes adicionales */
   }
-  

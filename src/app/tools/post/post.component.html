@@ -18,9 +18,14 @@
         </div>
         <!-- Imagen de la publicación -->
         <img src="{{postData?.imageUrl}}" class="post-image">
+        <div class="more-post">
+            <span class="likes">{{l}}<span class="like-count">{{n}}</span></span>
+            <span class="comments"><i class="fa fa-comment"></i>{{postData?.id}} </span>
+          </div>
+          
         <!-- Iconos de acción -->
-        <div class="post-actions">
-            <i class="icon like-icon">❤️</i>
+        <div class="post-actions">           
+            <i (click)="Like()" class="icon like-icon">❤️</i>
             <i class="icon comment-icon">💬</i>
             <i class="icon save-icon">🔖</i>
         </div>

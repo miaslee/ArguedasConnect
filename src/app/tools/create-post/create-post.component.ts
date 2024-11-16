@@ -53,7 +53,8 @@ export class CreatePostComponent {
           comment: comment,
           creatorId: this.auth.getAuth().currentUser?.uid,
           imageUrl: uploadedUrl,
-          timestamp : FirebaseTSApp.getFirestoreTimestamp( )
+          timestamp : FirebaseTSApp.getFirestoreTimestamp( ),
+          likes: 0
         },
         onComplete: (docId) =>{
     this.dialog.close();
@@ -75,7 +76,8 @@ export class CreatePostComponent {
         data: {
           comment: comment,
           creatorId: this.auth.getAuth().currentUser?.uid,
-          timestamp : FirebaseTSApp.getFirestoreTimestamp( )
+          timestamp : FirebaseTSApp.getFirestoreTimestamp( ),
+          likes: 0
         },
         onComplete: (docId) =>{
     this.dialog.close();
