@@ -12,11 +12,13 @@ import { FeedComponent } from './pages/feed/feed.component';
 import { PostComponent } from './tools/post/post.component';
 import { HeaderComponent } from './tools/header/header.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { SharedService } from './services/shared.service';
+import { UserPerfilComponent } from './pages/user-perfil/user-perfil.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NgIf, CompleteProfileComponent, FeedComponent, PostComponent, HeaderComponent, PerfilComponent],
+  imports: [RouterOutlet,NgIf, CompleteProfileComponent, FeedComponent, PostComponent, HeaderComponent, PerfilComponent,UserPerfilComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   
@@ -33,7 +35,8 @@ export class AppComponent {
  mailv : boolean;
 
 constructor (
-  private router: Router
+  private router: Router,
+  private sharedService: SharedService
 
 
 ) {
@@ -93,6 +96,11 @@ constructor (
   );
   
 }
+ngOnInit() {
+  this.sharedService.perfilClick$.subscribe(() => {
+    this.PerfilClick(); // Llama a perfilClick cuando el evento se activa
+  });
+}
 getUsersProfile() {
   const user = this.auth.getAuth().currentUser;
 
@@ -149,11 +157,17 @@ isPerfilState(){
 isAmigoState(){
   return this.state == HomeCompState.AMIGOS;
 }
+isUserPerfilState(){
+  return this.state == HomeCompState.USERPERFIL;
+}
      HomeClick(){
     this.state = HomeCompState.HOME;
     }
     PerfilClick(){
       this.state = HomeCompState.PERFIL;
+    }
+    userPerfilClick(){
+      this.state = HomeCompState.USERPERFIL;
     }
     AmigoClick(){
       this.state = HomeCompState.AMIGOS;
@@ -162,13 +176,16 @@ isAmigoState(){
 
       switch (this.state) {
         case HomeCompState.HOME :
-    return "Home";
-  case HomeCompState.PERFIL :
-    return "Perfil";
-    case HomeCompState.AMIGOS:
-      return "Amigos";
+          return "Home";
+        case HomeCompState.PERFIL :
+           return "Perfil";
+       case HomeCompState.AMIGOS:
+         return "Amigos";
+         case HomeCompState.USERPERFIL:
+         return "User Perfil";
       
     }
+    
   }
   
 }
@@ -176,6 +193,7 @@ export enum HomeCompState {
   HOME,
 PERFIL,
 AMIGOS,
+USERPERFIL
 
 }
 export interface userDocument {

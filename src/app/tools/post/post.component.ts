@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FirebaseTSFirestore, Where } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { PostData } from '../../pages/feed/feed.component';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { NgIf } from '@angular/common';
 import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
+import { SharedService } from '../../services/shared.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 })
 export class PostComponent {
   @Input() postData?: PostData;
+ 
   auth = new FirebaseTSAuth();
  firestore = new FirebaseTSFirestore(); 
  public userProfileData: UserProfile | null = null;
@@ -22,12 +24,33 @@ export class PostComponent {
   time: string = "Hace ";
   u : boolean = false;
 
-  constructor(){
+  constructor(private sharedService: SharedService){
     
   }
+
+  //llamar para mostrar perfil
+  callPerfilClick() {
+    this.sharedService.triggerPerfilClick();
+  }
+
+  sendId(): string {
+    const id = this.postData?.creatorId ?? ""; // Asigna una cadena vacía si creatorId es undefined
+    this.sharedService.sendId(id); // Envía el ID a través del servicio
+    this.callPerfilClick();
+    return id;
+}
+
+  showPerfil(){
+    
+    const i = this.postData?.creatorId+"";
+    
+    
+     
+  }
+
   ngOnInit() {
     this.getInfoProfile();
-  
+    
   }
 
 
@@ -102,6 +125,9 @@ export class PostComponent {
     );
     }
 
+
+
+   
 }
 export interface UserProfile {
   publicName: string;

@@ -1,46 +1,30 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input, ɵgetUnknownPropertyStrictMode } from '@angular/core';
+import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { FirebaseTSFirestore, Limit, OrderBy, Where } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
-import { PostComponent } from '../../tools/post/post.component';
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
+import { PerfilComponent } from '../perfil/perfil.component';
 import { PerfilPostsComponent } from '../../tools/perfil-posts/perfil-posts.component';
-import { SharedService } from '../../services/shared.service';
-
 
 @Component({
-  selector: 'app-perfil',
+  selector: 'app-user-perfil',
   standalone: true,
-  imports: [NgIf,PostComponent, NgFor, PerfilPostsComponent],
-  templateUrl: './perfil.component.html',
-  styleUrl: './perfil.component.css'
+  imports: [NgFor,PerfilComponent, PerfilPostsComponent],
+  templateUrl: './user-perfil.component.html',
+  styleUrl: './user-perfil.component.css'
 })
-export class PerfilComponent {
- auth = new FirebaseTSAuth();
- firestore = new FirebaseTSFirestore(); 
- public userProfileData: UserProfile | null = null;
- posts : PostData []=[];
- receivedId: string | null = null; // Variable para almacenar el ID recibido
-  
- 
+export class UserPerfilComponent {
+  auth = new FirebaseTSAuth();
+  firestore = new FirebaseTSFirestore(); 
+  public userProfileData: UserProfile | null = null;
+  posts : PostData []=[];
 
 
- constructor(private sharedService: SharedService){
-  
-  this.sharedService.currentId$.subscribe(id => {
-    if (id) {
-      this.receivedId = id;
-      console.log(`rer`);
-      this.getInfoProfile1(id);
-      this.getPosts(id);
-    }
-  });
-  
- }
- ngOnInit(): void {
-  const i =  this.auth.getAuth().currentUser?.uid+"";
- 
-}
+
+  ngOnInit(): void {
+    const i =  this.auth.getAuth().currentUser?.uid+"";
+    this.getPosts (i);
+    this.getInfoProfile1(i);
+  }
 
 
   getPosts (userId: string){
@@ -97,11 +81,7 @@ export class PerfilComponent {
     
     );
     }
-
- 
-
 }
-
 export interface UserProfile {
   publicName: string;
   publicCareer: string;
@@ -115,7 +95,3 @@ export interface PostData {
   imageUrl?: string,
   timestamp : any
 }
-
-
-
-

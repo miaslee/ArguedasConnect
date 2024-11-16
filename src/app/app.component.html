@@ -13,7 +13,7 @@
     <div class="header-right">
       <span class="user-name">Hola, {{userDocument.publicName}}</span>
       <a (click)="HomeClick()" class="header-link">Inicio</a>
-      <a (click)="PerfilClick()"class="header-link">Perfil</a>
+      <a (click)="userPerfilClick()"class="header-link">Perfil</a>
       <a (click)="AmigoClick()" class="header-link">Amigos</a>
       <button  (click)="LogoutClick()" class="logout-button">Cerrar sesión</button>
     </div>
@@ -33,6 +33,7 @@
   
   <app-feed   *ngIf="MailV() && loggedIn() && userHasProfile && isHomeState() "></app-feed>
   <app-perfil *ngIf="loggedIn() && userHasProfile && isPerfilState() "></app-perfil>
+  <app-user-perfil    *ngIf="loggedIn() && userHasProfile && isUserPerfilState() ">   </app-user-perfil>
 
 <app-complete-profile *ngIf="loggedIn() &&!userHasProfile "> </app-complete-profile>
 

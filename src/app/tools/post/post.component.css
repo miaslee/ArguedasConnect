@@ -15,6 +15,20 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.username:hover {
+    text-decoration: underline; /* Agrega un subrayado */
+    color: blue; /* Cambia el color del texto a azul */
+    cursor: pointer; /* Cambia el puntero a uno de enlace */
+}
+/* Cambiar el cursor al pasar sobre la foto de perfil */
+.user-avatar:hover {
+    cursor: pointer; /* Cambia el cursor a estilo botón */
+}
+.user-avatar:hover {
+    cursor: pointer; /* Cambia el cursor a estilo botón */
+    filter: brightness(0.8); /* Reduce el brillo para oscurecer */
+    transition: filter 0.3s ease; /* Transición suave para el efecto */
+}
 
 /* Post header */
 .post-header {
