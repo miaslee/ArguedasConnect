@@ -58,7 +58,7 @@ export class UserPerfilComponent {
     if (this.selectedImageFile) {
       let id  =  this.auth.getAuth().currentUser?.uid+"";
       const uploadedUrl = await this.uploadToDevmias(this.selectedImageFile);
-      console.log(uploadedUrl)
+     
    
        this.firestore.update({
          path: ["Users", id], // Ruta al documento que deseas actualizar
@@ -66,7 +66,7 @@ export class UserPerfilComponent {
            photoUrl: uploadedUrl
          }, // Campos adicionales o modificados
          onComplete: () => {
-           console.log("Documento actualizado exitosamente.");
+           
          },
          onFail: (error) => {
            console.error("Error al actualizar el documento:", error);
@@ -129,6 +129,7 @@ export class UserPerfilComponent {
     result.docs.forEach(
       doc => {
         let post = <PostData>doc.data();
+        post.id = doc.id; // Agrega el ID del documento al objeto `post`
         this.posts.push(post);
        
       }
@@ -160,7 +161,6 @@ export class UserPerfilComponent {
         this.userProfileData = doc.data() as UserProfile; 
         this.b = true;
        
-       //console.log(post);
       }
     )
       },
@@ -186,4 +186,6 @@ export interface PostData {
   imageUrl?: string,
   timestamp : any,
   photoUrl :string
+  likes: number;
+  id?: string; 
 }

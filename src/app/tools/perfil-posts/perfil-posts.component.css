@@ -85,3 +85,15 @@
     color: #8e8e8e; /* Color gris para menor importancia */
     margin-left: auto;
 }
+.more-post {
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos */
+    align-items: center; /* Alinea verticalmente */
+    padding: 10px 15px; /* Espaciado interno */
+    
+   
+    font-size: 14px; /* Tamaño de fuente */
+   
+   
+  }
+  

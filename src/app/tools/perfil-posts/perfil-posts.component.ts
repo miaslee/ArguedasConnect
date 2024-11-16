@@ -5,6 +5,7 @@ import { FirebaseTSFirestore, Where } from 'firebasets/firebasetsFirestore/fireb
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { NgForm } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import firebase from "firebase/app";
 
 
 
@@ -25,14 +26,147 @@ export class PerfilPostsComponent {
   photo : string = "";
   u : boolean = false;
   public userProfileData: UserProfile | null = null;
+  l: string = "♡"
+  n : any;
+  public likeData: likes | null = null;
 
   constructor(){
     
   }
   ngOnInit() {
     this.getInfoProfile();
+    this.update();
+    this.n = this.postData?.likes;
   
   }
+  update (){
+
+    const postId = this.postData?.id ?? ""; // ID del post actual
+  const userId = this.auth.getAuth().currentUser?.uid ?? ""; // ID del usuario actual
+  
+  
+  
+  const likeId = `${postId}_${userId}`; // ID único para el like
+  const likePath = ["Likes", likeId]; // Ruta del documento en Firestore
+  
+  this.firestore.getDocument({
+    path: likePath,
+    onComplete: (result) => {
+      if (result.exists) {
+       
+        this.l = "♥"; // Actualizar visualmente el estado
+       
+      } else {
+        
+        this.l = "♡"; // Actualizar visualmente el estado
+        
+      }
+    },
+    onFail: (error) => {
+      console.error("Error al verificar el like:", error);
+    },
+  });
+  }
+  Like() {
+    const postId = this.postData?.id || ""; // ID del post actual
+    const user = this.auth.getAuth().currentUser; // Usuario actual
+    const userId = user?.uid || ""; // ID del usuario actual
+    console.log(postId)
+  
+    if (!postId || !userId) {
+      console.error("PostId o UserId no disponibles");
+      return;
+    }
+  
+    const likeId = `${postId}_${userId}`; // ID único para el like
+    const likePath = ["Likes", likeId]; // Ruta del documento del like
+  
+    // Verificar si el like ya existe
+    this.firestore.getDocument({
+      path: likePath,
+      onComplete: (result) => {
+        if (result.exists) {
+          
+          // Quitar el like
+          this.firestore.delete({
+            path: likePath,
+            onComplete: () => {
+             
+              this.l = "♡";
+              this.disLike(postId);
+            },
+            onFail: (error) => {
+              
+            },
+          });
+        } else {
+          
+          // Crear el like
+          this.firestore.create({
+            path: likePath,
+            data: {
+              postId: postId,
+              userId: userId,
+            },
+            onComplete: () => {
+             
+              this.l ="♥"
+              this.addLike(postId);
+            },
+            onFail: (error) => {
+              console.error("Error al agregar el like:", error);
+            },
+          });
+        }
+      },
+      onFail: (error) => {
+        console.error("Error al verificar el like:", error);
+      },
+    });
+  }
+  addLike(postId: string) {
+    this.firestore.update({
+      path: ["Posts", postId], // Ruta al documento específico
+      data: {
+        likes: firebase.firestore.FieldValue.increment(1), // Incrementa el campo "likes"
+      },
+      onComplete: () => {
+       
+        this.n = this.n +1;
+      },
+      onFail: (error) => {
+        console.error("Error al incrementar los likes:", error);
+      },
+    });
+  }
+  disLike(postId: string) {
+    this.firestore.update({
+      path: ["Posts", postId], // Ruta al documento específico
+      data: {
+        likes: firebase.firestore.FieldValue.increment(-1), // Incrementa el campo "likes"
+      },
+      onComplete: () => {
+        
+        this.n = this.n -1;
+      },
+      onFail: (error) => {
+        console.error("Error al incrementar los likes:", error);
+      },
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
   getInfoProfile (){
     let userId = this.auth.getAuth().currentUser?.uid;
     
@@ -107,4 +241,6 @@ export interface UserProfile {
   userId : string;
   photoUrl: string
 }
-
+export interface likes {
+  likeId :string
+ }

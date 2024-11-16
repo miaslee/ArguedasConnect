@@ -30,7 +30,7 @@ export class PerfilComponent {
   this.sharedService.currentId$.subscribe(id => {
     if (id) {
       this.receivedId = id;
-      console.log(`rer`);
+      
       this.getInfoProfile1(id);
       this.getPosts(id);
     }
@@ -56,6 +56,7 @@ export class PerfilComponent {
     result.docs.forEach(
       doc => {
         let post = <PostData>doc.data();
+        post.id = doc.id; // Agrega el ID del documento al objeto `post`
         this.posts.push(post);
          
       }
@@ -116,6 +117,8 @@ export interface PostData {
   creatorId: string,
   imageUrl?: string,
   timestamp : any,
+  likes: number;
+  id?: string; 
   
 }
 
