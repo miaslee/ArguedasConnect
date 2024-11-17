@@ -54,7 +54,9 @@ if(this.isNotEmpty(name)&& this.isNotEmpty(lastname) &&this.isNotEmpty(sexo) && 
   
       },
       onComplete: (docId: string) => {
-       console.log("Perfil creado");
+       
+       this.showNotification("creado");
+
   
   
         InputNombre.value = "";
@@ -65,6 +67,7 @@ if(this.isNotEmpty(name)&& this.isNotEmpty(lastname) &&this.isNotEmpty(sexo) && 
       },
       onFail: (err: any) => {
         alert(err);
+        this.showNotification("error");
       }
     });
   } else {
@@ -72,10 +75,54 @@ if(this.isNotEmpty(name)&& this.isNotEmpty(lastname) &&this.isNotEmpty(sexo) && 
   }
 }else{
   console.log("Completa todos los campos")
+  this.showNotification("vacio");
 }
 
 }
 isNotEmpty(text: string){
   return text != null && text.length > 0;
 }
+showNotification(Message: string) {
+  const notification = document.getElementById('notification');
+  if (notification) {
+
+  
+    if (Message == "vacio") {
+      notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+     notification.innerText = "Por favor, completa todos los campos requeridos antes de continuar."
+      
+    } else if (Message == "creado") {
+      notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+      notification.innerText = "¡Perfil completado con éxito! Gracias por proporcionar tu información."
+
+    }else if (Message == "error") {
+      notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+      notification.innerText = "Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde."
+
+    }  else{
+      notification.innerText = "Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde.";
+      notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+    }
+
+
+
+    // Establecer el mensaje de error
+    //notification.innerText = Message;
+
+    // Mostrar la notificación
+    notification.style.display = 'block';
+
+    // Después de 3 segundos, añade la clase para desvanecer
+    setTimeout(() => {
+      notification.classList.add('hide');
+    }, 3000);
+
+    // Después de 4 segundos, oculta completamente la notificación
+    setTimeout(() => {
+      notification.style.display = 'none';
+      notification.classList.remove('hide'); // Resetea para reutilizar la notificación
+    }, 4000);
+  }
+}
+
 }

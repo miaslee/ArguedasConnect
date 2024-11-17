@@ -64,6 +64,9 @@ export class LoginComponent {
         notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
         notification.innerText = "Por favor, completa todos los campos obligatorios antes de continuar.";
       
+      }else if (Message == "login") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+        notification.innerText = "Inicio de sesión exitoso. Bienvenido de nuevo.";
       }else{
         notification.innerText = "Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde.";
         notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
@@ -122,8 +125,9 @@ export class LoginComponent {
           email: email,
           password: pass,
           onComplete: (uc) => {
-            console.log("Logged")
+            
             this.c = false;
+            this.showNotification("login");
 
           },
           onFail: (err) => {

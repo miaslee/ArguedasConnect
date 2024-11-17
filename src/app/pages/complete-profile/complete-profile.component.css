@@ -86,3 +86,23 @@ input[type="date"],
 .signup-button:hover {
     background-color: #b35917; /* Naranja más oscuro */
 }
+/* Estilo general de la notificación */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #3498db; /* Color de fondo (verde éxito) */
+    color: white; /* Texto en blanco */
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 1s ease-out; /* Animación de desvanecimiento */
+    z-index: 10000; /* Asegurar que esté sobre otros elementos */
+    display: none; /* Oculta inicialmente */
+  }
+  
+  /* Cuando la notificación comienza a desaparecer */
+  .notification.hide {
+    opacity: 0; /* Cambia la opacidad a 0 */
+  }

@@ -104,21 +104,21 @@ export class AppComponent {
       this.PerfilClick(); // Llama a perfilClick cuando el evento se activa
     });
     this.sharedService.perfilClick1$.subscribe(() => {
-     
-     this.AmigoClick();
-     setTimeout(() => {
-      this.userPerfilClick(); // Llama a userPerfilClick después de 1 segundo
-    }, 100); // 1000 milisegundos = 1 segundo
-      
-    });
-    this.sharedService.perfilClick2$.subscribe(() => {
-     
+
       this.AmigoClick();
       setTimeout(() => {
-       this.HomeClick(); // Llama a userPerfilClick después de 1 segundo
-     }, 100); // 1000 milisegundos = 1 segundo
-       
-     });
+        this.userPerfilClick(); // Llama a userPerfilClick después de 1 segundo
+      }, 100); // 1000 milisegundos = 1 segundo
+
+    });
+    this.sharedService.perfilClick2$.subscribe(() => {
+
+      this.AmigoClick();
+      setTimeout(() => {
+        this.HomeClick(); // Llama a userPerfilClick después de 1 segundo
+      }, 100); // 1000 milisegundos = 1 segundo
+
+    });
   }
 
   public static getUserDocument() {
@@ -221,6 +221,48 @@ export class AppComponent {
 
     }
 
+  }
+  showNotification(Message: string) {
+    const notification = document.getElementById('notification');
+    if (notification) {
+  
+    
+      if (Message == "vacio") {
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+       notification.innerText = "Por favor, completa todos los campos requeridos antes de continuar."
+        
+      } else if (Message == "creado") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+        notification.innerText = "¡Perfil completado con éxito! Gracias por proporcionar tu información."
+  
+      }else if (Message == "error") {
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+        notification.innerText = "Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde."
+  
+      }  else{
+        notification.innerText = "Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde.";
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+      }
+  
+  
+  
+      // Establecer el mensaje de error
+      //notification.innerText = Message;
+  
+      // Mostrar la notificación
+      notification.style.display = 'block';
+  
+      // Después de 3 segundos, añade la clase para desvanecer
+      setTimeout(() => {
+        notification.classList.add('hide');
+      }, 3000);
+  
+      // Después de 4 segundos, oculta completamente la notificación
+      setTimeout(() => {
+        notification.style.display = 'none';
+        notification.classList.remove('hide'); // Resetea para reutilizar la notificación
+      }, 4000);
+    }
   }
 
 }
