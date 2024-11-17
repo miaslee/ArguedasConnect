@@ -55,7 +55,7 @@ if(this.isNotEmpty(name)&& this.isNotEmpty(lastname) &&this.isNotEmpty(sexo) && 
       },
       onComplete: (docId: string) => {
        
-       this.showNotification("creado");
+       this.showNotification2("creado");
 
   
   
@@ -67,7 +67,7 @@ if(this.isNotEmpty(name)&& this.isNotEmpty(lastname) &&this.isNotEmpty(sexo) && 
       },
       onFail: (err: any) => {
         alert(err);
-        this.showNotification("error");
+        this.showNotification2("error");
       }
     });
   } else {
@@ -75,15 +75,15 @@ if(this.isNotEmpty(name)&& this.isNotEmpty(lastname) &&this.isNotEmpty(sexo) && 
   }
 }else{
   console.log("Completa todos los campos")
-  this.showNotification("vacio");
+  this.showNotification2("vacio");
 }
 
 }
 isNotEmpty(text: string){
   return text != null && text.length > 0;
 }
-showNotification(Message: string) {
-  const notification = document.getElementById('notification');
+showNotification2(Message: string) {
+  const notification = document.getElementById('notification2');
   if (notification) {
 
   

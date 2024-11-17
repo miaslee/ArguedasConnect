@@ -87,7 +87,7 @@ input[type="date"],
     background-color: #b35917; /* Naranja más oscuro */
 }
 /* Estilo general de la notificación */
-.notification {
+.notification2 {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -103,6 +103,6 @@ input[type="date"],
   }
   
   /* Cuando la notificación comienza a desaparecer */
-  .notification.hide {
+  .notification2.hide {
     opacity: 0; /* Cambia la opacidad a 0 */
   }

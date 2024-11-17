@@ -31,8 +31,11 @@ export class PostComponent {
   carrera: string = "";
   l: string = "♡"
   n: any;
+  ll : boolean = false;
+  private isProcessingLike: boolean = false;
 
   constructor(private sharedService: SharedService, private dialog: MatDialog) {
+
 
 
   }
@@ -77,94 +80,117 @@ export class PostComponent {
     });
   }
 
-
-  Like() {
-    const postId = this.postData?.id || ""; // ID del post actual
-    const user = this.auth.getAuth().currentUser; // Usuario actual
-    const userId = user?.uid || ""; // ID del usuario actual
-
-    if (!postId || !userId) {
-      console.error("PostId o UserId no disponibles");
-      return;
-    }
-
-    const likeId = `${postId}_${userId}`; // ID único para el like
-    const likePath = ["Likes", likeId]; // Ruta del documento del like
-
-    // Verificar si el like ya existe
-    this.firestore.getDocument({
-      path: likePath,
-      onComplete: (result) => {
-        if (result.exists) {
-
-          // Quitar el like
-          this.firestore.delete({
-            path: likePath,
-            onComplete: () => {
-
-              this.l = "♡";
-              this.disLike(postId);
-            },
-            onFail: (error) => {
-
-            },
-          });
-        } else {
-
-          // Crear el like
-          this.firestore.create({
-            path: likePath,
-            data: {
-              postId: postId,
-              userId: userId,
-            },
-            onComplete: () => {
-
-              this.l = "♥"
-              this.addLike(postId);
-            },
-            onFail: (error) => {
-              console.error("Error al agregar el like:", error);
-            },
-          });
-        }
-      },
-      onFail: (error) => {
-        console.error("Error al verificar el like:", error);
-      },
-    });
+  
+// like() se llama al presionar el boton de like
+Like() {
+  if (this.isProcessingLike) {
+    
+    return; // No permite presionar si ya se está procesando
   }
 
-  addLike(postId: string) {
+  // Activar la bandera de procesamiento
+  this.isProcessingLike = true;
+
+  const postId = this.postData?.id || ""; // ID del post actual
+  const user = this.auth.getAuth().currentUser; // Usuario actual
+  const userId = user?.uid || ""; // ID del usuario actual
+
+  if (!postId || !userId) {
+    console.error("PostId o UserId no disponibles");
+    this.isProcessingLike = false; // Restablecer la bandera
+    return;
+  }
+
+  const likeId = `${postId}_${userId}`; // ID único para el like
+  const likePath = ["Likes", likeId]; // Ruta del documento del like
+
+  // Verificar si el like ya existe
+  this.firestore.getDocument({
+    path: likePath,
+    onComplete: (result) => {
+      if (result.exists) {
+        this.l = "♡";
+        this.n = this.n - 1;
+
+        // Quitar el like
+        this.firestore.delete({
+          path: likePath,
+          onComplete: async () => {
+            await this.disLike(postId);
+            this.isProcessingLike = false; // Restablecer la bandera
+          },
+          onFail: (error) => {
+            console.error("Error al quitar el like:", error);
+            this.isProcessingLike = false; // Restablecer la bandera
+          },
+        });
+      } else {
+        this.l = "♥";
+        this.n = this.n + 1;
+
+        // Crear el like
+        this.firestore.create({
+          path: likePath,
+          data: {
+            postId: postId,
+            userId: userId,
+          },
+          onComplete: async () => {
+            await this.addLike(postId);
+            this.isProcessingLike = false; // Restablecer la bandera
+          },
+          onFail: (error) => {
+            console.error("Error al agregar el like:", error);
+            this.isProcessingLike = false; // Restablecer la bandera
+          },
+        });
+      }
+    },
+    onFail: (error) => {
+      console.error("Error al verificar el like:", error);
+      this.isProcessingLike = false; // Restablecer la bandera
+    },
+  });
+}
+
+// Función para agregar un like
+addLike(postId: string): Promise<boolean> {
+  return new Promise((resolve) => {
     this.firestore.update({
       path: ["Posts", postId], // Ruta al documento específico
       data: {
         likes: firebase.firestore.FieldValue.increment(1), // Incrementa el campo "likes"
       },
       onComplete: () => {
-
-        this.n = this.n + 1;
+        resolve(true); // Indicar que se completó con éxito
       },
       onFail: (error) => {
         console.error("Error al incrementar los likes:", error);
+        resolve(false); // Indicar que hubo un error
       },
     });
-  }
-  disLike(postId: string) {
+  });
+}
+
+// Función para quitar un like
+disLike(postId: string): Promise<boolean> {
+  return new Promise((resolve) => {
     this.firestore.update({
       path: ["Posts", postId], // Ruta al documento específico
       data: {
-        likes: firebase.firestore.FieldValue.increment(-1), // Incrementa el campo "likes"
+        likes: firebase.firestore.FieldValue.increment(-1), // Decrementa el campo "likes"
       },
       onComplete: () => {
-
-        this.n = this.n - 1;
+        resolve(true); // Indicar que se completó con éxito
       },
       onFail: (error) => {
-        console.error("Error al incrementar los likes:", error);
+        console.error("Error al decrementar los likes:", error);
+        resolve(false); // Indicar que hubo un error
       },
     });
-  }
+  });
+}
+
 
   //llamar para mostrar perfil
   callPerfilClick() {
@@ -173,7 +199,7 @@ export class PostComponent {
   callPerfilClick1() {
     this.sharedService.triggerPerfilClick1();
   }
- 
+
 
   sendId(): string {
     const id = this.postData?.creatorId ?? ""; // Asigna una cadena vacía si creatorId es undefined
@@ -184,7 +210,7 @@ export class PostComponent {
     } else {
       this.sharedService.sendId(id); // Envía el ID a través del servicio
       this.callPerfilClick();
-      
+
     }
     return id;
   }

@@ -29,6 +29,7 @@ export class PerfilPostsComponent {
   l: string = "♡"
   n: any;
   public likeData: likes | null = null;
+  private isProcessingLike: boolean = false;
 
   constructor() {
 
@@ -68,39 +69,51 @@ export class PerfilPostsComponent {
     });
   }
   Like() {
+    if (this.isProcessingLike) {
+     
+      return; // No permite presionar si ya se está procesando
+    }
+  
+    // Activar la bandera de procesamiento
+    this.isProcessingLike = true;
+  
     const postId = this.postData?.id || ""; // ID del post actual
     const user = this.auth.getAuth().currentUser; // Usuario actual
     const userId = user?.uid || ""; // ID del usuario actual
-    console.log(postId)
-
+  
     if (!postId || !userId) {
       console.error("PostId o UserId no disponibles");
+      this.isProcessingLike = false; // Restablecer la bandera
       return;
     }
-
+  
     const likeId = `${postId}_${userId}`; // ID único para el like
     const likePath = ["Likes", likeId]; // Ruta del documento del like
-
+  
     // Verificar si el like ya existe
     this.firestore.getDocument({
       path: likePath,
       onComplete: (result) => {
         if (result.exists) {
-
+          this.l = "♡";
+          this.n = this.n - 1;
+  
           // Quitar el like
           this.firestore.delete({
             path: likePath,
-            onComplete: () => {
-
-              this.l = "♡";
-              this.disLike(postId);
+            onComplete: async () => {
+              await this.disLike(postId);
+              this.isProcessingLike = false; // Restablecer la bandera
             },
             onFail: (error) => {
-
+              console.error("Error al quitar el like:", error);
+              this.isProcessingLike = false; // Restablecer la bandera
             },
           });
         } else {
-
+          this.l = "♥";
+          this.n = this.n + 1;
+  
           // Crear el like
           this.firestore.create({
             path: likePath,
@@ -108,50 +121,59 @@ export class PerfilPostsComponent {
               postId: postId,
               userId: userId,
             },
-            onComplete: () => {
-
-              this.l = "♥"
-              this.addLike(postId);
+            onComplete: async () => {
+              await this.addLike(postId);
+              this.isProcessingLike = false; // Restablecer la bandera
             },
             onFail: (error) => {
               console.error("Error al agregar el like:", error);
+              this.isProcessingLike = false; // Restablecer la bandera
             },
           });
         }
       },
       onFail: (error) => {
         console.error("Error al verificar el like:", error);
+        this.isProcessingLike = false; // Restablecer la bandera
       },
     });
   }
-  addLike(postId: string) {
-    this.firestore.update({
-      path: ["Posts", postId], // Ruta al documento específico
-      data: {
-        likes: firebase.firestore.FieldValue.increment(1), // Incrementa el campo "likes"
-      },
-      onComplete: () => {
-
-        this.n = this.n + 1;
-      },
-      onFail: (error) => {
-        console.error("Error al incrementar los likes:", error);
-      },
+  
+  // Función para agregar un like
+  addLike(postId: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.firestore.update({
+        path: ["Posts", postId], // Ruta al documento específico
+        data: {
+          likes: firebase.firestore.FieldValue.increment(1), // Incrementa el campo "likes"
+        },
+        onComplete: () => {
+          resolve(true); // Indicar que se completó con éxito
+        },
+        onFail: (error) => {
+          console.error("Error al incrementar los likes:", error);
+          resolve(false); // Indicar que hubo un error
+        },
+      });
     });
   }
-  disLike(postId: string) {
-    this.firestore.update({
-      path: ["Posts", postId], // Ruta al documento específico
-      data: {
-        likes: firebase.firestore.FieldValue.increment(-1), // Incrementa el campo "likes"
-      },
-      onComplete: () => {
-
-        this.n = this.n - 1;
-      },
-      onFail: (error) => {
-        console.error("Error al incrementar los likes:", error);
-      },
+  
+  // Función para quitar un like
+  disLike(postId: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.firestore.update({
+        path: ["Posts", postId], // Ruta al documento específico
+        data: {
+          likes: firebase.firestore.FieldValue.increment(-1), // Decrementa el campo "likes"
+        },
+        onComplete: () => {
+          resolve(true); // Indicar que se completó con éxito
+        },
+        onFail: (error) => {
+          console.error("Error al decrementar los likes:", error);
+          resolve(false); // Indicar que hubo un error
+        },
+      });
     });
   }
 

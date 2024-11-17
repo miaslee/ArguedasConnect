@@ -28,8 +28,8 @@ export class LoginComponent {
     }, 500); // Espera de 2 segundos
 
   }
-  showNotification(Message: string) {
-    const notification = document.getElementById('notification');
+  showNotification1(Message: string) {
+    const notification = document.getElementById('notification1');
     if (notification) {
 
       let s = "{\"error\":{\"code\":400,\"message\":\"INVALID_LOGIN_CREDENTIALS\",\"errors\":[{\"message\":\"INVALID_LOGIN_CREDENTIALS\",\"domain\":\"global\",\"reason\":\"invalid\"}]}}";
@@ -102,7 +102,7 @@ export class LoginComponent {
         email: email,
         onComplete: (err) => {
           let errorMessage = "send";
-          this.showNotification(errorMessage)
+          this.showNotification1(errorMessage)
 
         }
       }
@@ -127,14 +127,14 @@ export class LoginComponent {
           onComplete: (uc) => {
             
             this.c = false;
-            this.showNotification("login");
+            this.showNotification1("login");
 
           },
           onFail: (err) => {
             console.log("No se puede iniciar" + err);
             this.c = false;
             const errorMessage = err.message || "Ocurrió un error desconocido";
-            this.showNotification(errorMessage);
+            this.showNotification1(errorMessage);
 
           }
         }
@@ -171,7 +171,7 @@ export class LoginComponent {
         password: pass,
         onComplete: (uc) => {
 
-          this.showNotification("creado");
+          this.showNotification1("creado");
 
           registroEmail.value = "";
           registroPass.value = "";
@@ -179,7 +179,7 @@ export class LoginComponent {
         },
         onFail: (err) => {
          // alert("Error al crear la cuenta: " + err);
-          this.showNotification("no se puede");
+          this.showNotification1("no se puede");
         }
       });
 
@@ -187,16 +187,16 @@ export class LoginComponent {
     this.isNotEmpty(pass) && 
     this.isNotEmpty(confirmPass) && !this.isUnajmaMail(email)) {
 
-      this.showNotification("Solo estudiantes");
+      this.showNotification1("Solo estudiantes");
 
     } else if (this.isUnajmaMail(email) && !this.isAMatch(pass, confirmPass)) {
 
-      this.showNotification("Contraseña no coincide");
+      this.showNotification1("Contraseña no coincide");
 
     }
 
     else {
-      this.showNotification("vacio");
+      this.showNotification1("vacio");
     }
 
 
