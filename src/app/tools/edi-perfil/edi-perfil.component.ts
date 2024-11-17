@@ -50,6 +50,8 @@ export class EdiPerfilComponent {
     ) {
       let id = this.auth.getAuth().currentUser?.uid + "";
 
+      
+      this.showNotification("perfil-actualizando");
       this.firestore.update({
         path: ["Users", id], // Ruta al documento que deseas actualizar
         data: {
@@ -63,6 +65,7 @@ export class EdiPerfilComponent {
         onComplete: () => {
           this.dialog.close();
           this.callPerfilClick1();
+          this.showNotification("perfil-actualizado");
 
         },
         onFail: (error) => {
@@ -77,4 +80,10 @@ export class EdiPerfilComponent {
   isNotEmpty(text: string) {
     return text != null && text.length > 0;
   }
+
+  showNotification(valor:string): string {
+  
+    this.sharedService.sendId1(valor); // Envía el ID a través del servicio
+  return valor
+}
 }

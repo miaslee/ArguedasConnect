@@ -26,8 +26,10 @@ export class UserPerfilComponent {
   b: boolean = false;
   selectedImageFile: File | null = null;
   bb: boolean = false;
+  u : boolean = false;
 
 constructor(private dialog: MatDialog, private sharedService: SharedService){
+  
 
 }
 showNotification(valor:string): string {
@@ -85,16 +87,20 @@ callPerfilClick1() {
   async uploadPhoto() {
     if (this.selectedImageFile) {
       let id = this.auth.getAuth().currentUser?.uid + "";
+      this.showNotification("perfil-photo-subiendo");
       const uploadedUrl = await this.uploadToDevmias(this.selectedImageFile);
-
-
       this.firestore.update({
         path: ["Users", id], // Ruta al documento que deseas actualizar
         data: {
           photoUrl: uploadedUrl
         }, // Campos adicionales o modificados
         onComplete: () => {
-          this.callPerfilClick1();
+          this.u = true;
+          this.showNotification("perfil-photo-actualizado");
+          
+           // Llama a userPerfilClick después de 1 segundo
+           this.callPerfilClick1();
+       
 
         },
         onFail: (error) => {

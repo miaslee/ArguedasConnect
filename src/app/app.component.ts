@@ -119,7 +119,9 @@ export class AppComponent {
       this.AmigoClick();
       setTimeout(() => {
         this.userPerfilClick(); // Llama a userPerfilClick después de 1 segundo
+        
       }, 100); // 1000 milisegundos = 1 segundo
+      
 
     });
     this.sharedService.perfilClick2$.subscribe(() => {
@@ -127,7 +129,9 @@ export class AppComponent {
       this.AmigoClick();
       setTimeout(() => {
         this.HomeClick(); // Llama a userPerfilClick después de 1 segundo
+       
       }, 100); // 1000 milisegundos = 1 segundo
+      
 
     });
    
@@ -250,18 +254,18 @@ export class AppComponent {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
         notification.innerText = "Creando publicación..."
   
-      }else if (Message == "") {
+      }else if (Message == "perfil-photo-subiendo") {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
-        notification.innerText = ""
-      } else if (Message == "") {
+        notification.innerText = "Actualizando foto de perfil..."
+      } else if (Message == "perfil-photo-actualizado") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+        notification.innerText = "¡Foto de perfil actualizada exitosamente!"
+      }  else if (Message == "perfil-actualizado") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+        notification.innerText = "¡Datos de perfil actualizados exitosamente!"
+      }  else if (Message == "perfil-actualizando") {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
-        notification.innerText = ""
-      }  else if (Message == "") {
-        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
-        notification.innerText = ""
-      }  else if (Message == "") {
-        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
-        notification.innerText = ""
+        notification.innerText = "Actualizando datos del perfil..."
       }  else if (Message == "") {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
         notification.innerText = ""
