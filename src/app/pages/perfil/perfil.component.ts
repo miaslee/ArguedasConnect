@@ -31,6 +31,7 @@ export class PerfilComponent {
     this.sharedService.currentId$.subscribe(id => {
       if (id) {
         this.receivedId = id;
+        
 
         this.getInfoProfile1(id);
         this.getPosts(id);

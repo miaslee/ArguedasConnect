@@ -30,6 +30,11 @@ export class UserPerfilComponent {
 constructor(private dialog: MatDialog, private sharedService: SharedService){
 
 }
+showNotification(valor:string): string {
+  
+  this.sharedService.sendId1(valor); // Envía el ID a través del servicio
+return valor
+}
 callPerfilClick1() {
   this.sharedService.triggerPerfilClick1();
   

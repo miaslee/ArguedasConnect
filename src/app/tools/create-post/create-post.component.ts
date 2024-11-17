@@ -24,9 +24,14 @@ export class CreatePostComponent {
 
   }
 
+  showNotification(valor: string): string {
+
+    this.sharedService.sendId1(valor); // Envía el ID a través del servicio
+    return valor
+  }
   callPerfilClick1() {
     this.sharedService.triggerPerfilClick2();
-    
+
   }
 
 
@@ -42,12 +47,11 @@ export class CreatePostComponent {
     }
 
   }
-
-
   async uploadImagePost(comment: string) {
     let postID = this.firestore.genDocId();
 
     if (this.selectedImageFile) { // Verifica si selectedImageFile no es null
+      this.showNotification("post-creando");
       const uploadedUrl = await this.uploadToDevmias(this.selectedImageFile);
       console.log('URL de la imagen subida:', uploadedUrl);
       this.firestore.create(
@@ -63,8 +67,9 @@ export class CreatePostComponent {
           onComplete: (docId) => {
             this.callPerfilClick1()
             this.dialog.close();
+            this.showNotification("post-creado");
 
-            
+
           }
 
         }
@@ -77,6 +82,7 @@ export class CreatePostComponent {
 
   }
   uploadPost(comment: string) {
+    this.showNotification("post-creando")
     this.firestore.create(
       {
         path: ["Posts"],
@@ -89,6 +95,7 @@ export class CreatePostComponent {
         onComplete: (docId) => {
           this.callPerfilClick1()
           this.dialog.close();
+          this.showNotification("post-creado");
         }
 
       }

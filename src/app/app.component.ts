@@ -33,6 +33,7 @@ export class AppComponent {
   private static userDocument: userDocument | null = null;
   log: boolean;
   mailv: boolean;
+  receivedId1: string | null = null; // Variable para almacenar el ID recibido
 
   constructor(
     private router: Router,
@@ -54,6 +55,7 @@ export class AppComponent {
     };
     this.log = false;
     this.mailv = false;
+    
 
 
     //
@@ -97,6 +99,15 @@ export class AppComponent {
 
 
     );
+    this.sharedService.currentId1$.subscribe(id => {
+      if (id) {
+        this.receivedId1 = id;
+    
+        this.showNotification(id);
+
+        
+      }
+    });
 
   }
   ngOnInit() {
@@ -119,6 +130,9 @@ export class AppComponent {
       }, 100); // 1000 milisegundos = 1 segundo
 
     });
+   
+    
+    
   }
 
   public static getUserDocument() {
@@ -147,7 +161,7 @@ export class AppComponent {
           AppComponent.userDocument = <userDocument>result.data();
 
           // Aquí puedes manejar la actualización del documento del usuario
-          console.log("Documento del perfil de usuario actualizado:", result);
+          
           this.userHasProfile = result.exists;
           AppComponent.userDocument.userId = this.auth.getAuth().currentUser?.uid + "";
           this.mailv = true;
@@ -226,22 +240,43 @@ export class AppComponent {
     const notification = document.getElementById('notification');
     if (notification) {
   
-    
-      if (Message == "vacio") {
-        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
-       notification.innerText = "Por favor, completa todos los campos requeridos antes de continuar."
-        
-      } else if (Message == "creado") {
+      //notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+      //notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+      if (Message == "post-creado") {
         notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
-        notification.innerText = "¡Perfil completado con éxito! Gracias por proporcionar tu información."
+       notification.innerText = "¡Publicación creada!"
+        
+      } else if (Message == "post-creando") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = "Creando publicación..."
   
-      }else if (Message == "error") {
-        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
-        notification.innerText = "Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde."
-  
-      }  else{
-        notification.innerText = "Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde.";
-        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+      }else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      } else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      }  else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      }  else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      }  else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      }  else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      }  else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      }  else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      }   else{
+        notification.innerText = "";
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
       }
   
   

@@ -6,6 +6,7 @@ import { PostComponent } from '../../tools/post/post.component';
 import { NgFor, NgIf } from '@angular/common';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { Timestamp } from 'rxjs';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-feed',
@@ -31,12 +32,15 @@ public userProfileData: UserProfile | null = null;
 
 constructor (private dialog : MatDialog){
   
+  
 }
 ngOnInit(): void {
   this.getPosts();
   this.getInfo ();
  
 }
+
+
 
 
   CrearPost() {

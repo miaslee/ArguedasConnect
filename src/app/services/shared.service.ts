@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedService {
+
   
 
 //perfilclick en appcomponetn
@@ -41,5 +42,15 @@ export class SharedService {
   // Método para actualizar el valor del ID
   sendId(id: string) {
     this.idSource.next(id);
+  }
+  //notificaciones
+  //senID
+  private idSource1 = new BehaviorSubject<string | null>(null); // Usa BehaviorSubject para emitir y almacenar el último valor
+  currentId1$: Observable<string | null> = this.idSource1.asObservable();
+
+  // Método para actualizar el valor del ID
+  sendId1(id: string) {
+    this.idSource1.next(id);
+    
   }
 }
