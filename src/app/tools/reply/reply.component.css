@@ -9,8 +9,9 @@ p {
   
   /* Caja de comentarios */
   .reply-box {
-    width:94%;
-    max-width: 600px;
+    width:500px;
+    margin-right: 10px;
+    max-width: 800px;
     height: 500px;
     overflow-y: auto;
     border: 1px solid #ccc;
@@ -26,10 +27,12 @@ p {
   
   /* Comentario individual */
   .comment-item {
+    
     display: flex;
     align-items: flex-start;
     padding: 10px 0;
     border-bottom: 1px solid #eaeaea;
+    
   }
   
   .comment-item:last-child {
@@ -52,6 +55,10 @@ p {
     word-wrap: break-word; /* Permite saltos de línea en palabras largas */
     word-break: break-word; /* Asegura el ajuste de texto */
     white-space: normal; /* Permite texto multilínea */
+    background-color: #e0d9d9;
+    padding: 5px;
+    
+    border-radius: 8px;
   }
   
   /* Estilo del nombre */
