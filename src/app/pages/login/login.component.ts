@@ -36,27 +36,37 @@ export class LoginComponent {
 
 
       if (Message == "The email address is badly formatted.") {
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
 
         notification.innerText = "La dirección de correo electrónico tiene un formato incorrecto."
+        
       } else if (Message == s) {
-
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
         notification.innerText = "Las credenciales ingresadas son incorrectas. Por favor, verifica tu correo y contraseña."
 
 
       } else if (Message == "send") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
         notification.innerText = "Hemos enviado un enlace de restablecimiento de contraseña a tu correo electrónico. Revisa tu bandeja de entrada y sigue las instrucciones."
       } else if (Message == "Contraseña no coincide") {
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
         notification.innerText = "Las contraseñas no coinciden. Por favor, verifica e inténtalo nuevamente.";
       } else if (Message == "Solo estudiantes") {
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
         notification.innerText = "Solo se permiten correos institucionales de la UNAJMA. Por favor, utiliza tu correo universitario válido.";
       } else if (Message == "no se puede") {
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
         notification.innerText = "No se pudo completar el registro. Por favor, inténtalo nuevamente más tarde.";
       } else if (Message == "creado") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
         notification.innerText = "¡Registro exitoso! Bienvenido a ArguedasConnect, ya puedes iniciar sesión.";
       } else if (Message == "vacio") {
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
         notification.innerText = "Por favor, completa todos los campos obligatorios antes de continuar.";
-      } else if (Message == "") {
-        notification.innerText = "";
+      
+      }else{
+        notification.innerText = "Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde.";
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
       }
 
 
