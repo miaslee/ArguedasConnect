@@ -1,27 +1,75 @@
 # ArguedasConnect
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
+## Descripción
+ArguedasConnect es una red social diseñada exclusivamente para los alumnos de la **UNAJMA – Universidad Nacional José María Arguedas**. Permite a los estudiantes interactuar, compartir publicaciones, comentar y gestionar su perfil personal de manera sencilla y eficiente. 
 
-## Development server
+## Funcionalidades
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### 1. **Página de Inicio (Feed)**
+El feed principal muestra las publicaciones más recientes de los estudiantes. Cada publicación incluye opciones para comentar y reaccionar.
 
-## Code scaffolding
+![Página de Inicio](https://devmiasx.com/uploads/GitImage/feed.jpg)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+### 2. **Publicar Contenido**
+Los usuarios pueden crear publicaciones con texto e imágenes para compartir con sus compañeros.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![Crear Publicación](https://devmiasx.com/uploads/GitImage/crearPost.jpg)
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 3. **Sistema de Comentarios**
+Permite a los usuarios interactuar con las publicaciones dejando comentarios.
 
-## Running end-to-end tests
+![Comentarios](https://devmiasx.com/uploads/GitImage/comentarios.jpg)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+### 4. **Registro e Inicio de Sesión**
+Nuevos usuarios pueden registrarse fácilmente proporcionando su correo universitario y contraseña utilizando Firebase Authentication. También pueden iniciar sesión con sus credenciales de manera segura.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Registro**  
+![Registro](https://devmiasx.com/uploads/GitImage/registro.jpg)
+
+- **Inicio de Sesión**  
+![Inicio de Sesión](https://devmiasx.com/uploads/GitImage/login.jpg)
+
+---
+
+### 5. **Gestión del Perfil**
+Los usuarios pueden personalizar su perfil, editar su información personal y ajustar la privacidad de su cuenta (perfil público o privado).
+
+- **Mi Perfil**  
+![Mi Perfil](https://devmiasx.com/uploads/GitImage/miPerfil.jpg)
+
+- **Editar Perfil**  
+![Editar Perfil](https://devmiasx.com/uploads/GitImage/perfilEdit.jpg)
+
+- **Perfil Público**  
+![Perfil Público](https://devmiasx.com/uploads/GitImage/perfilPublico.jpg)
+
+- **Perfil Privado**  
+![Perfil Privado](https://devmiasx.com/uploads/GitImage/perfilPrivado.jpg)
+
+---
+
+### 6. **Recuperación de Contraseña**
+En caso de olvidar la contraseña, los usuarios pueden solicitar un enlace de recuperación para establecer una nueva contraseña utilizando Firebase Authentication.
+
+![Recuperar Contraseña](https://devmiasx.com/uploads/GitImage/pass.jpg)
+
+---
+
+## Tecnologías Utilizadas
+
+- **Frontend**: Angular
+- **Base de Datos**: Firebase
+- **Autenticación**: Firebase Authentication
+- **Hosting de Imágenes**: Servidor externo (`https://devmiasx.com/uploads/`)
+
+## Cómo Ejecutar el Proyecto
+
+1. Clona este repositorio:
+   ```bash
+   git clone https://github.com/miaslee/ArguedasConnect.git
