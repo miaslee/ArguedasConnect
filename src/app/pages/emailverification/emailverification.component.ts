@@ -10,24 +10,32 @@ import { Router } from '@angular/router';
   styleUrl: './emailverification.component.css'
 })
 export class EmailverificationComponent {
-  auth= new FirebaseTSAuth();
-  constructor (private router:Router){
-
-
+  auth = new FirebaseTSAuth();
+  constructor(private router: Router) {
+    
   }
-  ngOnInit(): void
-{
-  if(this.auth.isSignedIn() && !this.auth.getAuth().currentUser?.emailVerified)
-    {
-this.auth.sendVerificationEmail();
-  }else {
-    this.router.navigate([""])
+  async ngOnInit() {
+    try {
+      if (this.auth.isSignedIn()) {
+        const currentUser = this.auth.getAuth().currentUser;
+        if (currentUser?.emailVerified) {
+          console.log("El correo ya está verificado.");
+        } else {
+          await this.auth.sendVerificationEmail();
+          console.log("Correo de verificación enviado.");
+        }
+      } else {
+        console.log("El usuario no está autenticado.");
+        this.router.navigate(["login"]);
+      }
+    } catch (error) {
+      console.error("Error al verificar el correo:", error);
+    }
+    
+    
   }
-}
-  reenviarCorreo(){
+  reenviarCorreo() {
     this.auth.sendVerificationEmail();
-
-
   }
 
 }

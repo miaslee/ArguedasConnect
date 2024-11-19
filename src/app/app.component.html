@@ -1,5 +1,19 @@
+<div *ngIf="!mailv && loggedIn() &&  !userHasProfile" class="containermail">
+  <h2>Tu correo no está verificado</h2>
+  <p>Te hemos enviado un correo electrónico. Por favor, revisa tu bandeja de entrada y sigue las instrucciones para activar tu cuenta.</p>
+  <br>
+  <p>Cerrando sesión en {{s}} segundos</p>
+ 
+</div>
+
+
+
+<div  *ngIf=" loggedIn() && c "  class="loading-overlay">
+  <div class="spinner"></div>
+</div>
+
 <div id="notification" class="notification">
-  <p>All very well! Credit received: +R$ 0.46</p>
+  <p>Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde.</p>
 </div>
 
 <router-outlet *ngIf="!loggedIn()"></router-outlet>
@@ -22,7 +36,7 @@
     </div>
   </header>
 
-  <header *ngIf="loggedIn() && !userHasProfile" class="header">
+  <header *ngIf="mailv && loggedIn() && !userHasProfile && !k" class="header">
 
     <div class="header-left">
        
@@ -43,7 +57,7 @@
   </div>
   
 
-<app-complete-profile *ngIf="loggedIn() &&!userHasProfile "> </app-complete-profile>
+<app-complete-profile *ngIf="MailV() && loggedIn() &&!userHasProfile && !k "> </app-complete-profile>
 
 
 

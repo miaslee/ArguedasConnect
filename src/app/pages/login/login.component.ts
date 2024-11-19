@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, resolveForwardRef } from '@angular/core';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
+import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 export class LoginComponent {
   state = LoginCompState.BLANK;
   c: boolean = false;
+sin : boolean ;
 
 
   firebasetsAuth: FirebaseTSAuth;
@@ -19,13 +21,16 @@ export class LoginComponent {
 
     this.firebasetsAuth = new FirebaseTSAuth();
     this.init();
-
-
+this.sin = false;
+     this.sin = this.firebasetsAuth.isSignedIn()
+     console.log(this.sin)
   }
   init() {
     setTimeout(() => {
       this.state = LoginCompState.LOGIN;
     }, 500); // Espera de 2 segundos
+
+
 
   }
   showNotification1(Message: string) {
@@ -35,11 +40,12 @@ export class LoginComponent {
       let s = "{\"error\":{\"code\":400,\"message\":\"INVALID_LOGIN_CREDENTIALS\",\"errors\":[{\"message\":\"INVALID_LOGIN_CREDENTIALS\",\"domain\":\"global\",\"reason\":\"invalid\"}]}}";
 
 
+
       if (Message == "The email address is badly formatted.") {
         notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
 
         notification.innerText = "La dirección de correo electrónico tiene un formato incorrecto."
-        
+
       } else if (Message == s) {
         notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
         notification.innerText = "Las credenciales ingresadas son incorrectas. Por favor, verifica tu correo y contraseña."
@@ -63,11 +69,18 @@ export class LoginComponent {
       } else if (Message == "vacio") {
         notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
         notification.innerText = "Por favor, completa todos los campos obligatorios antes de continuar.";
-      
-      }else if (Message == "login") {
+
+      } else if (Message == "login") {
         notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
         notification.innerText = "Inicio de sesión exitoso. Bienvenido de nuevo.";
-      }else{
+      }else if(Message == "pass 6"){
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+        notification.innerText = "La contraseña debe tener como minimo 6 caracteres.";
+      }else if(Message == "The email address is already in use by another account."){
+        notification.innerText = "La dirección de correo electrónico ya está en uso por otra cuenta.";
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+      }
+       else {
         notification.innerText = "Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde.";
         notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
       }
@@ -125,7 +138,7 @@ export class LoginComponent {
           email: email,
           password: pass,
           onComplete: (uc) => {
-            
+
             this.c = false;
             this.showNotification1("login");
 
@@ -140,6 +153,8 @@ export class LoginComponent {
         }
       )
 
+    }else {
+      this.showNotification1("vacio"); 
     }
 
 
@@ -158,50 +173,54 @@ export class LoginComponent {
     let confirmPass = registroConfirmPass.value;
 
     if (
-
-      this.isNotEmpty(email) &&
-      this.isNotEmpty(pass) &&
-      this.isUnajmaMail(email) &&
-      this.isNotEmpty(confirmPass) &&
-      this.isAMatch(pass, confirmPass)
+      !this.isNotEmpty(email) ||
+      !this.isNotEmpty(pass) ||
+      !this.isNotEmpty(confirmPass)
     ) {
-
+      // Caso: Uno o más campos están vacíos
+      this.showNotification1("vacio");
+    } else if (!this.pass6(pass)) {
+      // Caso: Contraseña no cumple con la longitud mínima de 6 caracteres
+      this.showNotification1("pass 6");
+    } else if (!this.isAMatch(pass, confirmPass)) {
+      // Caso: Contraseña y confirmación no coinciden
+      this.showNotification1("Contraseña no coincide");
+    } else if (!this.isUnajmaMail(email)) {
+      // Caso: Email no pertenece a Unajma
+      this.showNotification1("Solo estudiantes");
+    } else {
+      this.c = true;
+      // Caso: Todos los datos son válidos
       this.firebasetsAuth.createAccountWith({
         email: email,
         password: pass,
+
         onComplete: (uc) => {
-
+          this.c = false;
           this.showNotification1("creado");
-
           registroEmail.value = "";
           registroPass.value = "";
           registroConfirmPass.value = "";
+          this.c = false;
+          
         },
         onFail: (err) => {
-         // alert("Error al crear la cuenta: " + err);
-          this.showNotification1("no se puede");
-        }
+          this.showNotification1(err.message);
+          //console.log(err.message)
+          this.c = false;
+          
+        },
       });
-
-    } else if (this.isNotEmpty(email) &&
-    this.isNotEmpty(pass) && 
-    this.isNotEmpty(confirmPass) && !this.isUnajmaMail(email)) {
-
-      this.showNotification1("Solo estudiantes");
-
-    } else if (this.isUnajmaMail(email) && !this.isAMatch(pass, confirmPass)) {
-
-      this.showNotification1("Contraseña no coincide");
-
+      
     }
-
-    else {
-      this.showNotification1("vacio");
-    }
-
-
+    
 
   }
+  pass6(pass: string) {
+  
+    return pass.length >= 6
+  }
+
   isUnajmaMail(text: string) {
     return text.endsWith("@unajma.edu.pe");
   }

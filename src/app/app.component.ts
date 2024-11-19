@@ -14,6 +14,8 @@ import { HeaderComponent } from './tools/header/header.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { SharedService } from './services/shared.service';
 import { UserPerfilComponent } from './pages/user-perfil/user-perfil.component';
+import { fakeAsync } from '@angular/core/testing';
+
 
 @Component({
   selector: 'app-root',
@@ -31,20 +33,24 @@ export class AppComponent {
   firestore: FirebaseTSFirestore;
   userHasProfile: boolean;
   private static userDocument: userDocument | null = null;
-  log: boolean;
+  s: number = 5;
+k: boolean = false;
   mailv: boolean;
+
+  c: boolean=false;
   receivedId1: string | null = null; // Variable para almacenar el ID recibido
 
   constructor(
     private router: Router,
     private sharedService: SharedService
-
-
   ) {
-    FirebaseTSApp.init(environment.firebaseConfig);
+     FirebaseTSApp.init(environment.firebaseConfig);
+     
+    this.c = true;
+
     this.auth = new FirebaseTSAuth();
     this.firestore = new FirebaseTSFirestore();
-    this.userHasProfile = true;
+    this.userHasProfile = false;
     AppComponent.userDocument = {
       publicName: '',
       publicLastname: '',
@@ -53,9 +59,10 @@ export class AppComponent {
       publicSex: '',
       userId: ''
     };
-    this.log = false;
-    this.mailv = false;
     
+
+    this.mailv = false;
+
 
 
     //
@@ -66,8 +73,9 @@ export class AppComponent {
           {
             whenSignedIn: user => {
 
-              console.log("login")
               this.isLoggedIn = true;
+              
+
 
             },
             whenSignedOut: user => {
@@ -78,14 +86,31 @@ export class AppComponent {
 
             },
             whenSignedInAndEmailNotVerified: user => {
-              this.router.navigate(["emailVerification"])
+              // this.router.navigate(["emailVerification"])
               this.mailv = false;
+              this.auth.sendVerificationEmail();
+              
+
+              const interval = setInterval(() => {
+                console.log(this.s); // Muestra el número en la consola
+
+                if (this.s > 0) {
+                  this.s--; // Disminuye el número en 1
+                } else {
+                  clearInterval(interval); // Detiene el intervalo cuando llega a 0
+                  this.LogoutClick(); // Llama a LogoutClick después de que el número llegue a 0
+                }
+              }, 1000); // Ejecuta cada 1000 milisegundos (1 segundo)
+
+
 
             },
             whenSignedInAndEmailVerified: user => {
 
               this.getUsersProfile();
-
+              this.k = true;
+              this.mailv = true;
+              
 
             },
             whenChanged: user => {
@@ -102,10 +127,10 @@ export class AppComponent {
     this.sharedService.currentId1$.subscribe(id => {
       if (id) {
         this.receivedId1 = id;
-    
+
         this.showNotification(id);
 
-        
+
       }
     });
 
@@ -119,9 +144,9 @@ export class AppComponent {
       this.AmigoClick();
       setTimeout(() => {
         this.userPerfilClick(); // Llama a userPerfilClick después de 1 segundo
-        
+
       }, 100); // 1000 milisegundos = 1 segundo
-      
+
 
     });
     this.sharedService.perfilClick2$.subscribe(() => {
@@ -129,14 +154,14 @@ export class AppComponent {
       this.AmigoClick();
       setTimeout(() => {
         this.HomeClick(); // Llama a userPerfilClick después de 1 segundo
-       
+
       }, 100); // 1000 milisegundos = 1 segundo
-      
+
 
     });
-   
-    
-    
+
+
+
   }
 
   public static getUserDocument() {
@@ -144,6 +169,7 @@ export class AppComponent {
 
   }
   getUsername(): string {
+    this.c = false;
     try {
       // Devuelve el nombre del usuario si está disponible
       return AppComponent.userDocument?.publicName || "Invitado";
@@ -155,7 +181,7 @@ export class AppComponent {
   }
   getUsersProfile() {
     const user = this.auth.getAuth().currentUser;
-
+    
     if (user) {
       this.firestore.listenToDocument({
         name: "Getting Document",
@@ -165,7 +191,7 @@ export class AppComponent {
           AppComponent.userDocument = <userDocument>result.data();
 
           // Aquí puedes manejar la actualización del documento del usuario
-          
+
           this.userHasProfile = result.exists;
           AppComponent.userDocument.userId = this.auth.getAuth().currentUser?.uid + "";
           this.mailv = true;
@@ -186,10 +212,10 @@ export class AppComponent {
   }
 
   loggedIn() {
-    this.log = this.isLoggedIn
 
 
-    return this.log;
+
+    return this.isLoggedIn;
   }
 
 
@@ -243,59 +269,59 @@ export class AppComponent {
   showNotification(Message: string) {
     const notification = document.getElementById('notification');
     if (notification) {
-  
+
       //notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
       //notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
       if (Message == "post-creado") {
         notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
-       notification.innerText = "¡Publicación creada!"
-        
+        notification.innerText = "¡Publicación creada!"
+
       } else if (Message == "post-creando") {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
         notification.innerText = "Creando publicación..."
-  
-      }else if (Message == "perfil-photo-subiendo") {
+
+      } else if (Message == "perfil-photo-subiendo") {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
         notification.innerText = "Actualizando foto de perfil..."
       } else if (Message == "perfil-photo-actualizado") {
         notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
         notification.innerText = "¡Foto de perfil actualizada exitosamente!"
-      }  else if (Message == "perfil-actualizado") {
+      } else if (Message == "perfil-actualizado") {
         notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
         notification.innerText = "¡Datos de perfil actualizados exitosamente!"
-      }  else if (Message == "perfil-actualizando") {
+      } else if (Message == "perfil-actualizando") {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
         notification.innerText = "Actualizando datos del perfil..."
-      }  else if (Message == "") {
+      } else if (Message == "mail") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = "Verifica tu mail"
+      } else if (Message == "") {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
         notification.innerText = ""
-      }  else if (Message == "") {
+      } else if (Message == "") {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
         notification.innerText = ""
-      }  else if (Message == "") {
+      } else if (Message == "") {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
         notification.innerText = ""
-      }  else if (Message == "") {
-        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
-        notification.innerText = ""
-      }   else{
+      } else {
         notification.innerText = "";
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
       }
-  
-  
-  
+
+
+
       // Establecer el mensaje de error
       //notification.innerText = Message;
-  
+
       // Mostrar la notificación
       notification.style.display = 'block';
-  
+
       // Después de 3 segundos, añade la clase para desvanecer
       setTimeout(() => {
         notification.classList.add('hide');
       }, 3000);
-  
+
       // Después de 4 segundos, oculta completamente la notificación
       setTimeout(() => {
         notification.style.display = 'none';

@@ -1,12 +1,12 @@
 <div id="notification1" class="notification1">
-    <p>All very well! Credit received: +R$ 0.46</p>
+    <p>Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde.</p>
   </div>
   
 <div  *ngIf="c"  class="loading-overlay">
     <div class="spinner"></div>
   </div>
 
-<div class="container" *ngIf = "!isLoggin() && isLoginState() ">
+<div class="container" *ngIf = "!isLoggin() && isLoginState() && !sin">
     
         <div   >
             <h1 class="logo">ArguedasConnect</h1>
