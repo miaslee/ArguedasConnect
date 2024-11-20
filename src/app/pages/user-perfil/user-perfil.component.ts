@@ -27,6 +27,7 @@ export class UserPerfilComponent {
   selectedImageFile: File | null = null;
   bb: boolean = false;
   u : boolean = false;
+  verificado: boolean = false;
 
 constructor(private dialog: MatDialog, private sharedService: SharedService){
   
@@ -194,6 +195,13 @@ callPerfilClick1() {
               this.userProfileData = doc.data() as UserProfile;
               this.b = true;
 
+              if(this.userProfileData.verificado == "true"){
+                this.verificado = true;
+                              }
+                              if(this.userProfileData.verificado == "false"){
+                                this.verificado = false;
+                                              }
+
 
             }
           )
@@ -214,6 +222,7 @@ export interface UserProfile {
   publicSex: string;
   photoUrl: string;
   privacidad: string;
+  verificado: string
 }
 
 export interface PostData {

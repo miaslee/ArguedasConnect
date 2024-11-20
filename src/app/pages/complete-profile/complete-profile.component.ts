@@ -99,7 +99,9 @@ export class CompleteProfileComponent {
             publicSex: sexo,
             userId: this.auth.getAuth().currentUser?.uid,
             photoUrl: "https://devmiasx.com/uploads/67380645a9ac3_user.png",
-            privacidad: "publico"
+            privacidad: "publico",
+            verificado: "false"
+
 
           },
           onComplete: (docId: string) => {

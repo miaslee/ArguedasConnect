@@ -23,6 +23,7 @@ export class PerfilComponent {
   receivedId: string | null = null; // Variable para almacenar el ID recibido
   b: boolean = false;
   p: boolean = true;
+  verificado : boolean = false;
 
 
 
@@ -92,6 +93,12 @@ export class PerfilComponent {
                 this.p = true;
                 this.b = true;
               }
+              if(this.userProfileData.verificado == "true"){
+this.verificado = true;
+              }
+              if(this.userProfileData.verificado == "false"){
+                this.verificado = false;
+                              }
 
             }
           )
@@ -116,6 +123,7 @@ export interface UserProfile {
   publicSex: string;
   photoUrl: string;
   privacidad: string
+  verificado: string
 }
 export interface PostData {
   comment: string,
