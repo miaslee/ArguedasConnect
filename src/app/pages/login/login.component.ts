@@ -23,7 +23,7 @@ sin : boolean ;
     this.init();
 this.sin = false;
      this.sin = this.firebasetsAuth.isSignedIn()
-     console.log(this.sin)
+    
   }
   init() {
     setTimeout(() => {

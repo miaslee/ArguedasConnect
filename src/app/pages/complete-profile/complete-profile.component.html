@@ -1,9 +1,12 @@
+<div  *ngIf="!perfil1" class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
 <div id="notification2" class="notification2">
     <p>All very well! Credit received: +R$ 0.46</p>
   </div>
-<div class="container"  [ngClass]="{'active': show, 'idle': !show}">
+<div class="container"  >
    
-    <div  >
+    <div id="perfil" class="cp"  >
         <h1 class="logo">ArguedasConnect</h1>
         <h2>Completa tu perfil</h2>
         
@@ -45,3 +48,4 @@
         </form>
     </div>
 </div>
+

@@ -31,26 +31,28 @@ export class AppComponent {
   auth: FirebaseTSAuth;
   isLoggedIn = false;
   firestore: FirebaseTSFirestore;
-  userHasProfile: boolean;
+  userHasProfile: boolean = false;
   private static userDocument: userDocument | null = null;
   s: number = 5;
-k: boolean = false;
-  mailv: boolean;
 
-  c: boolean=false;
+  mailv: boolean;
+  perfil : boolean= true;
+  load : boolean = true;
+
+ 
   receivedId1: string | null = null; // Variable para almacenar el ID recibido
 
   constructor(
     private router: Router,
     private sharedService: SharedService
   ) {
-     FirebaseTSApp.init(environment.firebaseConfig);
-     
-    this.c = true;
+    FirebaseTSApp.init(environment.firebaseConfig);
+
+    
 
     this.auth = new FirebaseTSAuth();
     this.firestore = new FirebaseTSFirestore();
-    this.userHasProfile = false;
+    
     AppComponent.userDocument = {
       publicName: '',
       publicLastname: '',
@@ -59,7 +61,7 @@ k: boolean = false;
       publicSex: '',
       userId: ''
     };
-    
+
 
     this.mailv = false;
 
@@ -74,9 +76,6 @@ k: boolean = false;
             whenSignedIn: user => {
 
               this.isLoggedIn = true;
-              
-
-
             },
             whenSignedOut: user => {
               console.log("logout")
@@ -89,10 +88,12 @@ k: boolean = false;
               // this.router.navigate(["emailVerification"])
               this.mailv = false;
               this.auth.sendVerificationEmail();
-              
+              this.perfil = false;
+              this.load = false
+
 
               const interval = setInterval(() => {
-                console.log(this.s); // Muestra el número en la consola
+
 
                 if (this.s > 0) {
                   this.s--; // Disminuye el número en 1
@@ -108,9 +109,14 @@ k: boolean = false;
             whenSignedInAndEmailVerified: user => {
 
               this.getUsersProfile();
-              this.k = true;
+              
               this.mailv = true;
               
+             
+              this.perfil = false
+              this.load = false;
+
+
 
             },
             whenChanged: user => {
@@ -169,7 +175,7 @@ k: boolean = false;
 
   }
   getUsername(): string {
-    this.c = false;
+    
     try {
       // Devuelve el nombre del usuario si está disponible
       return AppComponent.userDocument?.publicName || "Invitado";
@@ -181,20 +187,34 @@ k: boolean = false;
   }
   getUsersProfile() {
     const user = this.auth.getAuth().currentUser;
-    
+
     if (user) {
       this.firestore.listenToDocument({
         name: "Getting Document",
         path: ["Users", user.uid], // Asegúrate de incluir la colección y el UID del usuario
         onUpdate: (result) => {
-
+          this.mailv = true;
           AppComponent.userDocument = <userDocument>result.data();
 
-          // Aquí puedes manejar la actualización del documento del usuario
 
+          // Aquí puedes manejar la actualización del documento del usuario
+          this.load = false
+          
           this.userHasProfile = result.exists;
+          const perfil = document.getElementById('pf');
+          if (perfil) {
+            if (!result.exists) {
+              // Mostrar la perfil
+              perfil.style.display = 'block';
+              
+              
+            }
+
+
+          }
           AppComponent.userDocument.userId = this.auth.getAuth().currentUser?.uid + "";
-          this.mailv = true;
+         
+          
         }
       });
     } else {
