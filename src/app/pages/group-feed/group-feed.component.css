@@ -1,4 +1,82 @@
-.more-post {
+.group-feed {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feed-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .feed-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #666;
+  }
+  
+  .post-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .post-input {
+    resize: none;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .post-btn {
+    align-self: flex-end;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .post-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .post-card {
+    padding: 15px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+  }
+  
+  .post-card p {
+    margin: 5px 0;
+  }
+  
+  .post-date {
+    color: #999;
+    font-size: 12px;
+    text-align: right;
+  }
+  
+
+  .more-post {
     display: flex;
     justify-content: space-between; /* Distribuye los elementos */
     align-items: center; /* Alinea verticalmente */

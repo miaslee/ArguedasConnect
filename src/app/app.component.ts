@@ -17,12 +17,13 @@ import { UserPerfilComponent } from './pages/user-perfil/user-perfil.component';
 import { fakeAsync } from '@angular/core/testing';
 import { GruposComponent } from './pages/grupos/grupos.component';
 import { EventosComponent } from './pages/eventos/eventos.component';
+import { GroupFeedComponent } from './pages/group-feed/group-feed.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgIf, CompleteProfileComponent, FeedComponent, PostComponent, HeaderComponent, PerfilComponent, UserPerfilComponent, GruposComponent,   EventosComponent],
+  imports: [RouterOutlet, NgIf, GroupFeedComponent, CompleteProfileComponent, FeedComponent, PostComponent, HeaderComponent, PerfilComponent, UserPerfilComponent, GruposComponent,   EventosComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 

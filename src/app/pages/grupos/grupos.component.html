@@ -1,36 +1,44 @@
 <div class="groups-container">
-    <h1 class="page-title">Grupos de Estudio</h1>
-    <div class="actions">
-      <input 
-        type="text" 
-        class="search-bar" 
-        placeholder="Buscar grupos..." 
-        [(ngModel)]="searchTerm"
-      />
-      <button class="create-group-btn">
-        <i class="fas fa-plus"></i> Crear Grupo
-      </button>
+  <!-- Modal para crear un grupo -->
+  <div *ngIf="showCreateGroupModal" class="modal">
+    <div class="modal-content">
+      <input [(ngModel)]="newGroup.nombre" placeholder="Nombre del grupo" class="input-field" />
+      <textarea [(ngModel)]="newGroup.descripcion" placeholder="Descripción" class="input-field"></textarea>
+      <button class="save-btn" (click)="createGroup()">Guardar</button>
+      <button class="cancel-btn" (click)="closeCreateGroupModal()">Cancelar</button>
     </div>
-    <div class="group-list">
-      <!-- Tarjeta de grupo filtrada -->
-      <div 
-        class="group-card" 
-        *ngFor="let group of filteredGroups()"
-      >
-        <div class="group-image">
-          <img src="{{ group.image }}" alt="{{ group.name }}" />
-        </div>
-        <div class="group-details">
-          <h3 class="group-title">{{ group.name }}</h3>
-          <p class="group-members">
-            <i class="fas fa-user-friends"></i> {{ group.members }} miembros
-          </p>
-          <p class="group-description">{{ group.description }}</p>
-        </div>
-        <div class="group-actions">
-          <button class="join-btn">Unirte al grupo</button>
-        </div>
+  </div>
+
+  <!-- Lista de Grupos -->
+  <div *ngIf="!selectedGroup" class="group-list">
+    <div class="group-card" *ngFor="let group of filteredGroups()">
+      <div class="group-details">
+        <h3 class="group-title">{{ group.nombre }}</h3>
+        <p class="group-description">{{ group.descripcion }}</p>
+        <p class="group-meta">Creador: {{ group.creador }}</p>
+        <p class="group-members">Miembros: {{ group.miembros.length }}</p>
+        <button 
+          *ngIf="isMember(group)" 
+          class="view-feed-btn" 
+          (click)="viewGroupFeed(group)"
+        >
+          Ver Feed
+        </button>
+        <button 
+          *ngIf="!isMember(group)" 
+          class="join-btn" 
+          (click)="joinGroup(group.id)"
+        >
+          Unirse
+        </button>
       </div>
     </div>
   </div>
+
+  <!-- Feed del Grupo Seleccionado -->
+  <div *ngIf="selectedGroup" class="group-feed-container">
+    <button class="back-btn" (click)="backToGroups()">← Volver a Grupos</button>
+    <app-group-feed [group]="selectedGroup"></app-group-feed>
+  </div>
   
+</div>
