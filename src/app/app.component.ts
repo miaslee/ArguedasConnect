@@ -170,6 +170,8 @@ export class AppComponent {
 
   }
 
+
+
   public static getUserDocument() {
     return AppComponent.userDocument;
 
@@ -232,9 +234,6 @@ export class AppComponent {
   }
 
   loggedIn() {
-
-
-
     return this.isLoggedIn;
   }
 
@@ -259,6 +258,12 @@ export class AppComponent {
   isUserPerfilState() {
     return this.state == HomeCompState.USERPERFIL;
   }
+  isGruposState (){
+    return this.state == HomeCompState.GRUPOS;
+  }
+  isEventosState (){
+    return this.state == HomeCompState.EVENTOS;
+  }
   HomeClick() {
     this.state = HomeCompState.HOME;
   }
@@ -271,6 +276,13 @@ export class AppComponent {
   AmigoClick() {
     this.state = HomeCompState.AMIGOS;
   }
+  gruposClick(){
+    this.state = HomeCompState.GRUPOS;
+  }
+  eventosClick(){
+    this.state = HomeCompState.EVENTOS;
+  }
+
   getStateText() {
 
     switch (this.state) {
@@ -282,6 +294,11 @@ export class AppComponent {
         return "Amigos";
       case HomeCompState.USERPERFIL:
         return "User Perfil";
+      case HomeCompState.EVENTOS:
+        return "Eventos";
+      case HomeCompState.GRUPOS:
+        return "Grupos"
+
 
     }
 
@@ -355,7 +372,9 @@ export enum HomeCompState {
   HOME,
   PERFIL,
   AMIGOS,
-  USERPERFIL
+  USERPERFIL,
+  GRUPOS,
+  EVENTOS
 
 }
 export interface userDocument {

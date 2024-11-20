@@ -10,6 +10,7 @@ export const routes: Routes = [
     {path: "", component: HomeComponent},
     {path:"emailVerification", component: EmailverificationComponent},
     {path: "completeProfile", component: CompleteProfileComponent},
+  
     {path: "**", component: HomeComponent}
     
 ];

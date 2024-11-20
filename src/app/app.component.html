@@ -31,7 +31,9 @@
       <span class="user-name">Hola, {{getUsername()}}</span>
       <a  (click)="HomeClick()" class=" menut">Inicio</a>
       <a (click)="userPerfilClick()"class="menut">Perfil</a>
-      <a  class="menut">Amigos</a>
+      <a (click)="gruposClick()" class="menut">Grupo</a>
+      <a  (click)="eventosClick()" class="menut">Eventos</a>
+
       <button  (click)="LogoutClick()" class="logout-button">Cerrar sesión</button>
     </div>
   </header>
