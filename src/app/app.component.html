@@ -31,7 +31,7 @@
       <span class="user-name">Hola, {{getUsername()}}</span>
       <a  (click)="HomeClick()" class=" menut">Inicio</a>
       <a (click)="userPerfilClick()"class="menut">Perfil</a>
-      <a (click)="gruposClick()" class="menut">Grupo</a>
+      <a (click)="gruposClick()" class="menut">Grupos</a>
       <a  (click)="eventosClick()" class="menut">Eventos</a>
 
       <button  (click)="LogoutClick()" class="logout-button">Cerrar sesión</button>
@@ -63,6 +63,8 @@
   
 
 <app-complete-profile *ngIf="loggedIn() && MailV() && !userHasProfile && !perfil"> </app-complete-profile>
+<app-grupos  *ngIf="loggedIn() && userHasProfile && isGruposState() "> </app-grupos>
+<app-eventos  *ngIf="loggedIn() && userHasProfile && isEventosState() "> </app-eventos>
 
 
 

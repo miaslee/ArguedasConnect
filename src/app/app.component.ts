@@ -15,12 +15,14 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
 import { SharedService } from './services/shared.service';
 import { UserPerfilComponent } from './pages/user-perfil/user-perfil.component';
 import { fakeAsync } from '@angular/core/testing';
+import { GruposComponent } from './pages/grupos/grupos.component';
+import { EventosComponent } from './pages/eventos/eventos.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgIf, CompleteProfileComponent, FeedComponent, PostComponent, HeaderComponent, PerfilComponent, UserPerfilComponent],
+  imports: [RouterOutlet, NgIf, CompleteProfileComponent, FeedComponent, PostComponent, HeaderComponent, PerfilComponent, UserPerfilComponent, GruposComponent,   EventosComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 

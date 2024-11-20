@@ -1,1 +1,39 @@
-<p>eventos works!</p>
+<div class="events-container">
+    <h1 class="page-title">Eventos Académicos</h1>
+    <div class="actions">
+      <input 
+        type="text" 
+        class="search-bar" 
+        placeholder="Buscar eventos..." 
+        [(ngModel)]="searchTerm"
+      />
+      <button class="create-event-btn">
+        <i class="fas fa-plus"></i> Crear Evento
+      </button>
+    </div>
+    <div class="event-list">
+      <!-- Tarjeta de evento filtrada -->
+      <div 
+        class="event-card" 
+        *ngFor="let event of filteredEvents()"
+      >
+        <div class="event-image">
+          <img src="{{ event.image }}" alt="{{ event.title }}" />
+        </div>
+        <div class="event-details">
+          <h3 class="event-title">{{ event.title }}</h3>
+          <p class="event-date">
+            <i class="fas fa-calendar-alt"></i> {{ event.date }}
+          </p>
+          <p class="event-time">
+            <i class="fas fa-clock"></i> {{ event.time }}
+          </p>
+          <p class="event-description">{{ event.description }}</p>
+        </div>
+        <div class="event-actions">
+          <button class="join-btn">Unirte al evento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
