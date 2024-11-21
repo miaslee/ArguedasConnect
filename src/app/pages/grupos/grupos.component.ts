@@ -124,12 +124,6 @@ createGroup() {
     }
   });
 }
-
-isMember(group: Grupo): boolean {
-  const userId = this.auth.getAuth().currentUser?.uid;
-  return group.miembros.includes(userId || '');
-}
-
 joinGroup(groupId: string | undefined) {
   if (!groupId) {
     console.error("El ID del grupo es inválido o está vacío.");
@@ -174,6 +168,13 @@ joinGroup(groupId: string | undefined) {
     }
   });
 }
+
+isMember(group: Grupo): boolean {
+  const userId = this.auth.getAuth().currentUser?.uid;
+  return group.miembros.includes(userId || '');
+}
+
+
 
 
 

@@ -20,7 +20,7 @@ export class GroupFeedComponent {
   publicaciones : Publicacion[] = [];
   firestore: FirebaseTSFirestore = new FirebaseTSFirestore();
   auth: FirebaseTSAuth = new FirebaseTSAuth();
-  verificado: boolean =false;
+  verificado1: boolean =false;
 
   // Define explícitamente el tipo como un arreglo de objetos
 
@@ -72,11 +72,12 @@ export class GroupFeedComponent {
                   publicacion.carrera = userData['publicCareer'];
                   publicacion.verificado = userData['verificado'];
                   if(userData['verificado'] == "true"){
-                    this.verificado =true;
+                    this.verificado1 =true;
                   }
                   if(userData['verificado'] == "false"){
-                    this.verificado =false;
+                    this.verificado1 =false;
                   }
+                 
 
 
                 } else {
@@ -106,39 +107,6 @@ export class GroupFeedComponent {
       }
     });
 }
-
-
-
-
-
-  loadFeed1() {
-
-    this.firestore.getCollection({
-      path: [`grupos/${this.group.id}/publicaciones`],
-
-      where: [
-        new OrderBy("fecha", "desc")
-      ],
-
-      onComplete: (result) => {
-        this.publicaciones = result.docs.map(doc => {
-          const data = doc.data();
-          return {
-            id: doc.id,
-            autor: data['autor'],
-            contenido: data['contenido'],
-            tipo: data['tipo'],
-            fecha: data['fecha'].toDate(),
-          } as Publicacion;
-        });
-
-
-      },
-      onFail: (error) => {
-        console.error('Error al cargar el feed:', error);
-      }
-    });
-  }
 
   addPost() {
     const userId = this.auth.getAuth().currentUser?.uid;

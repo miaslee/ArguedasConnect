@@ -1,39 +1,82 @@
 <div class="events-container">
-    <h1 class="page-title">Eventos Académicos</h1>
-    <div class="actions">
-      <input 
-        type="text" 
-        class="search-bar" 
-        placeholder="Buscar eventos..." 
-        [(ngModel)]="searchTerm"
-      />
-      <button class="create-event-btn">
-        <i class="fas fa-plus"></i> Crear Evento
-      </button>
-    </div>
-    <div class="event-list">
-      <!-- Tarjeta de evento filtrada -->
-      <div 
-        class="event-card" 
-        *ngFor="let event of filteredEvents()"
-      >
-        <div class="event-image">
-          <img src="{{ event.image }}" alt="{{ event.title }}" />
-        </div>
-        <div class="event-details">
-          <h3 class="event-title">{{ event.title }}</h3>
-          <p class="event-date">
-            <i class="fas fa-calendar-alt"></i> {{ event.date }}
-          </p>
-          <p class="event-time">
-            <i class="fas fa-clock"></i> {{ event.time }}
-          </p>
-          <p class="event-description">{{ event.description }}</p>
-        </div>
-        <div class="event-actions">
-          <button class="join-btn">Unirte al evento</button>
-        </div>
+  <!-- Título principal -->
+  <h1 class="page-title">Eventos Académicos</h1>
+
+  <!-- Acciones (Buscar y Crear Evento) -->
+  <div class="actions">
+    <input 
+      type="text" 
+      class="search-bar" 
+      placeholder="Buscar eventos..." 
+      [(ngModel)]="searchTerm"
+    />
+    <button class="create-event-btn" (click)="toggleCreateEventModal()">
+      <i class="fas fa-plus"></i> Crear Evento
+    </button>
+  </div>
+
+  <!-- Modal para Crear Evento -->
+  <div *ngIf="showCreateEventModal" class="modal">
+    <div class="modal-content">
+      <h2 class="modal-title">Crear un Nuevo Evento</h2>
+      <input [(ngModel)]="newEvent.title" placeholder="Título del evento" class="input-field" />
+      <textarea [(ngModel)]="newEvent.description" placeholder="Descripción del evento" class="input-field"></textarea>
+      <input [(ngModel)]="newEvent.date" type="date" class="input-field" />
+      <input [(ngModel)]="newEvent.time" type="time" class="input-field" />
+      <input [(ngModel)]="newEvent.lugar" type="text" placeholder="Lugar del evento" class="input-field" />
+      <div class="modal-actions">
+        <button class="save-btn" (click)="createEvent()">Guardar</button>
+        <button class="cancel-btn" (click)="toggleCreateEventModal()">Cancelar</button>
       </div>
     </div>
   </div>
-  
+
+  <!-- Lista de eventos -->
+  <div class="event-list">
+    <div 
+      class="event-card" 
+      *ngFor="let event of filteredEvents()"
+      [ngClass]="{'finalized': event.isFinalized}"
+    >
+      <div class="event-image">
+        <img src="{{ event.image || 'https://via.placeholder.com/150' }}" alt="{{ event.title }}" />
+      </div>
+      <div class="event-details">
+        <h3 class="event-title">  {{ event.title }}</h3>
+        <p class="event-description" > {{ event.description }}</p>
+        <p class="event-date">
+          <i class="fas fa-calendar-alt"></i> Fecha: {{ event.date | date }}
+        </p>
+        <p class="event-time">
+          <i class="fas fa-clock"></i>Hora: {{ event.time }}
+        </p>
+        <p class="event-members">
+          <i class="fas fa-users"></i> Miembros: {{ event.members?.length || 0 }}
+        </p>
+        <p class="event-members">
+          <i class="fas fa-users"></i> Lugar: {{ event.lugar || 'Desconocido'}}
+        </p>
+        <p *ngIf="event.isFinalized" class="event-status finalized">Finalizado</p>
+        <p *ngIf="!event.isFinalized" class="event-time-remaining">
+          Tiempo restante: {{ event.remainingTime }}
+        </p>
+      </div>
+      <div class="event-actions">
+        <button 
+          *ngIf="!event.isFinalized && !event.members.includes(currentUser)" 
+          class="join-btn" 
+          (click)="joinEvent(event.id)"
+        >
+          Unirse
+        </button>
+        <button 
+          *ngIf="event.creator === currentUser" 
+          class="delete-btn" 
+          (click)="deleteEvent(event.id)"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

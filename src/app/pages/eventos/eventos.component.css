@@ -48,28 +48,37 @@
     transform: scale(1.05);
   }
   
-  /* Lista de eventos */
-  .event-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-  }
-  
-  /* Tarjeta individual de evento */
-  .event-card {
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .event-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  }
+ /* Lista de eventos */
+ .event-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajusta el tamaño de las columnas */
+  gap: 20px; /* Espacio entre las tarjetas */
+  justify-items: center; /* Centra cada tarjeta dentro de la cuadrícula */
+  align-items: start; /* Alinea las tarjetas al inicio */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; /* Centra la lista en la página */
+}
+
+.event-card {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Espaciado entre el contenido */
+  align-items: stretch; /* Forzar que el contenido ocupe el espacio */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 100%; /* Asegura que las tarjetas ocupen el ancho disponible */
+  max-width: 300px; /* Limita el ancho máximo */
+}
+
+.event-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
   
   /* Imagen del evento */
   .event-image img {
@@ -80,7 +89,10 @@
   
   /* Detalles del evento */
   .event-details {
-    padding: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    
     color: #333;
   }
   
@@ -147,3 +159,113 @@
 }
 
   
+/* Miembros */
+.event-members {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Finalizado */
+.event-status.finalized {
+  font-size: 14px;
+  color: red;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Tiempo restante */
+.event-time-remaining {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+/* Botón de eliminar evento */
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 400px;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.save-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-btn:hover {
+  background-color: #0056b3;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #d32f2f;
+}
