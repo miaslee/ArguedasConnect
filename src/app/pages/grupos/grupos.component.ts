@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { FirebaseTSFirestore, Limit, OrderBy } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { GroupFeedComponent } from '../group-feed/group-feed.component';
+import { SharedService } from '../../services/shared.service';
 
 
 
@@ -32,7 +33,7 @@ export class GruposComponent {
     creador: ''
   };
 
-constructor(){
+constructor(private sharedService: SharedService){
   
 }
 
@@ -73,7 +74,11 @@ listGroups() {
   });
 }
 
+showNotification(valor: string): string {
 
+  this.sharedService.sendId1(valor); // Envía el ID a través del servicio
+  return valor
+}
 
 filteredGroups() {
   return this.groups.filter(group => 
@@ -99,7 +104,9 @@ createGroup() {
   }
 
   if (!this.newGroup.nombre || !this.newGroup.descripcion) {
-    alert('El nombre y la descripción del grupo son obligatorios.');
+    //alert('El nombre y la descripción del grupo son obligatorios.');
+    this.showNotification("grp-vacio")
+    
     return;
   }
 
@@ -115,7 +122,8 @@ createGroup() {
     path: ["grupos"],
     data: group,
     onComplete: (docId) => {
-      alert(`Grupo creado con éxito. ID: ${docId}`);
+      this.showNotification("grp-creado")
+      //alert(`Grupo creado con éxito. ID: ${docId}`);
       this.closeCreateGroupModal();
       this.listGroups();
     },
@@ -149,7 +157,8 @@ joinGroup(groupId: string | undefined) {
             path: ["grupos", groupId],
             data: { miembros },
             onComplete: () => {
-              alert("Te has unido al grupo con éxito.");
+             // alert("Te has unido al grupo con éxito.");
+              this.showNotification("grp-join")
               this.listGroups();
             },
             onFail: (error) => {

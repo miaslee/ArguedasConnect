@@ -312,6 +312,7 @@ export class AppComponent {
 
       //notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
       //notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+      //notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
       if (Message == "post-creado") {
         notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
         notification.innerText = "¡Publicación creada!"
@@ -335,6 +336,58 @@ export class AppComponent {
       } else if (Message == "mail") {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
         notification.innerText = "Verifica tu mail"
+      } else if (Message == "evt-vacio") {
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+        notification.innerText = "Todos los campos son obligatorios para crear un evento."
+      } else if (Message == "evt-hfi") {
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+        notification.innerText = "La fecha u hora del evento no son válidas."
+      } else if (Message == "evt-30") {
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+        notification.innerText = "El evento debe programarse al menos 30 minutos en el futuro."
+      } else if (Message == "evt-creado") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+        notification.innerText = "Evento creado con éxito."
+      } else if (Message == "evt-delete") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+        notification.innerText = "Evento eliminado con exito."
+      } else if (Message == "evt-join") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+        notification.innerText = "Te has unido al evento con éxito."
+      } else if (Message == "evt-joined") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = "Ya eres miembro de este evento."
+        //gruposs
+      } else if (Message == "grp-vacio") {
+        notification.style.backgroundColor = '#dc3545'; // Rojo (Error)
+        notification.innerText = "El nombre y la descripción del grupo son obligatorios."
+      } else if (Message == "grp-creado") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+        notification.innerText = "Grupo creado con éxito."
+      } else if (Message == "grp-join") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+        notification.innerText = "Te has unido al grupo con éxito."
+      } else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      } else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      } else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      } else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      } else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      } else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
+      } else if (Message == "") {
+        notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
+        notification.innerText = ""
       } else if (Message == "") {
         notification.style.backgroundColor = '#3498db'; // Azul (Aviso)
         notification.innerText = ""

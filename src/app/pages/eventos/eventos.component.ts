@@ -4,6 +4,7 @@ import { NgModel } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { FirebaseTSFirestore, OrderBy } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-eventos',
@@ -21,7 +22,7 @@ export class EventosComponent implements OnInit {
   searchTerm: string = ''; // Variable para el término de búsqueda
   eventos: Evento[] = []; // Lista de eventos tipada con la interfaz
 
-  constructor() {}
+  constructor(private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.currentUser = this.auth.getAuth().currentUser?.uid || '';
@@ -34,13 +35,13 @@ export class EventosComponent implements OnInit {
   joinEvent(eventId: string | undefined) {
     if (!eventId) {
       console.error("El ID del evento es inválido o está vacío.");
-      alert("Ocurrió un error al intentar unirte al evento.");
+     // alert("Ocurrió un error al intentar unirte al evento.");
       return;
     }
   
     const userId = this.auth.getAuth().currentUser?.uid;
     if (!userId) {
-      alert("Debes iniciar sesión para unirte a un evento.");
+      //alert("Debes iniciar sesión para unirte a un evento.");
       return;
     }
   
@@ -56,7 +57,8 @@ export class EventosComponent implements OnInit {
               path: ["eventos", eventId],
               data: { members },
               onComplete: () => {
-                alert("Te has unido al evento con éxito.");
+                this.showNotification("evt-join")
+                //alert("Te has unido al evento con éxito.");
                 this.listEvents();
               },
               onFail: (error) => {
@@ -64,7 +66,8 @@ export class EventosComponent implements OnInit {
               }
             });
           } else {
-            alert("Ya eres miembro de este evento.");
+            this.showNotification("evt-joined")
+            //alert("Ya eres miembro de este evento.");
           }
         } else {
           console.error("El evento no existe.");
@@ -100,7 +103,8 @@ export class EventosComponent implements OnInit {
   
     // Validar que todos los campos estén completos
     if (!this.newEvent.title || !this.newEvent.description || !this.newEvent.date || !this.newEvent.time) {
-      alert("Todos los campos son obligatorios para crear un evento.");
+     // alert("Todos los campos son obligatorios para crear un evento.");
+      this.showNotification("evt-vacio")
       return;
     }
   
@@ -110,14 +114,16 @@ export class EventosComponent implements OnInit {
   
     // Validar si la fecha y hora son válidas
     if (isNaN(eventDateTime.getTime())) {
-      alert("La fecha u hora del evento no son válidas.");
+      //alert("La fecha u hora del evento no son válidas.");
+      this.showNotification("evt-hfi")
       return;
     }
   
     // Validar que el evento sea al menos 30 minutos en el futuro
     const thirtyMinutesInMilliseconds = 30 * 60 * 1000; // 30 minutos en milisegundos
     if (eventDateTime.getTime() - now.getTime() <= thirtyMinutesInMilliseconds) {
-      alert("El evento debe programarse al menos 30 minutos en el futuro.");
+     // alert("El evento debe programarse al menos 30 minutos en el futuro.");
+     this.showNotification("evt-30")
       return;
     }
   
@@ -137,7 +143,9 @@ export class EventosComponent implements OnInit {
       path: ["eventos"],
       data: event,
       onComplete: (docId) => {
-        alert(`Evento creado con éxito. ID: ${docId}`);
+       
+       this.showNotification("evt-creado")
+        //alert(`Evento creado con éxito. ID: ${docId}`);
         this.newEvent = { title: '', description: '', date: '', time: '', members: [], creator: 'USER_ID' , lugar:''};
         this.toggleCreateEventModal();
         this.listEvents();
@@ -148,6 +156,11 @@ export class EventosComponent implements OnInit {
     });
   }
   
+  showNotification(valor: string): string {
+
+    this.sharedService.sendId1(valor); // Envía el ID a través del servicio
+    return valor
+  }
   
   // Cargar eventos desde Firestore
   listEvents() {
@@ -180,10 +193,10 @@ export class EventosComponent implements OnInit {
           return evento;
         });
   
-        console.log("Eventos cargados:", this.eventos);
+        //console.log("Eventos cargados:", this.eventos);
       },
       onFail: (error) => {
-        console.error("Error al listar los eventos:", error);
+       // console.error("Error al listar los eventos:", error);
       }
     });
   }
@@ -267,13 +280,14 @@ export class EventosComponent implements OnInit {
   deleteEvent(eventId: string) {
     if (!eventId) {
       console.error("El ID del evento es inválido o está vacío.");
-      alert("Ocurrió un error al intentar eliminar el evento.");
+     // alert("Ocurrió un error al intentar eliminar el evento.");
       return;
     }
 
     this.firestore.delete({
       path: ["eventos", eventId],
       onComplete: () => {
+        this.showNotification("evt-delete")
        
         this.listEvents();
       },
