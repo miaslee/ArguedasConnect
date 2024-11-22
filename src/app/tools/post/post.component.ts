@@ -40,6 +40,8 @@ export class PostComponent {
 
 
   }
+
+  
   ngOnInit(): void {
     this.update()
     this.getInfoProfile();
@@ -50,6 +52,7 @@ export class PostComponent {
 
   onReplyClick() {
     this.dialog.open(ReplyComponent, { data: this.postData?.id });
+    
   }
 
   update() {

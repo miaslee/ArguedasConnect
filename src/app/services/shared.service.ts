@@ -33,6 +33,22 @@ export class SharedService {
     this.perfilClickSource2.next();
     
   }
+  //Loadposts grupo
+  private perfilClickSource3= new Subject<void>();
+  perfilClick3$ = this.perfilClickSource3.asObservable();
+
+  triggerPerfilClick3() {
+    this.perfilClickSource3.next();
+    
+  }
+  //Loadposts feedd
+  private perfilClickSource4= new Subject<void>();
+  perfilClick4$ = this.perfilClickSource4.asObservable();
+
+  triggerPerfilClick4() {
+    this.perfilClickSource4.next();
+    
+  }
   
 
   //senID

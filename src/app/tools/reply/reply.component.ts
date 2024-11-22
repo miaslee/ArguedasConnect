@@ -1,10 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { FirebaseTSFirestore, OrderBy, Where } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog'; 
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'; 
 import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 import { AppComponent } from '../../app.component';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { NgFor, NgIf } from '@angular/common';
+import { SharedService } from '../../services/shared.service';
 
 
 @Component({
@@ -20,10 +21,13 @@ export class ReplyComponent {
   public userProfileData: UserProfile | null = null;
   comments :Comment [] = [];
   c : boolean = false;
+  photoUrl: string = "";
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) private id: string){
-    this.getInfoProfile1();
+
+
+  constructor(@Inject(MAT_DIALOG_DATA) private id: string, private sharedService: SharedService, private dialog: MatDialogRef<ReplyComponent>){
+    
   }
 ngOnInit(): void {
   this.getComment();
@@ -32,54 +36,55 @@ ngOnInit(): void {
 getComment() {
   this.firestore.listenToCollection(
     {
-      name:"Post Comments",
-      path:["Posts", this.id, "PostComments"],
-      where: [
-        new OrderBy("timestamp","asc")
-      ],
-      onUpdate : (result) =>{
-        result.docChanges().forEach(
-          postComentDoc =>{
-            if(postComentDoc.type == "added"){
-              this.comments.unshift(<Comment>postComentDoc.doc.data());
-            }
+      name: "Post Comments",
+      path: ["Posts", this.id, "PostComments"],
+      where: [new OrderBy("timestamp", "asc")],
+      onUpdate: (result) => {
+        result.docChanges().forEach((postComentDoc) => {
+          if (postComentDoc.type === "added") {
+            // Obtén los datos del comentario
+            const commentData = <Comment>postComentDoc.doc.data();
+
+            // Busca los datos del usuario (autor del comentario) usando creatorId
+            this.firestore.getDocument({
+              path: ["Users", commentData.creatorId],
+              onComplete: (userDoc) => {
+                const userData = <UserProfile>userDoc.data();
+
+                if (userData) {
+                  // Agrega los datos del autor al comentario
+                  commentData.creatorName = `${userData.publicName} ${userData.publicLastname}`;
+                  commentData.photoUrl = userData.photoUrl;
+                  commentData.verificado = userData.verificado
+                } else {
+                  // Si no se encuentran datos del usuario, usa valores por defecto
+                  commentData.creatorName = "Usuario desconocido";
+                  commentData.photoUrl = "ruta_por_defecto_de_imagen.jpg"; // Foto por defecto
+                }
+
+                // Agrega el comentario a la lista de comentarios
+                this.comments.unshift(commentData);
+                
+              },
+              onFail: (err) => {
+                console.error("Error al obtener los datos del usuario:", err);
+
+                // Si falla, usa valores por defecto
+                commentData.creatorName = "Usuario desconocido";
+                commentData.photoUrl = "ruta_por_defecto_de_imagen.jpg";
+                this.comments.unshift(commentData);
+              },
+            });
           }
-        )
-        this.c = true;
-      }
+        });
+        this.c = true; // Indica que los comentarios han sido cargados
+      },
     }
   );
 }
-  getInfoProfile1 (){
 
 
-    let userId = this.auth.getAuth().currentUser?.uid;
-      
-      
-    this.firestore.getCollection(
-    {
-      path:["Users"],
-      where: [
-        new Where("userId","==",userId)  
-       
-      ],
-      onComplete: (result) => {
-    result.docs.forEach(
-      doc => {
-       
-        this.userProfileData = doc.data() as UserProfile; 
-        
-       
-      }
-    )
-      },
-      onFail: err => {
-        
-      }
-    }
-    
-    );
-    }
+  
   onSendClick(commentInput:HTMLInputElement) {
    
     let name = this.userProfileData?.publicName;
@@ -94,9 +99,9 @@ getComment() {
           data: {
             comment : commentInput.value,
             creatorId : this.auth.getAuth().currentUser?.uid,
-            creatorName: name+" "+lastname,
-            timestamp : FirebaseTSApp.getFirestoreTimestamp(),
-            photoUrl: photoUrl
+          
+            timestamp : Date.now(),
+           
       
           },
           onComplete: (docId) => {
@@ -104,12 +109,33 @@ getComment() {
           }
         }
       )
-
+      commentInput.value = "";
     }
 
   }
 
+  sendId(id:string): string {
+    //const id = this.publicaciones[0]?.autor // Asigna una cadena vacía si creatorId es undefined
+    //comprobar si entramos a nuestro perfil
+    if (id == this.auth.getAuth().currentUser?.uid) {
+      this.dialog.close();
+      this.callPerfilClick1();
 
+    } else {
+      this.sharedService.sendId(id); // Envía el ID a través del servicio
+      this.dialog.close();
+      this.callPerfilClick();
+
+    }
+    return id;
+  }
+    //llamar para mostrar perfil
+    callPerfilClick() {
+      this.sharedService.triggerPerfilClick();
+    }
+    callPerfilClick1() {
+      this.sharedService.triggerPerfilClick1();
+    }
   
 }
 
@@ -118,6 +144,8 @@ export interface UserProfile {
   publicName: string
   publicLastname : string,
   photoUrl:  string
+  userId: string
+  verificado:string
 }
 export interface Comment {
   creatorId: string;
@@ -126,4 +154,7 @@ export interface Comment {
 
   timestamp : firebase.default.firestore.Timestamp
   photoUrl:  string
+  authorName?: string
+  authorPhoto?:string
+  verificado?: string
 }

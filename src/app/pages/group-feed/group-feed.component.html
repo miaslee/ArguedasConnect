@@ -11,14 +11,15 @@
   </div>
 
   <!-- Formulario para añadir publicaciones -->
-  <div class="post-form">
-    <textarea
-      [(ngModel)]="newPost.contenido"
-      placeholder="Escribe algo para publicar..."
-      class="post-input"
-    ></textarea>
-    <button (click)="addPost()" class="post-btn">Publicar</button>
-  </div>
+  <div  class="status-box" >
+    <div class="status-content">
+       
+        <div  (click)="addPost()" class="status-placeholder">Escribe algo...</div>
+    </div>
+    <div class="actions">
+        <button class="action-button" (click)="addPost()">📷 Foto/Video</button>
+    </div>
+</div>
 
   <!-- Lista de publicaciones -->
   <div class="posts-list">
@@ -27,7 +28,8 @@
             <img  src="{{ publicacion.fotoUsuario }} " alt="User Avatar" class="user-avatar">
             
             <div class="user-info">
-                <span class="username">{{ publicacion.autorNombreCompleto }}    <svg *ngIf="verificado1"  aria-label="Verificado" class="x1lliihq x1n2onr6" fill="rgb(0, 149, 246)" height="11" role="img" viewBox="0 0 40 40" width="11"><title>Verificado</title><path d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z" fill-rule="evenodd"></path></svg> </span>
+                <span  (click)="sendId(publicacion.autor)" class="username">{{ publicacion.autorNombreCompleto }}   <svg *ngIf="publicacion.verificado === 'true'"  aria-label="Verificado" class="x1lliihq x1n2onr6" fill="rgb(0, 149, 246)" height="11" role="img" viewBox="0 0 40 40" width="11"><title>Verificado</title><path d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z" fill-rule="evenodd"></path></svg> 
+                </span>
                 <!-- Información de la carrera -->
                 <p class="career">{{ publicacion.carrera }} </p>
               </div>
@@ -40,7 +42,7 @@
             <p>{{ publicacion.contenido }}</p>
         </div>
         <!-- Imagen de la publicación -->
-        <img src="{{ publicacion.img }}" class="post-image">
+        <img src="{{ publicacion.imageUrl}}" class="post-image">
         <div class="more-post">
            <!--  <span class="likes"><span class="like-count"></span></span>
             <span class="comments"><i class="fa fa-comment"></i>comentarios</span> -->

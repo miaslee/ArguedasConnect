@@ -24,6 +24,8 @@ p {
     
     
   }
+
+ 
   
   /* Comentario individual */
   .comment-item {
@@ -48,6 +50,10 @@ p {
     object-fit: cover;
     background-color: #f0f0f0;
   }
+  .comment-avatar:hover {
+    filter: brightness(0.8); /* Oscurece un poco la imagen */
+    cursor: pointer; /* Cambia el cursor a una mano */
+  }
   
   /* Contenedor de contenido */
   .comment-content {
@@ -66,9 +72,19 @@ p {
     font-weight: bold;
     font-size: 14px;
     margin: 0;
-    color: #1B263B; /* Color similar al de Facebook */
+    color: #1B263B; /* Color inicial */
     margin-bottom: 3px;
+    transition: color 0.3s ease; /* Suaviza el cambio de color */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    text-decoration: none; /* Sin subrayado por defecto */
   }
+  
+  .comment-name:hover {
+    color: #1877f2; /* Tono azul al pasar el ratón */
+    text-decoration: underline; /* Subraya al pasar el ratón */
+  }
+  
+  
   
   /* Estilo del texto del comentario */
   .comment-text {

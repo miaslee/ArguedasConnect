@@ -16,19 +16,23 @@
   </div>
 
   <!-- Modal para Crear Evento -->
-  <div *ngIf="showCreateEventModal" class="modal">
-    <div class="modal-content">
-      <h2 class="modal-title">Crear un Nuevo Evento</h2>
-      <input [(ngModel)]="newEvent.title" placeholder="Título del evento" class="input-field" />
-      <textarea [(ngModel)]="newEvent.description" placeholder="Descripción del evento" class="input-field"></textarea>
-      <input [(ngModel)]="newEvent.date" type="date" class="input-field" />
-      <input [(ngModel)]="newEvent.time" type="time" class="input-field" />
-      <input [(ngModel)]="newEvent.lugar" type="text" placeholder="Lugar del evento" class="input-field" />
-      <div class="modal-actions">
-        <button class="save-btn" (click)="createEvent()">Guardar</button>
-        <button class="cancel-btn" (click)="toggleCreateEventModal()">Cancelar</button>
+   <div *ngIf="showCreateEventModal"   class="modal-overlay">
+    <div class="modal">
+      <div class="modal-content">
+        <h2 class="modal-title">Crear un Nuevo Evento</h2>
+        <input [(ngModel)]="newEvent.title" placeholder="Título del evento" class="input-field" />
+        <textarea [(ngModel)]="newEvent.description" placeholder="Descripción del evento" class="input-field"></textarea>
+        <input [(ngModel)]="newEvent.date" type="date" class="input-field" />
+        <input [(ngModel)]="newEvent.time" type="time" class="input-field" />
+        <input [(ngModel)]="newEvent.lugar" type="text" placeholder="Lugar del evento" class="input-field" />
+        <div class="modal-actions">
+          <button class="save-btn" (click)="createEvent()">Guardar</button>
+          <button class="cancel-btn" (click)="toggleCreateEventModal()">Cancelar</button>
+        </div>
       </div>
-    </div>
+
+   </div>
+  
   </div>
 
   <!-- Lista de eventos -->

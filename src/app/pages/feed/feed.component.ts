@@ -30,13 +30,14 @@ p :boolean = false;
 public userProfileData: UserProfile | null = null;
 
 
-constructor (private dialog : MatDialog){
+constructor (private dialog : MatDialog, private sharedService: SharedService){
   
   
 }
 ngOnInit(): void {
   this.getPosts();
   this.getInfo ();
+  
  
 }
 

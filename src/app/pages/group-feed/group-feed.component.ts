@@ -5,6 +5,9 @@ import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { FirebaseTSFirestore, OrderBy } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { Grupo } from '../grupos/grupos.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PostCreateGrupoComponent } from '../../tools/post-create-grupo/post-create-grupo.component';
+import { SharedService } from '../../services/shared.service';
 
 
 @Component({
@@ -20,7 +23,10 @@ export class GroupFeedComponent {
   publicaciones : Publicacion[] = [];
   firestore: FirebaseTSFirestore = new FirebaseTSFirestore();
   auth: FirebaseTSAuth = new FirebaseTSAuth();
-  verificado1: boolean =false;
+  verificado: boolean =true;
+  constructor(private dialog : MatDialog, private sharedService: SharedService) {
+
+  }
 
   // Define explícitamente el tipo como un arreglo de objetos
 
@@ -33,7 +39,10 @@ export class GroupFeedComponent {
 
   ngOnInit(): void {
     this.loadFeed();
-    console.log("Grupo recibido:", this.group); // Debugging
+    this.sharedService.perfilClick3$.subscribe(() => {
+      this.loadFeed(); // Llama a perfilClick cuando el evento se activa
+     
+    });
   }
 
 
@@ -50,6 +59,7 @@ export class GroupFeedComponent {
           const publicacion: Publicacion = {
             id: doc.id,
             groupId: this.group.id,
+            imageUrl:  data['imageUrl'],
             autor: data['autor'],
             contenido: data['contenido'],
             tipo: data['tipo'],
@@ -60,7 +70,7 @@ export class GroupFeedComponent {
           // Validar que autor tenga un valor válido
           if (publicacion.autor) {
             const autorPath = `Users/${publicacion.autor}`;
-            console.log(`Path del documento del autor: ${autorPath}`);
+            
             this.publicaciones = [...publicacionesTemp]; // Actualiza las publicaciones
             this.firestore.getDocument({
               path: ["Users", publicacion.autor ],
@@ -71,12 +81,14 @@ export class GroupFeedComponent {
                   publicacion.fotoUsuario = userData['photoUrl'];
                   publicacion.carrera = userData['publicCareer'];
                   publicacion.verificado = userData['verificado'];
-                  if(userData['verificado'] == "true"){
-                    this.verificado1 =true;
+                  
+                  if(publicacion.verificado == "true"){
+                    this.verificado =true;
                   }
-                  if(userData['verificado'] == "false"){
-                    this.verificado1 =false;
+                  if(publicacion.verificado == "false"){
+                    this.verificado =false;
                   }
+                  
                  
 
 
@@ -108,35 +120,36 @@ export class GroupFeedComponent {
     });
 }
 
-  addPost() {
-    const userId = this.auth.getAuth().currentUser?.uid;
-    if (!userId || !this.newPost.contenido) {
-      alert('No puedes publicar contenido vacío.');
-      return;
-    }
-
-    const publicacion: Publicacion = {
-      id: '',
-      autor: userId,
-      groupId: this.group.id,
-      contenido: this.newPost.contenido!,
-      tipo: this.newPost.tipo!,
-      fecha: new Date(),
-    };
-
-    this.firestore.create({
-      path: [`grupos/${this.group.id}/publicaciones`],
-      data: publicacion,
-      onComplete: () => {
-        alert('Publicación agregada.');
-        this.newPost.contenido = ''; // Limpia el formulario
-        this.loadFeed(); // Recarga el feed
-      },
-      onFail: (error) => {
-        console.error('Error al agregar la publicación:', error);
-      }
+  
+  addPost(){
+    const grupoId = this.group.id
+    console.log("gupo Id:",grupoId)
+    this.dialog.open(PostCreateGrupoComponent, {
+      data :  grupoId
     });
   }
+
+  sendId(id:string): string {
+    //const id = this.publicaciones[0]?.autor // Asigna una cadena vacía si creatorId es undefined
+    //comprobar si entramos a nuestro perfil
+    if (id == this.auth.getAuth().currentUser?.uid) {
+      this.callPerfilClick1();
+
+    } else {
+      this.sharedService.sendId(id); // Envía el ID a través del servicio
+      this.callPerfilClick();
+
+    }
+    return id;
+  }
+    //llamar para mostrar perfil
+    callPerfilClick() {
+      this.sharedService.triggerPerfilClick();
+    }
+    callPerfilClick1() {
+      this.sharedService.triggerPerfilClick1();
+    }
+
 }
 
 
@@ -150,10 +163,11 @@ export interface Publicacion {
   contenido: string;
   tipo: string;
   fecha: Date;
+  imageUrl:string;
   autorNombreCompleto?: string;
   fotoUsuario?: string;
   carrera?: string
-  verificado? : boolean;
+  verificado? : string;
   img?: string;
 }
 

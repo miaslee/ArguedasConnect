@@ -11,15 +11,19 @@
   </div>
 
   <!-- Modal para crear un grupo -->
-  <div *ngIf="showCreateGroupModal" class="modal">
-    <div class="modal-content">
-      <h3>Crear un Nuevo Grupo</h3>
-      <input [(ngModel)]="newGroup.nombre" placeholder="Nombre del grupo" class="input-field" />
-      <textarea [(ngModel)]="newGroup.descripcion" placeholder="Descripción" class="input-field"></textarea>
-      <button class="save-btn" (click)="createGroup()">Guardar</button>
-      <button class="cancel-btn" (click)="closeCreateGroupModal()">Cancelar</button>
+   <div  *ngIf="showCreateGroupModal"  class="modal-overlay">
+    <div  class="modal ">
+      <div class="modal-content">
+        <h3>Crear un Nuevo Grupo</h3>
+        <input [(ngModel)]="newGroup.nombre" placeholder="Nombre del grupo" class="input-field" />
+        <textarea [(ngModel)]="newGroup.descripcion" placeholder="Descripción" class="input-field"></textarea>
+        <button class="save-btn" (click)="createGroup()">Guardar</button>
+        <button class="cancel-btn" (click)="closeCreateGroupModal()">Cancelar</button>
+      </div>
     </div>
-  </div>
+   </div>
+
+  
 
   <!-- Lista de Grupos -->
   <div *ngIf="!selectedGroup" class="group-list">
