@@ -1,5 +1,8 @@
 # ArguedasConnect
 
+## Aviso
+El proyecto lo hize sin saber pasar variables desde otro componente, sin saber llamar funciones desde otros compentenes, por eso al principio hay funciones iguales en direferentes componentes, y la misma variable en más de un componente, si hubiese sabido pasar variables usando servicios desde el inicio, el codigo estuviese más optimizado, Ahora que terminé el proyecto aprendí a llamar funciones de otras clases desde servicios, Si tendria que hacer de nuevo el proyecto lo haria mejor usando servicios para las funciones y pasar variables.
+
 ## Descripción
 ArguedasConnect es una red social diseñada exclusivamente para los alumnos de la **UNAJMA – Universidad Nacional José María Arguedas**. Permite a los estudiantes interactuar, compartir publicaciones, comentar y gestionar su perfil personal de manera sencilla y eficiente. 
 
