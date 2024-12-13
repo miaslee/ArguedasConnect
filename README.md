@@ -1,4 +1,6 @@
 # ArguedasConnect
+##LINK EN HOSTING
+https://homeapps.lol/
 
 ## Aviso
 El proyecto lo hize sin saber pasar variables desde otro componente, sin saber llamar funciones desde otros compentenes, por eso al principio hay funciones iguales en direferentes componentes, y la misma variable en más de un componente, si hubiese sabido pasar variables usando servicios desde el inicio, el codigo estuviese más optimizado, Ahora que terminé el proyecto aprendí a llamar funciones de otras clases desde servicios, Si tendria que hacer de nuevo el proyecto lo haria mejor usando servicios para las funciones y pasar variables.
