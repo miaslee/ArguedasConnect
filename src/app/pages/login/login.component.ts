@@ -144,7 +144,7 @@ this.sin = false;
 
           },
           onFail: (err) => {
-            console.log("No se puede iniciar" + err);
+           // console.log("No se puede iniciar" + err);
             this.c = false;
             const errorMessage = err.message || "Ocurrió un error desconocido";
             this.showNotification1(errorMessage);

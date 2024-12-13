@@ -23,7 +23,7 @@ export class EdiPerfilComponent {
   
   
   constructor(@Inject (MAT_DIALOG_DATA) public data: any, private dialog :MatDialogRef<EdiPerfilComponent>, private sharedService: SharedService){
-    console.log('Datos recibidos:', data.nombre);
+   // console.log('Datos recibidos:', data.nombre);
    
   }
 
@@ -44,7 +44,7 @@ export class EdiPerfilComponent {
     let lastname = InputApellido.value;
     let privacidad = (InputPrivacidad.querySelector('input[name="privacidad"]:checked') as HTMLInputElement)?.value;
     let fechaNaci = InputFN.value;
-    console.log(name, lastname, sexo, privacidad, fechaNaci)
+   // console.log(name, lastname, sexo, privacidad, fechaNaci)
     if (this.isNotEmpty(name) && this.isNotEmpty(lastname) &&
       this.isNotEmpty(sexo) && this.isNotEmpty(privacidad) && this.isNotEmpty(fechaNaci)
     ) {

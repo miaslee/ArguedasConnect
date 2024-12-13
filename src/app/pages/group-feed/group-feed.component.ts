@@ -120,10 +120,12 @@ export class GroupFeedComponent {
     });
 }
 
+
+
   
   addPost(){
     const grupoId = this.group.id
-    console.log("gupo Id:",grupoId)
+    //console.log("gupo Id:",grupoId)
     this.dialog.open(PostCreateGrupoComponent, {
       data :  grupoId
     });
@@ -148,6 +150,7 @@ export class GroupFeedComponent {
     }
     callPerfilClick1() {
       this.sharedService.triggerPerfilClick1();
+      
     }
 
 }

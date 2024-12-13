@@ -1,7 +1,11 @@
 /* Estilo general del header */
+
+
+
 .pf{
   display: none; /* Oculta inicialmente */
 }
+
 
 .header {
   display: flex;

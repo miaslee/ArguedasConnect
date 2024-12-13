@@ -1,0 +1,14 @@
+<header>
+  <div class="left-section">
+    <div (click)="HomeClick()"class="logo">ArguedasConnect</div>
+  </div>
+  <div class="menu" [ngClass]="{ 'responsive': menuResponsive }" id="menu">
+    <a (click)="HomeClick()" >Inicio</a>
+    <a (click)="userPerfilClick() ">Perfil</a>
+    <a (click)="gruposClick()" >Grupos</a>
+    <a (click)="eventosClick()"  >Eventos</a>
+    <button (click)="cerrarSesion()" class="logout-btn">Cerrar sesión</button>
+  </div>
+  
+  <div  class="hamburger" id="hamburger" (click)="toggleMenu()">☰</div>
+</header>

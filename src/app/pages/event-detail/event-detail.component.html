@@ -1,0 +1,30 @@
+
+    <div class="event-card" [ngClass]="{'finalized': isFinalized}">
+        <div class="event-image">
+            <img src="/evt.webp" alt="" />
+        </div>
+        <div class="event-details">
+            <h3 class="event-title"> {{ data.event.title }}</h3>
+            <p class="event-description"> {{ data.event.description }}</p>
+            <p class="event-date">
+                <i class="fas fa-calendar-alt"></i> Fecha: {{ data.event.date | date }}
+            </p>
+            <p class="event-time">
+                <i class="fas fa-clock"></i>Hora: {{ data.event.time }}
+            </p>
+            <p class="event-members">
+                <i class="fas fa-users"></i> Miembros: {{ data.event.members?.length || 0 }}
+            </p>
+            <p class="event-members">
+                <i class="fas fa-users"></i> Lugar: {{ data.event.lugar || 'Desconocido'}}
+            </p>
+            <p *ngIf="isFinalized" class="event-status finalized">Finalizado</p>
+            <p *ngIf="!isFinalized" class="event-time-remaining">
+                Tiempo restante: {{remainingTime}}
+            </p>
+        </div>
+        <div class="event-actions">
+            <button (click)="cerrar()"  class="cancel-btn" >Cerrar</button>
+
+        </div>
+    </div>

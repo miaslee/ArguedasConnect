@@ -46,8 +46,7 @@ body {
     height: 100%;
     padding: 20px;
     text-align: center;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-    
+   
     
 }
 
@@ -73,7 +72,10 @@ input[type="date"],
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
+    justify-content: center; /* Centra horizontalmente */
+    
 }
+
 
 .gender label {
     font-size: 14px;
@@ -120,7 +122,7 @@ input[type="date"],
     left: 0;
     width: 100%;
     
-    
+    justify-content: center; /* Centra horizontalmente */
     height: 68%; /* Restar la altura del header */
     
     display: flex;
@@ -149,3 +151,62 @@ input[type="date"],
   }
   
   /* CARGA FIN */
+  /* Responsivo para tablets y pantallas medianas */
+  @media (max-width: 768px) {
+    .logo {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+  
+    .container {
+        
+        max-width: 1000%;
+        align-content: center;
+    }
+  
+    .signup-button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+  }
+  
+  /* Responsivo para móviles y pantallas pequeñas */
+  @media (max-width: 480px) {
+    .logo {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+  
+    .container {
+        padding: 10px;
+        max-width: 95%;
+    }
+  
+    .signup-button {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+  
+    .birthdate,
+    .gender {
+        flex-direction: column; /* Ajusta los elementos en una columna */
+        gap: 5px;
+    }
+  }
+  

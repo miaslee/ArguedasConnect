@@ -1,66 +1,70 @@
-<div id="notification1" class="notification1">
-    <p>Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde.</p>
-  </div>
-  
-<div  *ngIf="c"  class="loading-overlay">
-    <div class="spinner"></div>
-  </div>
-
-<div class="container" *ngIf = "!isLoggin() && isLoginState() && !sin">
+<body>
+    <div id="notification1" class="notification1">
+        <p>Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde.</p>
+      </div>
+      
+    <div  *ngIf="c"  class="loading-overlay">
+        <div class="spinner"></div>
+      </div>
     
-        <div   >
-            <h1 class="logo">ArguedasConnect</h1>
-            <input #loginEmail type="text" placeholder="Correo electrónico">
-            <input #loginPass type="password" placeholder="Contraseña">
-            <button  (click) ="Login(loginEmail, loginPass)"
-            
-            class="login-button">Iniciar sesión</button>
-            <a href="#" (click)="ForgotPassClick()" class="forgot-password">¿Olvidaste tu contraseña?</a>
-            <hr>
-            <button  (click)="CreateAccountClick()" class="create-account-button">Crear cuenta nueva</button>
-        </div>
-       
-   
-</div>
-
-
-<div class="container" *ngIf="isForgotPasswordState()" >
-    <div >
-        <h1 class="logo">ArguedasConnect</h1>
-        <h2>¿Olvidaste tu contraseña?</h2>
-        <p>Ingresa tu correo electrónico para recibir un enlace de restablecimiento de contraseña.</p>
-        <input  #resetEmail type="text" placeholder="Correo electrónico">
-        <div class="buttons">
-            <button (click)="LoginClick()"  class="cancel-button">Cancelar</button>
-            <button (click)="ResetPass(resetEmail)" class="search-button">Enviar enlace</button>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="container" *ngIf="isRegisterState()">
-   
-    <div  >
-        <h1 class="logo">ArguedasConnect</h1>
-        <h2>Crea una cuenta</h2>
-        <p>Es rápido y fácil.</p>
-        <form>
+    <div class="container" *ngIf = "!isLoggin() && isLoginState() && !sin">
+        
+            <div   >
+                <h1 class="logo">ArguedasConnect</h1>
+                <input #loginEmail type="text" placeholder="Correo electrónico">
+                <input #loginPass type="password" placeholder="Ingresa tu contraseña">
+                <button  (click) ="Login(loginEmail, loginPass)"
+                
+                class="login-button">Iniciar sesión</button>
+                <a href="#" (click)="ForgotPassClick()" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                <hr>
+                <button  (click)="CreateAccountClick()" class="create-account-button">Crear cuenta nueva</button>
+            </div>
            
-            
-            <input #registroEmail type="email" placeholder="Correo electrónico" required>
-            <input #registroPass type="password" placeholder="Contraseña nueva" required>
-            <input #registroConfirmPass type="password" placeholder="Confirma tu contraseña" required>
-
-            <button   (click)="Registro(
-    
-            registroEmail,
-            registroPass,
-            registroConfirmPass
-        )" type="button" class="signup-button">Registrarte</button>
-            <p (click)="LoginClick()" class="login-link"><a href="#">¿Ya tienes una cuenta?</a></p>
-        </form>
+       
     </div>
-</div>
+    
+    
+    <div class="container" *ngIf="isForgotPasswordState()" >
+        <div >
+            <h1 class="logo">ArguedasConnect</h1>
+            <h2>¿Olvidaste tu contraseña?</h2>
+            <p>Ingresa tu correo electrónico para recibir un enlace de restablecimiento de contraseña.</p>
+            <input  #resetEmail type="text" placeholder="Correo electrónico">
+            <div class="buttons">
+                <button (click)="LoginClick()"  class="cancel-button">Cancelar</button>
+                <button (click)="ResetPass(resetEmail)" class="search-button">Enviar enlace</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <div class="container" *ngIf="isRegisterState()">
+       
+        <div  >
+            <h1 class="logo">ArguedasConnect</h1>
+            <h2 class="c" >Crea una cuenta</h2>
+            <p class="c">Es rápido y fácil.</p>
+            <form>
+               
+                
+                <input #registroEmail type="email" placeholder="Correo electrónico" required>
+                <input #registroPass type="password" placeholder="Contraseña nueva" required>
+                <input #registroConfirmPass type="password" placeholder="Confirma tu contraseña" required>
+    
+                <button   (click)="Registro(
+        
+                registroEmail,
+                registroPass,
+                registroConfirmPass
+            )" type="button" class="signup-button">Registrarte</button>
+                <p (click)="LoginClick()" class="login-link"><a href="#">¿Ya tienes una cuenta?</a></p>
+            </form>
+        </div>
+    </div>
+    
+    
+    
 
-
+</body>

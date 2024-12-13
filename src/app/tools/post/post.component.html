@@ -9,6 +9,7 @@
                 <p class="career">{{carrera}}</p>
               </div>
             <!-- Tiempo de publicación -->
+             
             <span class="post-time">{{time}}</span>
         </div>
         
@@ -20,14 +21,14 @@
         <img src="{{postData?.imageUrl}}" class="post-image">
         <div class="more-post">
             <span class="likes">{{l }} <span class="like-count">{{n}}</span></span>
-            <span class="comments"><i class="fa fa-comment"></i>comentarios</span>
+            <span (click)="onReplyClick()" class="comments"><i class="fa fa-comment"></i>Ver comentarios</span>
           </div>
           
         <!-- Iconos de acción -->
         <div class="post-actions">           
             <i (click)="Like()" class="icon like-icon">❤️</i>
             <i  (click)="onReplyClick()" class="icon comment-icon">💬</i>
-            <i class="icon save-icon">🔖</i>
+            <i  *ngIf="postData?.creatorId  == userId" (click)="borrarPost(postData?.id)" class="icon save-icon">❌</i>
         </div>
     </div>
 </div>

@@ -6,6 +6,9 @@ import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { FirebaseTSFirestore, Limit, OrderBy } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { GroupFeedComponent } from '../group-feed/group-feed.component';
 import { SharedService } from '../../services/shared.service';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
+import { Subscription } from 'rxjs';
 
 
 
@@ -24,6 +27,11 @@ export class GruposComponent {
   auth: FirebaseTSAuth = new FirebaseTSAuth();
   firestore : FirebaseTSFirestore = new FirebaseTSFirestore();
   selectedGroup: Grupo | null = null; // Grupo actualmente seleccionado
+  currentUser : string = "";
+  
+  receivedId2: Grupo| null = null; // Variable para almacenar el ID recibido
+  
+ 
 
 
   newGroup: Partial<Grupo> = {
@@ -35,17 +43,60 @@ export class GruposComponent {
 
 constructor(private sharedService: SharedService){
   
-}
-
-ngOnInit() {
-  this.listGroups();
   
 }
 
+
+
+
+ngOnInit() {
+  //
+  const id = this.sharedService.getId3(); // Obtiene el ID directamente
+  if (id) {
+    this.receivedId2 = id;
+    
+    this.viewGroupFeed(id)
+  }
+  
+  this.currentUser = this.auth.getAuth().currentUser?.uid || '';
+  this.listGroups();
+
+  
+  
+ 
+  
+}
+ngOnDestroy(): void {
+  this.sharedService.clearId3(); // Limpia el valor al salir
+}
+
+
+
 viewGroupFeed(group: Grupo) {
+  
   //console.log("Grupo seleccionado antes de asignar:", group); // Debugging
   this.selectedGroup = group; // Asigna el grupo seleccionado
   //console.log("selectedGroup después de asignar:", this.selectedGroup); // Debugging
+}
+
+deleteGrupo(eventId: string) {
+  if (!eventId) {
+    console.error("El ID del evento es inválido o está vacío.");
+   // alert("Ocurrió un error al intentar eliminar el evento.");
+    return;
+  }
+
+  this.firestore.delete({
+    path: ["grupos", eventId],
+    onComplete: () => {
+      this.showNotification("grp-delete")
+     
+      this.listGroups();
+    },
+    onFail: (error) => {
+      console.error("Error al eliminar el evento:", error);
+    }
+  });
 }
 
 
@@ -109,9 +160,9 @@ createGroup() {
     
     return;
   }
-
+  const id= firebase.firestore().collection('solicitudes').doc().id;
   const group: Grupo = {
-    id: '',
+    id: id,
     nombre: this.newGroup.nombre,
     descripcion: this.newGroup.descripcion,
     miembros: [userId],
@@ -119,7 +170,7 @@ createGroup() {
   };
 
   this.firestore.create({
-    path: ["grupos"],
+    path: ["grupos", id],
     data: group,
     onComplete: (docId) => {
       this.showNotification("grp-creado")

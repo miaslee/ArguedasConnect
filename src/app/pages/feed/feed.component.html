@@ -1,17 +1,107 @@
-<div  class="mrg"></div>
-<div *ngIf="!b"  class="loading-overlay">
-    <div class="spinner"></div>
+<div class="page-container">
+  <!-- Izquierda -->
+  <div *ngIf="b" class="sidebar-left">
+    <div class="recent-users">
+      <h3>Usuarios Recientes</h3>
+      <input type="text" placeholder="Buscar usuarios..." id="user-search" class="search-input"
+        [(ngModel)]="searchTerm" />
+      <div *ngFor="let user of filteredGroups()" (click)="sendId(user.userId)" class="user-card">
+        <div (click)="sendId(user.userId)" class="user-photo">
+          <img src="{{user.photoUrl}}" alt="Foto de usuario">
+        </div>
+        <div (click)="sendId(user.userId)" class="user-info">
+          <p class="user-name">{{user.publicName}} {{user.publicLastname}} <svg *ngIf="user.verificado == 'true'"
+              aria-label="Verificado" class="x1lliihq x1n2onr6" fill="rgb(0, 149, 246)" height="11" role="img"
+              viewBox="0 0 40 40" width="11">
+              <title>Verificado</title>
+              <path
+                d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z"
+                fill-rule="evenodd"></path>
+            </svg> </p>
+          <p class="user-career">{{user.publicCareer}}</p>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
+
+
   </div>
 
-<div *ngIf="b" class="status-box" >
-    <div class="status-content">
+  <!-- Contenido Principal -->
+  <div class="main-content">
+    <div class="mrg"></div>
+    <div *ngIf="!b" class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+
+    <div *ngIf="b" class="status-box">
+      <div class="status-content">
         <div class="profile-pic">
-            <img src="{{photo}}" alt="User Profile Picture">
+          <img src="{{photo}}" alt="User Profile Picture">
         </div>
-        <div  (click)="CrearPost()" class="status-placeholder">¿Qué estás pensando, {{name}}?  </div>
-    </div>
-    <div class="actions">
+        <div (click)="CrearPost()" class="status-placeholder">¿Qué estás pensando, {{name}}?</div>
+      </div>
+      <div class="actions">
         <button class="action-button" (click)="CrearPost()">📷 Foto/Video</button>
+      </div>
     </div>
+
+    <app-post *ngFor="let post of posts" [postData]="post"></app-post>
+  </div>
+
+  <!-- Derecha -->
+  <div *ngIf="b" class="sidebar-right">
+
+
+    <div class="recent-users">
+      <h3 class="tx">Tus Grupos</h3>
+      <div *ngIf="grupos.length <= 0">
+        <p class="tx">No tienes grupos. ¡Crea o únete a uno! </p>
+        <a (click)="aGrupo()" class="btn">Ir a Grupos</a>
+
+      </div>
+      
+
+      <div *ngFor="let g of grupos"   (click)="showFeed(g)"  class="user-card">
+        <div class="grupo-photo">
+          <img src="/grupo.webp" alt="Foto de usuario">
+        </div>
+        <div   class="user-info1">
+          <p class="user-name">{{g.nombre}}</p>
+          <p class="user-career">{{g.miembros.length}} miembros</p>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <div class="events-section">
+      <h3>Tus Eventos Próximos</h3>
+      <div *ngIf="eventos.length <= 0">
+        <p class="tx">No tienes eventos. ¡Crea o únete a uno! </p>
+        <a  (click)="aEvento()" class="btn">Ir a Eventos</a>
+      </div>
+      <ul class="events-list">
+        <li *ngFor="let e of eventos" (click)="eventInfo(e)" class="event-item">
+          <h4>{{e.title}}</h4>
+          <p><strong>Fecha:</strong>{{e.date}}</p>
+          <p><strong>Hora:</strong> {{e.time}}</p>
+        </li>
+
+      </ul>
+    </div>
+
+
+
+
+
+
+
+  </div>
 </div>
-<app-post *ngFor="let post of posts"  [postData]="post" ></app-post> 

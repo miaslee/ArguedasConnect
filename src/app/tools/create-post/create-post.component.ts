@@ -19,6 +19,8 @@ export class CreatePostComponent {
   auth = new FirebaseTSAuth();
   firestore = new FirebaseTSFirestore;
 
+  p: boolean = false;
+
 
   constructor(private dialog: MatDialogRef<CreatePostComponent>, private sharedService: SharedService) {
 
@@ -37,23 +39,32 @@ export class CreatePostComponent {
 
 
   PostClick(commentInput: HTMLTextAreaElement) {
-    let comment = commentInput.value;
+    if (!this.p) {
+      
 
-    if (comment.length <= 0) return;
-    if (this.selectedImageFile) {
-      this.uploadImagePost(comment);
-    } else {
-      this.uploadPost(comment);
-    }
+      let comment = commentInput.value;
+
+      if (comment.length <= 0) return;
+      if (this.selectedImageFile) {
+        this.p = true;
+        this.uploadImagePost(comment);
+        
+      } else {
+        this.p = true;
+        this.uploadPost(comment);
+      }
+    } 
+
 
   }
+
   async uploadImagePost(comment: string) {
     let postID = this.firestore.genDocId();
 
     if (this.selectedImageFile) { // Verifica si selectedImageFile no es null
       this.showNotification("post-creando");
       const uploadedUrl = await this.uploadToDevmias(this.selectedImageFile);
-      console.log('URL de la imagen subida:', uploadedUrl);
+      //console.log('URL de la imagen subida:', uploadedUrl);
       this.firestore.create(
         {
           path: ["Posts", postID],
@@ -68,6 +79,7 @@ export class CreatePostComponent {
             this.callPerfilClick1()
             this.dialog.close();
             this.showNotification("post-creado");
+            this.p = false;
 
 
           }
@@ -95,12 +107,15 @@ export class CreatePostComponent {
         onComplete: (docId) => {
           this.callPerfilClick1()
           this.dialog.close();
+          
           this.showNotification("post-creado");
+          this.p = false;
         }
 
       }
 
     );
+   
 
   }
 

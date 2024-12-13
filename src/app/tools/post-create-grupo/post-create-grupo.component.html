@@ -1,26 +1,29 @@
 <div class="post-container">
-    <h2>Crear Publicación</h2>
-  
-    <div class="input-area">
-      <textarea #commentInput placeholder="¿Qué estás pensando?" id="messageInput"></textarea>
-    </div>
-  
-    <div id="post-preview" class="post-preview">
-      <img id="post-preview-image"  />
-    </div>
-  
-    <div class="actions">
-      <label for="photo-upload" class="upload-button">
-        📷 Foto/Video
-        <input
-          #photoSelector
-          (change)="onPhotoSelected(photoSelector)"
-          id="photo-upload"
-          type="file"
-          accept="image/*"
-        />
-      </label>
-      <button (click)="PostClick(commentInput)">Publicar</button>
-    </div>
+  <h2>Crear Publicación</h2>
+
+  <div class="input-area">
+    <textarea
+      #commentInput
+      placeholder="Crea una publicación pública..."
+      id="messageInput"
+    ></textarea>
   </div>
-  
+
+  <div id="post-preview" class="post-preview">
+    <img id="post-preview-image" />
+  </div>
+
+  <div class="actions">
+    <label for="photo-upload" class="upload-button">
+      📷 Foto/Video
+      <input
+        #photoSelector
+        (change)="onPhotoSelected(photoSelector)"
+        id="photo-upload"
+        type="file"
+        accept="image/*"
+      />
+    </label>
+    <button (click)="PostClick(commentInput)">Publicar</button>
+  </div>
+</div>

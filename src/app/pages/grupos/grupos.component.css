@@ -1,3 +1,4 @@
+/* Contenedor Principal */
 .groups-container {
   padding: 20px;
   background-color: #f9f9f9;
@@ -5,34 +6,24 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Título */
 .page-title {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
+  margin-top: 40px;
   color: #333;
   margin-bottom: 20px;
 }
 
+/* Header con Botón y Buscador */
 .header-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* Por defecto */
   align-items: center;
   gap: 15px;
   margin-bottom: 30px;
-}
-
-.search-input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
-  width: 250px;
-  transition: border-color 0.3s ease-in-out;
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: #007bff;
+  flex-wrap: wrap;
 }
 
 .create-group-btn {
@@ -50,18 +41,22 @@
   background-color: #0056b3;
 }
 
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #ffffff;
-  padding: 20px;
-  width: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  z-index: 1000;
+.search-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 300px; /* Limita el ancho del buscador */
+  transition: border-color 0.3s ease-in-out;
 }
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -69,7 +64,24 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  z-index: 999; /* Debe estar debajo del modal */
+  z-index: 999;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 20px;
+  width: 90%; /* Ancho ajustado para pantallas pequeñas */
+  max-width: 400px; /* Máximo ancho en pantallas grandes */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  z-index: 1000;
+}
+.modal-content{
+  width: 95%;
 }
 
 .modal-content h3 {
@@ -101,7 +113,7 @@
 
 .save-btn {
   background-color: #4caf50;
-  color: #fff;
+  color: white;
 }
 
 .save-btn:hover {
@@ -110,16 +122,17 @@
 
 .cancel-btn {
   background-color: #f44336;
-  color: #fff;
+  color: white;
 }
 
 .cancel-btn:hover {
   background-color: #e53935;
 }
 
+/* Lista de Grupos */
 .group-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Diseño responsivo */
   gap: 20px;
 }
 
@@ -162,14 +175,14 @@
   margin-bottom: 10px;
 }
 
-.group-meta,
 .group-members {
   font-size: 12px;
   color: #777;
 }
 
 .view-feed-btn,
-.join-btn {
+.join-btn,
+.dlt-btn {
   padding: 10px 15px;
   margin-top: 10px;
   border: none;
@@ -181,7 +194,7 @@
 
 .view-feed-btn {
   background-color: #008cba;
-  color: #fff;
+  color: white;
 }
 
 .view-feed-btn:hover {
@@ -190,29 +203,42 @@
 
 .join-btn {
   background-color: #4caf50;
-  color: #fff;
+  color: white;
 }
 
 .join-btn:hover {
   background-color: #45a049;
 }
 
+.dlt-btn {
+  background-color: #f81629;
+  color: white;
+}
+
+.dlt-btn:hover {
+  background-color: #d71427;
+}
+
+/* Feed del Grupo Seleccionado */
 .group-feed-container {
-  margin-top: 20px;
+  
   background-color: #ffffff;
-  padding: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .back-btn {
-  position: relative; /* Cambia a absolute si es necesario */
-  z-index: 2; /* Más alto que cualquier otro componente */
-  margin-top: -10px; /* Ajusta la posición más cerca del borde superior */
+  position: fixed;
+  z-index: 2;
+  margin-top: 5px;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   background-color: #f44336;
-  color: #fff;
+  color: white;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
@@ -220,4 +246,54 @@
 
 .back-btn:hover {
   background-color: #e53935;
+}
+@media (min-width: 1024px) {
+  .header-container {
+    justify-content: center; /* Centra el botón y el buscador */
+  }
+  
+  .create-group-btn,
+  .search-input {
+    margin: 0 10px; /* Espaciado entre el botón y el buscador */
+  }
+}
+@media (max-width: 1024px) {
+  .header-container {
+    flex-direction: column; /* Apila el botón y el buscador verticalmente */
+    align-items: stretch; /* Ocupan todo el ancho disponible */
+    gap: 20px; /* Agrega espacio entre el botón y el buscador */
+  }
+
+  .create-group-btn,
+  .search-input {
+    width: 100%; /* Ocupan todo el ancho disponible */
+    max-width: unset; /* Elimina la restricción de ancho máximo */
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  /* Header */
+  .header-container {
+    flex-direction: column; /* Columna en pantallas pequeñas */
+    align-items: stretch; /* Alinea al ancho completo */
+  }
+
+  .create-group-btn {
+    width: 100%; /* Botón ocupa todo el ancho */
+  }
+
+  .search-input {
+    width: 100%; /* Buscador ocupa todo el ancho */
+  }
+
+  /* Modal */
+  .modal {
+    width: 90%; /* Ancho ajustado */
+  }
+
+  /* Grilla de Grupos */
+  .group-list {
+    grid-template-columns: 1fr; /* Una sola columna */
+  }
 }

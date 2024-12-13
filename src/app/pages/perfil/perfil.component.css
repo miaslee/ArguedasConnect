@@ -1,3 +1,4 @@
+/* Contenedor principal */
 .profile-container {
   font-family: Arial, sans-serif;
   color: #333;
@@ -7,9 +8,10 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  margin-top: 80px;
+  margin-top: 50px;
 }
 
+/* Header del perfil */
 .profile-header {
   position: relative;
   background-color: #333;
@@ -63,11 +65,13 @@
   margin-top: 4px;
 }
 
+/* Contenido del perfil */
 .profile-content {
   padding: 20px;
 }
 
-.profile-info, .profile-posts {
+.profile-info,
+.profile-posts {
   margin-top: 20px;
   padding: 20px;
   background-color: #fff;
@@ -75,7 +79,8 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.profile-info h2, .profile-posts h2 {
+.profile-info h2,
+.profile-posts h2 {
   font-size: 20px;
   margin-bottom: 15px;
   color: #555;
@@ -109,98 +114,95 @@
   display: block;
 }
 
-
-/* Main container */
+/* Contenedor principal */
 .main-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 /* Post container */
 .post {
-    width: 630px;
-    max-width: 100%;
-    border: 1px solid #dbdbdb;
-    border-radius: 8px;
-    background-color: #fff;
-    margin: 20px auto; /* Centrado horizontal */
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 630px;
+  max-width: 100%;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 20px auto;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Post header */
+/* Header del post */
 .post-header {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #dbdbdb;
 }
 
 .user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .username {
-    font-weight: bold;
-    font-size: 14px;
-    color: #262626;
+  font-weight: bold;
+  font-size: 14px;
+  color: #262626;
 }
 
-/* Post image */
+/* Imagen del post */
 .post-image {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
-/* Post actions */
+/* Acciones del post */
 .post-actions {
-    display: flex;
-    padding: 10px;
+  display: flex;
+  padding: 10px;
 }
 
 .icon {
-    font-size: 24px;
-    cursor: pointer;
-    margin-right: 15px;
-    color: #262626;
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 15px;
+  color: #262626;
 }
 
 .like-icon:hover {
-    color: #ed4956; /* Instagram-like red color */
+  color: #ed4956;
 }
 
 .comment-icon:hover {
-    color: #007aff; /* Comment icon color on hover */
+  color: #007aff;
 }
 
 .save-icon:hover {
-    color: #000; /* Save icon color on hover */
+  color: #000;
 }
 
-/* Post description */
+/* Descripción del post */
 .post-description {
-    padding: 10px;
-    font-size: 14px;
-    color: #262626;
+  padding: 10px;
+  font-size: 14px;
+  color: #262626;
 }
 
 .post-description p {
-    display: inline;
-    margin-left: 5px;
+  display: inline;
+  margin-left: 5px;
 }
 
-/* CARGA INICIO */
+/* Overlay de carga */
 .loading-overlay {
   position: absolute;
   left: 0;
   width: 100%;
   top: 70px;
-  
-  height: 50%; /* Restar la altura del header */
-  
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -226,4 +228,37 @@
   }
 }
 
-/* CARGA FIN */
+/* Responsividad */
+@media (max-width: 768px) {
+  .profile-header .profile-overlay {
+    flex-direction: column;
+  }
+
+  .profile-photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-details h1 {
+    font-size: 20px;
+  }
+
+  .profile-info,
+  .profile-posts {
+    padding: 15px;
+  }
+
+  .post {
+    width: 100%;
+    margin: 15px auto;
+  }
+
+  .post-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-avatar {
+    margin-bottom: 5px;
+  }
+}

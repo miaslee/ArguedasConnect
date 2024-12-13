@@ -1,20 +1,10 @@
-
 <body>
-    <div class="container">
-        <div class="left-section">
-            
-            
-        </div>
-
-        <div *ngIf="!isLog()" class="right-section">
-            <app-login></app-login>
-            <app-complete-profile  *ngIf="isLog()"></app-complete-profile>
-
-            
-        </div>
-        
+    <div class="background-image"></div>
+    <div class="content">
+      <div *ngIf="!isLog()">
+        <app-login></app-login>
+        <app-complete-profile *ngIf="isLog()"></app-complete-profile>
+      </div>
     </div>
-</body>
-
-
-
+  </body>
+  

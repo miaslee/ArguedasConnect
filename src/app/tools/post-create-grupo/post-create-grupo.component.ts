@@ -18,10 +18,11 @@ export class PostCreateGrupoComponent {
   selectedImageFile: File | null = null;
   auth = new FirebaseTSAuth();
   firestore = new FirebaseTSFirestore;
+  p : boolean = false;
 
 
   constructor(private dialog: MatDialogRef<PostCreateGrupoComponent >, private sharedService: SharedService, @Inject(MAT_DIALOG_DATA) public grupoId: string) {
-    console.log("id grupo: ",grupoId)
+   // console.log("id grupo: ",grupoId)
 
   }
 
@@ -37,15 +38,22 @@ export class PostCreateGrupoComponent {
 
 
 
-  PostClick(commentInput: HTMLTextAreaElement) {
-    let comment = commentInput.value;
-
-    if (comment.length <= 0) return;
-    if (this.selectedImageFile) {
-      this.uploadImagePost(comment);
-    } else {
-      this.uploadPost(comment);
+   PostClick(commentInput: HTMLTextAreaElement) {
+    if(!this.p){
+      
+      let comment = commentInput.value;
+  
+      if (comment.length <= 0) return;
+      if (this.selectedImageFile) {
+        this.uploadImagePost(comment);
+       this.p = true;
+      } else {
+         this.uploadPost(comment);
+         this.p = true;
+      }
     }
+    
+   
 
   }
   async uploadImagePost(comment: string) {
@@ -54,7 +62,7 @@ export class PostCreateGrupoComponent {
     if (this.selectedImageFile) { // Verifica si selectedImageFile no es null
       this.showNotification("post-creando");
       const uploadedUrl = await this.uploadToDevmias(this.selectedImageFile);
-      console.log('URL de la imagen subida:', uploadedUrl);
+      //console.log('URL de la imagen subida:', uploadedUrl);
       this.firestore.create(
         {
           path: [`grupos/${this.grupoId}/publicaciones`],
@@ -71,6 +79,7 @@ export class PostCreateGrupoComponent {
             this.loadPost()
             this.dialog.close();
             this.showNotification("post-creado");
+            this.p = false;
 
 
           }
@@ -102,6 +111,7 @@ export class PostCreateGrupoComponent {
           this.loadPost()
           this.dialog.close();
           this.showNotification("post-creado");
+          this.p = false;
         }
 
       }

@@ -26,6 +26,9 @@ body {
 .idle {
     width: 0;
 }
+.gender{
+    justify-content: center; /* Centra horizontalmente */
+}
 
 .container {
     display: flex;

@@ -214,7 +214,7 @@ export class EventosComponent implements OnInit {
   
       // Si el tiempo actual es mayor al tiempo de expiración, eliminar el evento
       if (now >= expirationTime) {
-        console.log(`Eliminando evento expirado (30 minutos después): ${event.id}`);
+       // console.log(`Eliminando evento expirado (30 minutos después): ${event.id}`);
         this.deleteEvent(event.id);
       }
     });

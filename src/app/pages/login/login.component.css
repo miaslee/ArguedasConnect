@@ -3,56 +3,48 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.logo {
-    color: #d2691e;
-    font-size: 60px; /* Tamaño ligeramente más grande */
-    font-weight: bold;
-    margin-bottom: 30px;
+  }
+  
+  /* Estilos generales */
+  body {
     
-    letter-spacing: 2px; /* Espaciado entre letras para mejor legibilidad */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15); /* Sombra suave para profundidad */
-    border-bottom: 3px solid #b35917; /* Línea decorativa debajo del texto */
-    padding-bottom: 5px;
-}
-
-
-
-/* Body */
-body {
-    background-color: #f3f4f6;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    color: #333;
-}
-
-/* Contenedor principal */
-.container {
+    height: auto;
+    
+  }
+  
+  .container {
     display: flex;
+    flex-direction: column; /* Asegura que los elementos hijos se apilen */
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    max-width: 400px;
     padding: 20px;
-    text-align: center;
+    background-color: white;
+    border-radius: 10px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-
-
-/* Estilos generales para los cuadros de login, recuperación y registro */
-
-
-/* Estilos para todos los inputs */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-.birthdate select {
+  }
+  
+  /* Logo */
+  .logo {
+    color: #d2691e;
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    border-bottom: 3px solid #b35917;
+    padding-bottom: 5px;
+  }
+  
+  /* Inputs generales */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="date"] {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
@@ -60,235 +52,107 @@ input[type="date"],
     border-radius: 8px;
     font-size: 16px;
     background-color: #f9fafb;
-}
+  }
+  
+  /* Botones generales */
+  button {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  .login-link, .forgot-password, .c{
+    text-align: center;
+  }
+  .login-link {
+    margin-bottom: 1em;
+    margin-top: 0.5em;
+  }
+  
+  .login-button,
+  .signup-button,
+  .search-button,
+  .create-account-button {
+    background-color: #d2691e;
+    color: white;
+  }
+  
+  .create-account-button {
 
-
-
-
-
-/* Link para recuperar contraseña */
-.forgot-password {
+    background-color: #1B263B;
+  }
+  
+  button:hover {
+    background-color: #b35917;
+  }
+  
+  /* Enlace de contraseña olvidada */
+  .forgot-password {
     display: block;
     margin-top: 10px;
     font-size: 14px;
     color: #d2691e;
     text-decoration: none;
-}
-
-.forgot-password:hover {
+  }
+  
+  .forgot-password:hover {
     text-decoration: underline;
-}
-
-/* Línea divisoria */
-hr {
+  }
+  
+  /* Divisor */
+  hr {
     margin: 20px 0;
     border: none;
     border-top: 1px solid #ddd;
-}
-
-/* Enlace para crear página */
-.create-page {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #666;
-    text-align: center;
-}
-
-.create-page a {
-    color: #d2691e;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.create-page a:hover {
-    text-decoration: underline;
-}
-
-/* Estilos específicos para los cuadros de login y registro */
-.right-section .login-box,
-.signup-box {
-    text-align: center;
-}
-
-.signup-box h2,
-.right-section h2 {
-    font-size: 26px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 15px;
-}
-
-.signup-box p,
-.right-section p {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.birthdate,
-.gender {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.gender label {
-    font-size: 14px;
-    color: #333;
-}
-
-/* Política de privacidad y términos */
-.policy,
-.terms {
-    font-size: 12px;
-    color: #777;
-    margin: 10px 0;
-}
-
-.policy a,
-.terms a {
-    color: #d2691e;
-    text-decoration: none;
-}
-
-/* Link de inicio de sesión */
-.login-link {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-}
-
-.login-link a {
-    color: #d2691e;
-    text-decoration: none;
-}
-
-.login-link a:hover {
-    text-decoration: underline;
-}
-
-/* Caja de Recuperación de Cuenta */
-.recovery-box h2 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.recovery-box p {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.recovery-box input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    margin-bottom: 20px;
-    background-color: #f9fafb;
-}
-
-.buttons {
+  }
+  
+  /* Caja de botones */
+  .buttons {
     display: flex;
     justify-content: space-between;
-}
-
-
-
-.cancel-button {
-    padding: 10px 20px;
+    gap: 10px;
+  }
+  
+  /* Botones secundarios */
+  .cancel-button {
     background-color: #f0f2f5;
     color: #606770;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.cancel-button:hover {
+  }
+  
+  .cancel-button:hover {
     background-color: #e0e2e5;
-}
-
-.search-button {
-    padding: 10px 20px;
-    background-color: #d2691e;
+  }
+  
+  /* Notificación */
+  .notification1 {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #3498db;
     color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-.login-button {
-    padding: 10px 20px;
-    background-color: #d2691e;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-.signup-button {
-    padding: 10px 20px;
-    background-color: #d2691e;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-.create-account-button {
-    padding: 10px 20px;
-    background-color: #1B263B;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.search-button:hover {
-    background-color: #b35917;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-
-
-
-.login-button:hover {
-    background-color: #b35917; /* Naranja más oscuro */
-}
-
-
-
-.create-account-button:hover
-{
-    background-color: #29406b; /* Naranja más oscuro */
-}
-.signup-button:hover {
-    background-color: #b35917; /* Naranja más oscuro */
-}
-
-/* CARGA INICIO */
-.loading-overlay {
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 1s ease-out;
+    z-index: 10000;
+    display: none;
+  }
+  
+  .notification1.show {
+    display: block;
+  }
+  
+  /* Carga de datos */
+  .loading-overlay {
     position: absolute;
     left: 0;
     width: 100%;
-    
-    
-    height: 50%; /* Restar la altura del header */
-    
+    height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -314,27 +178,88 @@ hr {
     }
   }
   
-  /* CARGA FIN */
-
-/* Estilo general de la notificación */
-.notification1 {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #3498db; /* Color de fondo (verde éxito) */
-    color: white; /* Texto en blanco */
-    padding: 15px 20px;
-    border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    opacity: 1;
-    transition: opacity 1s ease-out; /* Animación de desvanecimiento */
-    z-index: 10000; /* Asegurar que esté sobre otros elementos */
-    display: none; /* Oculta inicialmente */
+  @media (max-width: 6000px) {
+    .logo {
+      font-size: 50px;
+    }
+  
+    button {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  
+    input {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .container {
+      max-width: 90%;
+    }
+  }
+  /* Responsividad */
+  @media (max-width: 1024px) {
+    .logo {
+      font-size: 50px;
+    }
+  
+    button {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  
+    input {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .container {
+      max-width: 90%;
+    }
   }
   
-  /* Cuando la notificación comienza a desaparecer */
-  .notification1.hide {
-    opacity: 0; /* Cambia la opacidad a 0 */
+  @media (max-width: 768px) {
+    .logo {
+      font-size: 40px;
+    }
+  
+    .container {
+      padding: 15px;
+    }
+  
+    button {
+      font-size: 12px;
+      padding: 8px;
+    }
+  
+    input {
+      font-size: 14px;
+      padding: 8px;
+    }
   }
   
+  @media (max-width: 480px) {
+    .logo {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+  
+    button {
+      padding: 6px;
+      font-size: 12px;
+    }
+  
+    input {
+      padding: 6px;
+    }
+  
+    .forgot-password {
+      font-size: 12px;
+    }
+  
+    .notification1 {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
   

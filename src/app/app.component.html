@@ -1,3 +1,5 @@
+
+
 <div *ngIf="!mailv && loggedIn() &&  !userHasProfile" class="containermail">
   <h2>Tu correo no está verificado</h2>
   <p>Te hemos enviado un correo electrónico. Por favor, revisa tu bandeja de entrada y sigue las instrucciones para activar tu cuenta.</p>
@@ -16,9 +18,12 @@
   <p>Ocurrió un error inesperado. Por favor, inténtalo nuevamente más tarde.</p>
 </div>
 
+
+<app-header *ngIf="MailV()  && userHasProfile && loggedIn()"></app-header>
 <router-outlet *ngIf="!loggedIn()"></router-outlet>
 
-<header *ngIf="MailV()  && userHasProfile && loggedIn()  " class="header">
+
+<!-- <header *ngIf="MailV()  && userHasProfile && loggedIn()  " class="header">
     <div class="header-left">
       <h1 class="logo">ArguedasConnect</h1>
     </div>
@@ -30,13 +35,13 @@
     <div class="header-right">
       <span class="user-name">Hola, {{getUsername()}}</span>
       <a  (click)="HomeClick()" class=" menut">Inicio</a>
-      <a (click)="userPerfilClick()"class="menut">Perfil</a>
+      <a  (click)="userPerfilClick()"class="menut">Perfil</a>
       <a (click)="gruposClick()" class="menut">Grupos</a>
       <a  (click)="eventosClick()" class="menut">Eventos</a>
 
       <button  (click)="LogoutClick()" class="logout-button">Cerrar sesión</button>
     </div>
-  </header>
+  </header> -->
 
   <div id="pf" class="pf">
     <header *ngIf="mailv && loggedIn() && !userHasProfile && !perfil" class="header">

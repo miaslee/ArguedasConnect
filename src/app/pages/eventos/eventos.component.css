@@ -1,152 +1,62 @@
 /* Contenedor principal */
 .events-container {
-    margin-top: 70px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 70px auto 0;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  
-  /* Título principal */
-  .page-title {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #222;
-    font-weight: bold;
-  }
-  
-  /* Botón para crear evento */
-  .actions {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .create-event-btn {
-    background-color: #3b5998;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .create-event-btn i {
-    font-size: 18px;
-  }
-  
-  .create-event-btn:hover {
-    background-color: #344e86;
-    transform: scale(1.05);
-  }
-  
- /* Lista de eventos */
- .event-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajusta el tamaño de las columnas */
-  gap: 20px; /* Espacio entre las tarjetas */
-  justify-items: center; /* Centra cada tarjeta dentro de la cuadrícula */
-  align-items: start; /* Alinea las tarjetas al inicio */
-  width: 100%;
+  margin-top: 70px;
+  padding: 20px;
   max-width: 1200px;
-  margin: 0 auto; /* Centra la lista en la página */
-}
-
-.event-card {
-  background-color: #fff;
+  margin: 70px auto 0;
+  background-color: #f5f5f5;
   border-radius: 10px;
-  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título principal */
+.page-title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+  font-weight: bold;
+}
+
+/* Botón para crear evento */
+.actions {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Espaciado entre el contenido */
-  align-items: stretch; /* Forzar que el contenido ocupe el espacio */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
-  width: 100%; /* Asegura que las tarjetas ocupen el ancho disponible */
-  max-width: 300px; /* Limita el ancho máximo */
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Para apilar los elementos si no hay espacio */
+  gap: 15px; /* Espaciado entre elementos */
+  margin-bottom: 20px;
 }
 
-.event-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+.create-event-btn {
+  background-color: #3b5998;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
-  
-  /* Imagen del evento */
-  .event-image img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-  }
-  
-  /* Detalles del evento */
-  .event-details {
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    
-    color: #333;
-  }
-  
-  .event-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  .event-date,
-  .event-time {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .event-description {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 15px;
-  }
-  
-  /* Botones */
-  .event-actions {
-    padding: 10px 15px;
-    background-color: #f1f1f1;
-    text-align: center;
-  }
-  
-  .join-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .join-btn:hover {
-    background-color: #0056b3;
-  }
-  /* Buscador */
+.create-event-btn i {
+  font-size: 18px;
+}
+
+.create-event-btn:hover {
+  background-color: #344e86;
+  transform: scale(1.05);
+}
+
+/* Buscador */
 .search-bar {
   width: 100%;
   max-width: 300px;
   padding: 10px 15px;
-  margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
@@ -159,7 +69,72 @@
   border-color: #007bff;
 }
 
-  
+/* Lista de eventos */
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajuste automático */
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.event-card {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 100%;
+  max-width: 300px;
+}
+
+.event-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen del evento */
+.event-image img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* Detalles del evento */
+.event-details {
+  padding: 15px;
+  color: #333;
+}
+
+.event-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.event-date,
+.event-time {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.event-description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
 /* Miembros */
 .event-members {
   font-size: 14px;
@@ -170,7 +145,7 @@
   gap: 5px;
 }
 
-/* Finalizado */
+/* Estado del evento */
 .event-status.finalized {
   font-size: 14px;
   color: red;
@@ -185,7 +160,29 @@
   margin-bottom: 8px;
 }
 
-/* Botón de eliminar evento */
+/* Botones */
+.event-actions {
+  padding: 10px 15px;
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+.join-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.join-btn:hover {
+  background-color: #0056b3;
+}
+
 .delete-btn {
   background-color: #f44336;
   color: white;
@@ -213,19 +210,22 @@
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  width: 400px;
+  width: 90%; /* Responsivo */
+  max-width: 400px;
 }
+
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  z-index: 999; /* Debe estar debajo del modal */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 
 .modal-content {
+  width: 95%;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -278,4 +278,20 @@
 
 .cancel-btn:hover {
   background-color: #d32f2f;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .event-card {
+    max-width: 100%; /* Ajuste completo */
+  }
+
+  .search-bar {
+    max-width: 90%; /* Ocupa todo el ancho */
+  }
 }

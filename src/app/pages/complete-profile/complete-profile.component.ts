@@ -48,7 +48,7 @@ export class CompleteProfileComponent {
             if (!result.exists) {
               // Mostrar la perfil
               perfil.style.display = 'block';
-              console.log("perfil")
+              //console.log("perfil")
               this.perfil1 = true;
             }
 
@@ -122,10 +122,10 @@ export class CompleteProfileComponent {
           }
         });
       } else {
-        console.log("No hay un usuario autenticado.");
+       // console.log("No hay un usuario autenticado.");
       }
     } else {
-      console.log("Completa todos los campos")
+     // console.log("Completa todos los campos")
       this.showNotification2("vacio");
     }
 

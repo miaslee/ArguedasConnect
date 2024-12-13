@@ -10,7 +10,7 @@ import { CompleteProfileComponent } from './pages/complete-profile/complete-prof
 import { FirebaseTSFirestore } from "firebasets/firebasetsFirestore/firebaseTSFirestore";
 import { FeedComponent } from './pages/feed/feed.component';
 import { PostComponent } from './tools/post/post.component';
-import { HeaderComponent } from './tools/header/header.component';
+
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { SharedService } from './services/shared.service';
 import { UserPerfilComponent } from './pages/user-perfil/user-perfil.component';
@@ -18,12 +18,13 @@ import { fakeAsync } from '@angular/core/testing';
 import { GruposComponent } from './pages/grupos/grupos.component';
 import { EventosComponent } from './pages/eventos/eventos.component';
 import { GroupFeedComponent } from './pages/group-feed/group-feed.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgIf, GroupFeedComponent, CompleteProfileComponent, FeedComponent, PostComponent, HeaderComponent, PerfilComponent, UserPerfilComponent, GruposComponent,   EventosComponent],
+  imports: [RouterOutlet, NgIf, GroupFeedComponent, CompleteProfileComponent, FeedComponent, PostComponent, PerfilComponent, UserPerfilComponent, GruposComponent,   EventosComponent, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 
@@ -36,7 +37,7 @@ export class AppComponent {
   firestore: FirebaseTSFirestore;
   userHasProfile: boolean = false;
   private static userDocument: userDocument | null = null;
-  s: number = 5;
+  s: number = 10;
 
   mailv: boolean;
   perfil : boolean= true;
@@ -81,7 +82,7 @@ export class AppComponent {
               this.isLoggedIn = true;
             },
             whenSignedOut: user => {
-              console.log("logout")
+             // console.log("logout")
               this.isLoggedIn = false;
               AppComponent.userDocument = null;
 
@@ -168,11 +169,30 @@ export class AppComponent {
 
 
     });
+    //grupo
+    this.sharedService.perfilClick5$.subscribe(() => {
+      this.gruposClick() // Llama a perfilClick cuando el evento se activa
+    });
+    //evento
+    this.sharedService.perfilClick6$.subscribe(() => {
+      this.eventosClick() // Llama a perfilClick cuando el evento se activa
+    });
+    //inicio
+    this.sharedService.perfilClick7$.subscribe(() => {
+      this.HomeClick()
+    });
+    //grupo
+    this.sharedService.perfilClick8$.subscribe(() => {
+      this.userPerfilClick() 
+    });
+    //grupo
+    this.sharedService.perfilClick9$.subscribe(() => {
+      this.LogoutClick();
+    });
 
 
 
   }
-
 
 
   public static getUserDocument() {
@@ -348,7 +368,12 @@ export class AppComponent {
       } else if (Message == "evt-creado") {
         notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
         notification.innerText = "Evento creado con éxito."
-      } else if (Message == "evt-delete") {
+      } 
+      else if (Message == "grp-delete") {
+        notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
+        notification.innerText = "Grupo eliminado con exito."
+        
+      }else if (Message == "evt-delete") {
         notification.style.backgroundColor = '#28a745'; // Verde (Éxito)
         notification.innerText = "Evento eliminado con exito."
       } else if (Message == "evt-join") {

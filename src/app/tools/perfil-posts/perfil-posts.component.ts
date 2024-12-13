@@ -226,7 +226,7 @@ export class PerfilPostsComponent {
                     this.time = (`Hace ${seconds} segundos`);
                   }
                 } else {
-                  console.log("El timestamp del post no está disponible.");
+                  //console.log("El timestamp del post no está disponible.");
                 }
               }
 

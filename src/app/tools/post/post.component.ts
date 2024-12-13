@@ -34,9 +34,10 @@ export class PostComponent {
   n: any;
   ll: boolean = false;
   private isProcessingLike: boolean = false;
+  userId:string;
 
   constructor(private sharedService: SharedService, private dialog: MatDialog) {
-
+    this.userId = this.auth.getAuth().currentUser?.uid + "";
 
 
   }
@@ -201,6 +202,30 @@ export class PostComponent {
   }
   callPerfilClick1() {
     this.sharedService.triggerPerfilClick1();
+  }
+  callPerfilClick2() {
+    this.sharedService.triggerPerfilClick2();
+
+  }
+  borrarPost(id : any){
+    if (!id) {
+      console.error("El ID del evento es inválido o está vacío.");
+     // alert("Ocurrió un error al intentar eliminar el evento.");
+      return;
+    }
+  
+    this.firestore.delete({
+      path: ["Posts", id],
+      onComplete: () => {
+       // this.showNotification("grp-delete")
+       this.callPerfilClick2()
+       
+        
+      },
+      onFail: (error) => {
+        console.error("Error al eliminar el evento:", error);
+      }
+    });
   }
 
 

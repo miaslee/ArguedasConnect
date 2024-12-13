@@ -1,0 +1,56 @@
+ /* Imagen del evento */
+ .event-image img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+   /* Detalles del evento */
+   .event-details {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    
+    color: #333;
+  }
+  
+  .event-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .event-date,
+  .event-time {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .event-description {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  .cancel-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #d32f2f;
+  }
+   /* Botones */
+   .event-actions {
+    padding: 10px 15px;
+    background-color: #f1f1f1;
+    text-align: center;
+  }

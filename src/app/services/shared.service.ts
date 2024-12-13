@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Grupo } from '../pages/grupos/grupos.component';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,6 @@ export class SharedService {
 
   triggerPerfilClick3() {
     this.perfilClickSource3.next();
-    
   }
   //Loadposts feedd
   private perfilClickSource4= new Subject<void>();
@@ -49,7 +49,44 @@ export class SharedService {
     this.perfilClickSource4.next();
     
   }
+  //grupo
+  private perfilClickSource5= new Subject<void>();
+  perfilClick5$ = this.perfilClickSource5.asObservable();
+  triggerPerfilClick5() {
+    this.perfilClickSource5.next(); 
+  }
+   //evento
+   private perfilClickSource6= new Subject<void>();
+   perfilClick6$ = this.perfilClickSource6.asObservable();
+   triggerPerfilClick6() {
+     this.perfilClickSource6.next(); 
+   }
   
+  //HOME
+  private perfilClickSource7= new Subject<void>();
+  perfilClick7$ = this.perfilClickSource7.asObservable();
+  triggerPerfilClick7() {
+    this.perfilClickSource7.next(); 
+  }
+  //PERFIL
+  private perfilClickSource8= new Subject<void>();
+  perfilClick8$ = this.perfilClickSource8.asObservable();
+  triggerPerfilClick8() {
+    this.perfilClickSource8.next(); 
+  }
+  //CERRAR SESION
+  private perfilClickSource9= new Subject<void>();
+  perfilClick9$ = this.perfilClickSource9.asObservable();
+  triggerPerfilClick9() {
+    this.perfilClickSource9.next(); 
+  }
+
+  
+  
+
+
+
+
 
   //senID
   private idSource = new BehaviorSubject<string | null>(null); // Usa BehaviorSubject para emitir y almacenar el último valor
@@ -60,6 +97,7 @@ export class SharedService {
     this.idSource.next(id);
   }
   //notificaciones
+
   //senID
   private idSource1 = new BehaviorSubject<string | null>(null); // Usa BehaviorSubject para emitir y almacenar el último valor
   currentId1$: Observable<string | null> = this.idSource1.asObservable();
@@ -69,4 +107,24 @@ export class SharedService {
     this.idSource1.next(id);
     
   }
-}
+
+ //grupo
+ private idSource3: Grupo | null = null;
+
+  sendId3(id: Grupo): void {
+    this.idSource3 = id;
+  }
+
+  getId3(): Grupo | null {
+    return this.idSource3;
+  }
+  clearId3(): void {
+    this.idSource3 = null; // Limpia el valor
+  }
+
+
+
+
+ }
+  
+

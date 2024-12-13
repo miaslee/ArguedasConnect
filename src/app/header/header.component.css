@@ -1,0 +1,111 @@
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #2c3e50; /* Color similar */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  /* Contenedor del logo y saludo */
+  header .left-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  header .left-section .logo {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+  }
+  
+  header .left-section .user-greeting {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Menú */
+  header .menu {
+    display: flex;
+    gap: 15px;
+  }
+  
+  header .menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  header .menu a:hover {
+    background-color: #34495e;
+  }
+  
+  /* Botón de cierre de sesión */
+  header .logout-btn {
+    background-color: #e74c3c;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  header .logout-btn:hover {
+    background-color: #c0392b;
+  }
+  
+ 
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    /* Esconde el menú en pantallas pequeñas */
+    header .menu {
+      display: none;
+    }
+    header .menu.responsive {
+      display: flex !important; /* Mostrar el menú al agregar la clase responsive */
+    }
+    
+  
+    /* Ícono de hamburguesa */
+    header .hamburger {
+      display: block;
+      font-size: 24px;
+      cursor: pointer;
+      margin-right: 30px;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+  }
+  
+
+  .menu.responsive {
+    display: flex; /* Habilita el menú */
+    flex-direction: column; /* Alinea los elementos en columna */
+    align-items: flex-start; /* Alinea el contenido a la izquierda del menú */
+    justify-content: flex-start; /* Alinea el contenido al inicio */
+    position: absolute;
+    top: 50px; /* Separación desde la parte superior */
+    right: 0; /* Fija el menú en la parte derecha */
+    background-color: #2c3e50; /* Fondo del menú */
+    width: 300px; /* Ancho fijo para el menú */
+    padding: 15px; /* Espaciado interno */
+    border-radius: 8px 0 0 8px; /* Bordes redondeados en las esquinas izquierdas */
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2); /* Sombra que cae hacia la izquierda */
+    transition: all 0.3s ease-in-out; /* Transición suave para el menú */
+  }
+  

@@ -1,4 +1,4 @@
-<div class="groups-container" style="margin-top: 80px;">
+<div class="groups-container">
   <h2 *ngIf="!selectedGroup" class="page-title">Explora Grupos</h2>
   <div *ngIf="!selectedGroup"  class="header-container">
     <button class="create-group-btn" (click)="openCreateGroupModal()">Crear Grupo</button>
@@ -30,7 +30,7 @@
     <div class="group-card" *ngFor="let group of filteredGroups()">
       <div class="group-image-container">
         <img
-          src="https://via.placeholder.com/300x150"
+          src="/grupob.webp"
           alt="Imagen del Grupo"
           class="group-image"
         />
@@ -50,13 +50,23 @@
         <button *ngIf="!isMember(group)" class="join-btn" (click)="joinGroup(group.id)">
           Unirse
         </button>
+        <br>
+        <button 
+          *ngIf="group.creador === currentUser" 
+          class="delete-btn" 
+          (click)="deleteGrupo(group.id)"
+          class="dlt-btn"
+        >
+          Eliminar
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Feed del Grupo Seleccionado -->
-  <div *ngIf="selectedGroup" class="group-feed-container">
-    <button class="back-btn" (click)="backToGroups()">← Volver a Grupos</button>
-    <app-group-feed [group]="selectedGroup"></app-group-feed>
-  </div>
+  
+</div>
+<!-- Feed del Grupo Seleccionado -->
+<div *ngIf="selectedGroup" class="group-feed-container">
+  <button class="back-btn" (click)="backToGroups()">← Volver a Grupos</button>
+  <app-group-feed [group]="selectedGroup"></app-group-feed>
 </div>
